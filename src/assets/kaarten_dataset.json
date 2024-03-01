@@ -1,0 +1,32 @@
+{
+ "cards": [
+        {
+            "name": "Recht van spreken",
+            "context": "Met behulp van AI schrijven we een belangrijk stuk. Uit feedback blijkt dat er mogelijk sprake is van onbedoelde vooroordelen in de formuleringen. We krijgen er zelfs klachten over.",
+            "questions": [
+                "Hoe herkennen we onbedoelde vooroordelen in AI-gegenereerde content en hoe corrigeren we die?",
+                "Hoe zorgen we ervoor dat mensen, organisaties en onderwerpen gelijk en eerlijk worden gerepresenteerd in AI-content?"
+            ],
+            "type": "Scenariocard",
+            "tags": [
+                "Eerlijkheid",
+                "Inclusiviteit"
+            ],
+            "image": "image-21-3"
+        },
+        {
+            "name": "Botte verbeteringen",
+            "context": "We gebruiken AI om onzecommunicatie te verbeteren en vergemakkelijken. Reacties van ontvangers suggereren dat onze berichten te algemeen zijn en hun persoonlijke 'touch' hebben verloren.",
+            "questions": [
+                "Hoe houden we persoonlijke nuances in stand bij het gebruik van AI in de communicatie?",
+                "Wat is ervoor nodig om onze communicatie voldoende authentiek te maken?"
+            ],
+            "type": "Scenariocard",
+            "tags": [
+                "Creativiteit",
+                "Authenticiteit"
+            ],
+            "image": "image-88"
+        }
+    ]
+}
