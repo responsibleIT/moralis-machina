@@ -3,13 +3,12 @@ import {customElement, property} from 'lit/decorators.js'
 import {CardElement} from "./Card.ts";
 
 @customElement('deck-element')
-export class DeckElement extends LitElement {
-    @property({type: Array<CardElement>})
-    cards: Array<CardElement>
+export class DeckElement<T> extends LitElement {
+    private _cards:T[] = [];
 
-    constructor(cards: Array<CardElement>) {
+    constructor(cards: T[]) {
         super();
-        this.cards = cards;
+        this._cards = cards;
     }
 
     static styles = css`
@@ -21,25 +20,30 @@ export class DeckElement extends LitElement {
         }
     `
 
+    public get cards(): T[] {
+        return this._cards;
+    }
+
     shuffle() {
+        //Shuffle the deck
+
     }
 
-    push(card: CardElement) {
-        this.cards.push(card)
+    push(card: T) {
+        this._cards.push(card)
     }
 
-    draw(): CardElement  {
+    draw() {
         //TODO: Fix when stack is empty
-        return this.cards?.pop()!
+        return this._cards?.pop()!
     }
-
 
     render() {
         return html`
             <div class="deck">
                 <h1>Deck</h1>
                 
-                ${this.cards.map((card) => html`<div>${card}</div>`)}
+                ${this._cards.map((card) => html`<div>${card}</div>`)}
             </div>
         `
     }
