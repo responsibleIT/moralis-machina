@@ -27,6 +27,60 @@
                 "Authenticiteit"
             ],
             "image": "image-88"
+        },
+        {
+            "name": "Redactierobots",
+            "context": "Een AI-tool heeft de taak gekregen om onze teksten te redigeren, wat resulteert in aanzienlijke tijdwinst. Hierdoor zijn sommige collega's onzeker over hun toekomstige rol en waarde.",
+            "questions": [
+                "Hoe kunnen we onze rol en taken herdefiniëren nu AI sommige van onze taken overneemt?",
+                "Welke nieuwe vaardigheden of trainingen zijn nodig om de voordelen van AI te benutten?"
+            ],
+            "type": "Scenariocard",
+            "tags": [
+                "Waardigheid",
+                "Aanpassingsvermogen"
+            ],
+            "image": "image-26"
+        },
+        {
+            "name": "De Dissident",
+            "context": "Tijd om tegen de consensus in te gaan en gedachten voorgoed te veranderen.",
+            "type": "Specialcard",
+            "image": "image-19"
+        },
+        {
+            "name": "De Redenaar",
+            "context": "Houd een vlammend betoog en zet de groep op het juiste spoor.",
+            "type": "Specialcard",
+            "image": "image-20"
+        },
+        {
+            "name": "Authentieke interactie",
+            "context": "We maken gebruik van generatieve AI voor communicatie met burgers en bedrijven. Er komen kritische vragen binnen over de authenticiteit van deze berichten.",
+            "questions": [
+                "Welke mate van transparantie rondom het gebruik van AI in de creatie van onze publieke uitingen is er nodig?",
+                "Wat zijn de gevolgen voor het publieke vertrouwen wanneer AI wordt gebruikt voor onze communicatie?"
+            ],
+            "type": "Scenariocard",
+            "tags": [
+                "Integriteit",
+                "Transparantie"
+            ],
+            "image": "image-56"
+        },
+        {
+            "name": "De symbiose",
+            "context": "We beginnen meer en meer te vertrouwen op de uitkomsten en voorstellen van AI, waardoor eigen inspanningen en leermomenten afnemen.",
+            "questions": [
+                "Hoe creëren we evenwicht tussen efficiëntie en persoonlijke ontwikkeling in het maakproces?",
+                "Op welke manier maken we op een slimme manier gebruik van de kwaliteiten van AI terwijl we ook onze vaardigheden blijven ontwikkelen?"
+            ],
+            "type": "Scenariocard",
+            "tags": [
+                "Profesionnaliteit",
+                "Samenwerking"
+            ],
+            "image": "image-46"
         }
     ]
 }
