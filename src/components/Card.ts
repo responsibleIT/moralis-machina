@@ -4,11 +4,20 @@ import { CardType } from '../enums/CardType'
 
 @customElement('card-element')
 export abstract class CardElement extends LitElement{
-    protected readonly cardName: string
-    protected readonly context: string
-    protected readonly image: string
-    protected readonly cardType: CardType = CardType.ScenarioCard //Default value
-    protected _isFlipped: boolean = false
+    @property({type: String})
+    protected readonly cardName
+
+    @property({type: String})
+    protected readonly context
+
+    @property({type: String})
+    protected readonly image
+
+    @property({type: CardType})
+    protected readonly cardType
+
+    @property({type: Boolean})
+    protected _isFlipped = false
 
     protected constructor(cardName: string, context: string, image: string, cardType: CardType) {
         super();

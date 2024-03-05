@@ -4,7 +4,9 @@ import {CardElement} from "./Card.ts";
 
 @customElement('deck-element')
 export class DeckElement<T> extends LitElement {
-    private _cards:T[] = [];
+
+    @property({type: Array})
+    private _cards:T[]
 
     constructor(cards: T[]) {
         super();

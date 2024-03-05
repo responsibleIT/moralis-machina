@@ -7,9 +7,14 @@ import {ScenarioColor, ScenarioType} from "../enums/ScenarioType.ts";
 
 @customElement('scenario-card-element')
 export class ScenarioCardElement extends CardElement {
-    private readonly _tags: Array<String>
-    private readonly _scenarioType: ScenarioType
-    private readonly _questions: Array<String>
+    @property({type: Array<String>})
+    private readonly _tags
+
+    @property({type: ScenarioType})
+    private readonly _scenarioType
+
+    @property({type: Array<String>})
+    private readonly _questions
 
     constructor(cardName: string,
                 context: string,
