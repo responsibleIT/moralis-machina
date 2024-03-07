@@ -101,4 +101,18 @@ export abstract class CardElement extends LitElement{
         }
         
     `
+
+    protected render() {
+        return html`
+            <div class="card" @click=${this.flip}>
+                <div class="card-front">
+                    <img src="${this.image}" alt="image">
+                    <div class="card-name">${this.cardName}</div>
+                </div>
+                <div class="card-rear">
+                    <div>${this.context}</div>
+                </div>
+            </div>
+        `
+    }
 }

@@ -4,10 +4,11 @@ import { ScenarioCardElement } from './ScenarioCard'
 import { RoleCardElement } from './RoleCard'
 import { DeckElement } from './Deck'
 import { SpecialCardElement } from './SpecialCard.ts'
+import { CardElement } from './Card.ts'
 
 @customElement('board-element')
 export class BoardElement extends LitElement{
-    @property({type: Array<DeckElement>})
+    @property({type: Array<DeckElement<CardElement>>})
     private _cardDecks
 
     @property({type: Array<{"name": string, "card": SpecialCardElement | undefined}>})
@@ -19,7 +20,7 @@ export class BoardElement extends LitElement{
     @property({type: Array<ScenarioCardElement>})
     private readonly _specialCards
 
-    constructor(decks: Array<DeckElement>, players: Array<{"name": string, "card": SpecialCardElement | undefined}>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>) {
+    constructor(decks: Array<DeckElement<CardElement>>, players: Array<{"name": string, "card": SpecialCardElement | undefined}>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>) {
         super();
         this._cardDecks = decks;
         this._players = players;
@@ -28,7 +29,7 @@ export class BoardElement extends LitElement{
     }
 
     //Getters for the private properties
-    public get getDecks(): Array<DeckElement> {
+    public get getDecks(): Array<DeckElement<CardElement>> {
         return this._cardDecks;
     }
 
@@ -49,16 +50,16 @@ export class BoardElement extends LitElement{
     //     this._cardDecks = decks;
     // }
 
-    assignSpecialCards(players: Array<{"name": string, "card": SpecialCardElement | undefined}>, deck: DeckElement) {
+    assignSpecialCards(players: Array<{"name": string, "card": SpecialCardElement | undefined}>, deck: DeckElement<SpecialCardElement>) {
         //Assign a special card to each player until the deck is empty
         players.forEach(player => {
             player.card = deck?.draw()
         })
     }
 
-    removeSpecialCards(players: Array<{"name": string, "card": SpecialCardElement | undefined}>, deck: DeckElement) {
+    removeSpecialCards(players: Array<{"name": string, "card": SpecialCardElement | undefined}>, deck: DeckElement<SpecialCardElement>) {
         players.forEach(player => {
-            deck?.push(player.card)
+            deck?.push(player.card!)
             player.card = undefined
         })
     }

@@ -1,6 +1,5 @@
 import {LitElement, css, html} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-import {CardElement} from "./Card.ts";
 
 @customElement('deck-element')
 export class DeckElement<T> extends LitElement {
