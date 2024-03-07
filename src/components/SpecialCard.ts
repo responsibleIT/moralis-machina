@@ -6,7 +6,6 @@ import {CardType} from "../enums/CardType.ts";
 
 @customElement('special-card-element')
 export class SpecialCardElement extends CardElement {
-
     constructor(cardName: string,
                 context: string,
                 image: string,

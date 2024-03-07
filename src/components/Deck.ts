@@ -11,6 +11,7 @@ export class DeckElement<T> extends LitElement {
     constructor(cards: T[]) {
         super();
         this._cards = cards;
+        this.shuffle()
     }
 
     static styles = css`

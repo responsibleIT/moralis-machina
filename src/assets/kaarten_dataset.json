@@ -81,6 +81,12 @@
                 "Samenwerking"
             ],
             "image": "image-46"
+        },
+        {
+            "name": "De Redacteur",
+            "context": "De Redacteur verbetert je teksten - denk aan het vertalen, leesbaarder maken of het veranderen van de toon van tekst.",
+            "type": "Rolecard",
+            "image": "image-40"
         }
     ]
 }

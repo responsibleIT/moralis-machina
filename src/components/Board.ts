@@ -1,8 +1,8 @@
 import {LitElement, css, html} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import { ScenarioCardElement } from './ScenarioCard'
-import { RoleCardElement } from './RoleCard.ts'
-import { DeckElement } from './Decks'
+import { RoleCardElement } from './RoleCard'
+import { DeckElement } from './Deck'
 import { SpecialCardElement } from './SpecialCard.ts'
 
 @customElement('board-element')
@@ -18,7 +18,6 @@ export class BoardElement extends LitElement{
 
     @property({type: Array<ScenarioCardElement>})
     private readonly _specialCards
-
 
     constructor(decks: Array<DeckElement>, players: Array<{"name": string, "card": SpecialCardElement | undefined}>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>) {
         super();
@@ -46,14 +45,11 @@ export class BoardElement extends LitElement{
     }
 
     //Setters for the private properties
-    private set setDecks(decks: Array<DeckElement>) {
-        this._cardDecks = decks;
-    }
-
+    // private set setDecks(decks: Array<DeckElement>) {
+    //     this._cardDecks = decks;
+    // }
 
     assignSpecialCards(players: Array<{"name": string, "card": SpecialCardElement | undefined}>, deck: DeckElement) {
-        //Shuffle the deck
-        deck?.shuffle()
         //Assign a special card to each player until the deck is empty
         players.forEach(player => {
             player.card = deck?.draw()

@@ -6,6 +6,7 @@ import {CardType} from "../enums/CardType.ts";
 
 @customElement('role-card-element')
 export class RoleCardElement extends CardElement {
+    
     constructor(cardName: string,
                 context: string,
                 image: string,
