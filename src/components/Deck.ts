@@ -1,17 +1,12 @@
-import {LitElement, css, html} from 'lit'
-import {customElement, property} from 'lit/decorators.js'
+import { LitElement, css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { ScenarioCardElement } from './ScenarioCard.ts';
 
 @customElement('deck-element')
-export class DeckElement<T> extends LitElement {
+export class DeckElement extends LitElement {
 
-    @property({type: Array})
-    private _cards:T[]
-
-    constructor(cards: T[]) {
-        super();
-        this._cards = cards;
-        this.shuffle()
-    }
+    @property({ type: Array })
+    private _cards: ScenarioCardElement[] = [];
 
     static styles = css`
         .deck {
@@ -20,33 +15,35 @@ export class DeckElement<T> extends LitElement {
             flex-wrap: wrap;
             justify-content: center;
         }
-    `
+    `;
 
-    public get cards(): T[] {
-        return this._cards;
+    connectedCallback() {
+        super.connectedCallback();
+        this.shuffle();
     }
 
     shuffle() {
-        //Shuffle the deck
-
+        this._cards.sort(() => Math.random() - 0.5);
     }
 
-    push(card: T) {
-        this._cards.push(card)
+    push(card: ScenarioCardElement) {
+        this._cards.push(card);
+        this.requestUpdate();
     }
 
     draw() {
-        //TODO: Fix when stack is empty
-        return this._cards?.pop()!
+        return this._cards!.pop();
     }
 
     render() {
+        console.log(this._cards)
         return html`
             <div class="deck">
                 <h1>Deck</h1>
-                
+                <div class="deck">
                 ${this._cards.map((card) => html`<div>${card}</div>`)}
+                </div>
             </div>
-        `
+        `;
     }
 }

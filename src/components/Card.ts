@@ -51,8 +51,8 @@ export abstract class CardElement extends LitElement{
     protected flip() {
         this._isFlipped = !this._isFlipped;
 
-        const front = this.shadowRoot?.querySelector('.card-front') ? this.shadowRoot?.querySelector('.card-front') : null
-        const rear = this.shadowRoot?.querySelector('.card-rear') ? this.shadowRoot?.querySelector('.card-rear') : null
+        const front = this.shadowRoot?.querySelector('.card-front') as HTMLElement
+        const rear = this.shadowRoot?.querySelector('.card-rear') as HTMLElement
 
         if (this._isFlipped) {
             front.style.display = 'none'
@@ -99,20 +99,5 @@ export abstract class CardElement extends LitElement{
             font-weight: bold;
             margin-top: 8px;
         }
-        
     `
-
-    protected render() {
-        return html`
-            <div class="card" @click=${this.flip}>
-                <div class="card-front">
-                    <img src="${this.image}" alt="image">
-                    <div class="card-name">${this.cardName}</div>
-                </div>
-                <div class="card-rear">
-                    <div>${this.context}</div>
-                </div>
-            </div>
-        `
-    }
 }

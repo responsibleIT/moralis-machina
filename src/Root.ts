@@ -1,9 +1,12 @@
-import {LitElement, css, html} from 'lit'
+import {css, html, LitElement} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 
 import './components/ScenarioCard.ts'
-import './components/Deck.ts'
 import {ScenarioType} from "./enums/ScenarioType.ts";
+import {ScenarioCardElement} from "./components/ScenarioCard.ts";
+import {CardType} from "./enums/CardType.ts";
+
+import './components/Deck.ts'
 
 /**
  * An example element.
@@ -33,24 +36,31 @@ export class RootElement extends LitElement {
 
 
     render() {
+        let redCards: ScenarioCardElement[] = [];
         for (let i = 0; i < 20; i++) {
-            const card = document.createElement('scenario-card') as any
-            card.name = "Name" + i
-            card.context = "Context" + i
-            card.scenarioType = ScenarioType.GENERIC
-            this.appendChild(card)
-
+            const card = new ScenarioCardElement(
+                "Test" + i,
+                "Test" + i,
+                "Test" + i,
+                CardType.ScenarioCard,
+                ScenarioType.RED,
+                ["1", "2"],
+                ["1", "2"]
+            );
+            redCards.push(card);
         }
 
+
+
         return html`
-            <h1>Moralis Machina</h1>
-            <div>
-                <button @click=${this._onClick}>
-                    count is ${this.count}
-                </button>
-            </div>
-            <deck-element cards="${[]}"></deck-element>
-        `
+        <h1>Moralis Machina</h1>
+        <div>
+            <button @click=${this._onClick}>
+                count is ${this.count}
+            </button>
+        </div>
+        <deck-element ._cards="${redCards}"></deck-element>
+    `;
     }
 
     private _onClick() {
