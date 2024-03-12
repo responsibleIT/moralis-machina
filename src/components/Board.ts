@@ -6,9 +6,6 @@ import {DeckElement} from './Deck'
 import {SpecialCardElement} from './SpecialCard.ts'
 import {PlayerElement} from "./Player.ts";
 import {CurrentCardContainerElement} from "./CurrentCardContainerElement.ts";
-import {createRef, ref} from 'lit/directives/ref.js';
-
-import "./CurrentCardContainerElement.ts";
 
 @customElement('board-element')
 export class BoardElement extends LitElement {
@@ -28,15 +25,16 @@ export class BoardElement extends LitElement {
     private _specialCards
 
     @query('current-card-container-element')
-    private _currentCardContainer!: CurrentCardContainerElement
+    private _currentCardContainer: CurrentCardContainerElement
 
-    constructor(decks: Array<DeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>) {
+    constructor(decks: Array<DeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>, currentCardContainer: CurrentCardContainerElement) {
         super();
         this._cardDecks = decks;
         this._players = players;
         this._roleCards = roleCards;
         this._specialCards = specialCards;
         this._discardPile = [];
+        this._currentCardContainer = currentCardContainer;
     }
 
     //Getters for the private properties
@@ -56,19 +54,27 @@ export class BoardElement extends LitElement {
         return this._specialCards;
     }
 
-    private setCurrentCard(event: Event) {
-        let deck = event.target as HTMLElement;
-        let card = deck?.cloneNode(true)
-        if (card) {
-            // set current card
-            this._currentCardContainer.card = card;
-            console.log(this.currentCardRef);
-
-            this._currentCardContainer.showModal()
-
-
+    // Method to emit the custom event
+    private requestSetCurrentCard(currentCard: Node) {
+        console.log("Requesting to set current card");
+        this.dispatchEvent(new CustomEvent('request-set-current-card', {
+            bubbles: true, 
+            composed: true,
+            detail: {
+                card: currentCard
+            }
+    }))};
+    
+    private selectCurrentCard(event: Event) {
+        let deck = event.target as DeckElement;
+        let cardOnTop = deck?.peek() as HTMLElement
+        let clonedCard = cardOnTop.cloneNode(true)
+        if (clonedCard) {
+            //Fire an event that tells 
+            this.requestSetCurrentCard(clonedCard);
         } else {
             console.log("Deck is empty");
+            return;
         }
     }
 
@@ -124,14 +130,16 @@ export class BoardElement extends LitElement {
                 <div class="decks">
                     <h3>Speelstapels</h3>
                     ${this._cardDecks.map(deck => html`
-                        <div @click=${this.setCurrentCard}>${deck}</div>`)}
+                        <div @click=${this.selectCurrentCard}>${deck}</div>`)}
                 </div>
                 <div class="discard-pile">
                     <h3>Aflegstapel</h3>
                     ${this._discardPile.map(card => html`
                         <div>${card}</div>`)}
                 </div>
-                <current-card--container-element></current-card--container-element>
+                <div class="current-card">
+                    ${this._currentCardContainer}
+                </div>
             </div>
         `
     }

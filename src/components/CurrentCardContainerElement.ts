@@ -1,12 +1,11 @@
 import { LitElement, css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import {ScenarioCardElement as HTMLElement} from "./ScenarioCard.ts";
+import { customElement, property, query } from 'lit/decorators.js';
 
 @customElement('current-card--container-element')
 export class CurrentCardContainerElement extends LitElement {
 
-    @property({ type: HTMLElement })
-    private _card: HTMLElement | undefined;
+    @property({ type: Node })
+    private _card!: Node;
 
     @property({ type: Boolean })
     private _isVisible = false;
@@ -14,11 +13,14 @@ export class CurrentCardContainerElement extends LitElement {
     @property({ type: Boolean })
     private _isFlipped = false;
 
-    get card(): HTMLElement | undefined {
+    @query('.cardHolder')
+    private _cardHolder!: HTMLElement;
+
+    get card(): Node {
         return this._card;
     }
 
-    set card(value: HTMLElement) {
+    set card(value: Node) {
         this._card = value;
     }
 
@@ -38,24 +40,26 @@ export class CurrentCardContainerElement extends LitElement {
         this._isFlipped = value;
     }
 
-    showModal() {
-        this._isVisible = true;
+    private modalIsVisible(isVisible: boolean) {
+        this._isVisible = isVisible;
 
         let cardModal = this.shadowRoot?.getElementById('cardModal') as HTMLElement;
-        cardModal.style.display = "flex";
-
+        cardModal.style.display = isVisible ? "flex" : "none";
     }
 
-    hideModal() {
-        this._isVisible = false;
-
-        let cardModal = this.shadowRoot?.getElementById('cardModal') as HTMLElement;
-        cardModal.style.display = "none";
+    connectedCallback() {
+        console.log("Listening for request-set-current-card event")
+        this.addEventListener('request-set-current-card', this.handleCurrentCardRequested);
     }
 
-    constructor(card: HTMLElement) {
-        super();
-        this._card = card;
+    disconnectedCallback() {
+        this.removeEventListener('request-set-current-card', this.handleCurrentCardRequested);
+    }
+
+    private handleCurrentCardRequested(event) {
+        this.card = event.detail;
+        this._cardHolder.appendChild(this.card);
+        this.modalIsVisible(true);
     }
 
     static styles = css`
@@ -86,10 +90,8 @@ export class CurrentCardContainerElement extends LitElement {
     render() {
         return html`
             <div id="cardModal" class="modal">
-                <span class="close" @click="${this.hideModal}">&times;</span>
-                
-                ${this.card}
-                
+                <span class="close" @click="${this.modalIsVisible(false)}">&times;</span>
+                <div class="cardHolder"></div>
                 <button>Afleggen</button>
             </div>
         `;

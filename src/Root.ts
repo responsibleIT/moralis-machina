@@ -9,6 +9,7 @@ import {DeckElement} from "./components/Deck.ts";
 import {ScenarioCardElement} from "./components/ScenarioCard.ts";
 import {CardType} from "./enums/CardType.ts";
 import {ScenarioType} from "./enums/ScenarioType.ts";
+import { CurrentCardContainerElement } from './components/CurrentCardContainerElement.ts';
 
 @customElement('root-element')
 export class RootElement extends LitElement {
@@ -101,6 +102,12 @@ export class RootElement extends LitElement {
         return [redCards, blueCards, greenCards, yellowCards];
     }
 
+    initCurrentCardContainer() {
+        console.log("Initializing current card container...")
+        let currentCardContainer = new CurrentCardContainerElement();
+        return currentCardContainer;
+    }
+
     connectedCallback() {
         super.connectedCallback()
 
@@ -109,7 +116,7 @@ export class RootElement extends LitElement {
     render() {
         return html`
             <navbar-element></navbar-element>
-            <board-element ._players=${this.initPlayers()} ._cardDecks=${this.initDecks()}></board-element>
+            <board-element ._players=${this.initPlayers()} ._cardDecks=${this.initDecks()} ._currentCardContainer=${this.initCurrentCardContainer()}></board-element>
         `;
     }
 
