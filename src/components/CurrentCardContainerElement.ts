@@ -1,13 +1,12 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import {CardElement} from "./Card.ts";
-import {ScenarioColor} from "../enums/ScenarioType.ts";
-import {ScenarioCardElement} from "./ScenarioCard.ts";
-@customElement('current-card-element')
-export class CurrentCardElement extends LitElement {
+import {ScenarioCardElement as HTMLElement} from "./ScenarioCard.ts";
 
-    @property({ type: CardElement })
-    private _card: CardElement;
+@customElement('current-card--container-element')
+export class CurrentCardContainerElement extends LitElement {
+
+    @property({ type: HTMLElement })
+    private _card: HTMLElement | undefined;
 
     @property({ type: Boolean })
     private _isVisible = false;
@@ -15,12 +14,11 @@ export class CurrentCardElement extends LitElement {
     @property({ type: Boolean })
     private _isFlipped = false;
 
-
-    get card(): CardElement {
+    get card(): HTMLElement | undefined {
         return this._card;
     }
 
-    set card(value: CardElement) {
+    set card(value: HTMLElement) {
         this._card = value;
     }
 
@@ -55,7 +53,7 @@ export class CurrentCardElement extends LitElement {
         cardModal.style.display = "none";
     }
 
-    constructor(card: CardElement) {
+    constructor(card: HTMLElement) {
         super();
         this._card = card;
     }

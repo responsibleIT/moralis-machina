@@ -1,14 +1,14 @@
 import {css, html, LitElement} from 'lit'
-import {customElement, property} from 'lit/decorators.js'
+import {customElement, property, query} from 'lit/decorators.js'
 import {ScenarioCardElement} from './ScenarioCard'
 import {RoleCardElement} from './RoleCard'
 import {DeckElement} from './Deck'
 import {SpecialCardElement} from './SpecialCard.ts'
 import {PlayerElement} from "./Player.ts";
-import {CurrentCardElement} from "./CurrentCard.ts";
+import {CurrentCardContainerElement} from "./CurrentCardContainerElement.ts";
 import {createRef, ref} from 'lit/directives/ref.js';
 
-import "./CurrentCard.ts";
+import "./CurrentCardContainerElement.ts";
 
 @customElement('board-element')
 export class BoardElement extends LitElement {
@@ -27,10 +27,8 @@ export class BoardElement extends LitElement {
     @property({type: Array<SpecialCardElement>})
     private _specialCards
 
-    @property({type: CurrentCardElement})
-    private _currentCard: CurrentCardElement
-
-    currentCardRef: Ref<ScenarioCardElement> = createRef();
+    @query('current-card-container-element')
+    private _currentCardContainer!: CurrentCardContainerElement
 
     constructor(decks: Array<DeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>) {
         super();
@@ -59,15 +57,14 @@ export class BoardElement extends LitElement {
     }
 
     private setCurrentCard(event: Event) {
-        let deck = event.target as DeckElement;
-        let card = deck?.peek()
-        // TODO: REF TO CURRENT CARD https://lit.dev/docs/templates/directives/#ref
+        let deck = event.target as HTMLElement;
+        let card = deck?.cloneNode(true)
         if (card) {
             // set current card
-            this.currentCardRef = (card);
+            this._currentCardContainer.card = card;
             console.log(this.currentCardRef);
 
-            this._currentCard.showModal()
+            this._currentCardContainer.showModal()
 
 
         } else {
@@ -75,13 +72,13 @@ export class BoardElement extends LitElement {
         }
     }
 
-    private discardCurrentCard() {
-        let card = this._currentCard;
-        if (card) {
-            this._discardPile.push(card);
-            this._currentCard = undefined;
-        }
-    }
+    // private discardCurrentCard() {
+    //     let card = this._currentCardContainer;
+    //     if (card) {
+    //         this._discardPile.push(card);
+    //         this._currentCardContainer = undefined;
+    //     }
+    // }
 
     //Setters for the private properties
     // private set setDecks(decks: Array<DeckElement>) {
@@ -134,7 +131,7 @@ export class BoardElement extends LitElement {
                     ${this._discardPile.map(card => html`
                         <div>${card}</div>`)}
                 </div>
-                <current-card-element .card=${ref(this.currentCardRef)}></current-card-element>
+                <current-card--container-element></current-card--container-element>
             </div>
         `
     }
