@@ -1,4 +1,4 @@
-import {LitElement, css} from 'lit'
+import {LitElement, css, CSSResultGroup} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import { CardType } from '../enums/CardType'
 
@@ -87,5 +87,5 @@ export abstract class CardElement extends LitElement{
             transform: rotateY(180deg);
         }
         
-    `
+    ` as CSSResultGroup
 }
