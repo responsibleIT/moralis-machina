@@ -6,7 +6,7 @@ import {ScenarioType} from "./enums/ScenarioType.ts";
 import {ScenarioCardElement} from "./components/ScenarioCard.ts";
 import {CardType} from "./enums/CardType.ts";
 
-import './components/Deck.ts'
+import './components/Board.ts'
 
 /**
  * An example element.
@@ -36,30 +36,9 @@ export class RootElement extends LitElement {
 
 
     render() {
-        let redCards: ScenarioCardElement[] = [];
-        for (let i = 0; i < 20; i++) {
-            const card = new ScenarioCardElement(
-                "Test" + i,
-                "Test" + i,
-                "Test" + i,
-                CardType.ScenarioCard,
-                ScenarioType.RED,
-                ["1", "2"],
-                ["1", "2"]
-            );
-            redCards.push(card);
-        }
-
-
-
         return html`
         <h1>Moralis Machina</h1>
-        <div>
-            <button @click=${this._onClick}>
-                count is ${this.count}
-            </button>
-        </div>
-        <deck-element ._cards="${redCards}"></deck-element>
+        <board-element></board-element>
     `;
     }
 

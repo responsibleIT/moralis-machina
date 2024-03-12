@@ -3,10 +3,11 @@ import {customElement, property} from 'lit/decorators.js'
 
 import {CardElement} from "./Card.ts";
 import {CardType} from "../enums/CardType.ts";
+import {PlayerElement} from "./Player.ts";
 
 @customElement('role-card-element')
 export class RoleCardElement extends CardElement {
-    
+
     constructor(cardName: string,
                 context: string,
                 image: string,

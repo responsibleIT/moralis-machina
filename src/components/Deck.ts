@@ -39,10 +39,7 @@ export class DeckElement extends LitElement {
         console.log(this._cards)
         return html`
             <div class="deck">
-                <h1>Deck</h1>
-                <div class="deck">
                 ${this._cards.map((card) => html`<div>${card}</div>`)}
-                </div>
             </div>
         `;
     }

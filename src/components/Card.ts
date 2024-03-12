@@ -1,4 +1,4 @@
-import {LitElement, css, html} from 'lit'
+import {LitElement, css} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import { CardType } from '../enums/CardType'
 
@@ -19,6 +19,9 @@ export abstract class CardElement extends LitElement{
     @property({type: Boolean})
     protected _isFlipped = false
 
+    @property({type: Boolean})
+    protected _isFocused = false
+
     protected constructor(cardName: string, context: string, image: string, cardType: CardType) {
         super();
         this.cardName = cardName;
@@ -27,43 +30,26 @@ export abstract class CardElement extends LitElement{
         this.cardType = cardType;
     }
 
-    //Getters for the private properties
-    public get getCardName(): string {
-        return this.cardName;
-    }
-
-    public get getContext(): string {
-        return this.context;
-    }
-
-    public get getImage(): string {
-        return this.image;
-    }
-
-    public get getIsFlipped(): boolean {
-        return this._isFlipped;
-    }
-
-    public get getCardType(): CardType {
-        return this.cardType;
-    }
-
     protected flip() {
         this._isFlipped = !this._isFlipped;
 
-        const front = this.shadowRoot?.querySelector('.card-front') as HTMLElement
-        const rear = this.shadowRoot?.querySelector('.card-rear') as HTMLElement
+        const card = this.shadowRoot?.querySelector('.card') as HTMLElement
+        card.classList.toggle('is-flipped');
 
-        if (this._isFlipped) {
-            front.style.display = 'none'
-            rear.style.display = 'flex'
-        } else {
-            front.style.display = 'flex'
-            rear.style.display = 'none'
-        }
+    }
+
+    protected focus() {
+        this._isFocused = !this._isFocused;
+
+        const card = this.shadowRoot?.querySelector('.card') as HTMLElement
+        card.classList.toggle('is-focused');
     }
 
     static styles = css`
+        .card-outer {
+            perspective: 1000px;
+        }
+
         .card {
             display: flex;
             flex-direction: column;
@@ -71,20 +57,27 @@ export abstract class CardElement extends LitElement{
             height: 16rem;
             padding: 16px;
             margin: 8px;
+            position: relative;
             transition: transform 0.8s;
             transform-style: preserve-3d;
+            border-radius: 10px;
+            box-shadow: 4px 8px 4px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .card-face {
+            backface-visibility: hidden;
+            height: 100%;
         }
 
         .card-front {
             display: flex;
             flex-direction: column;
-            height: 100%;
         }
 
         .card-rear {
-            display: none;
+            display: flex;
             flex-direction: column;
-            height: 100%;
+            transform: rotateY(180deg);
         }
 
         .card img {
@@ -98,6 +91,16 @@ export abstract class CardElement extends LitElement{
             font-size: 1.5rem;
             font-weight: bold;
             margin-top: 8px;
+        }
+        
+        .is-flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .is-focused {
+            z-index: 100;
+            scale: 2;
+            transition: all .5s;
         }
     `
 }

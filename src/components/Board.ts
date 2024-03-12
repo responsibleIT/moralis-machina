@@ -5,23 +5,25 @@ import {RoleCardElement} from './RoleCard'
 import {DeckElement} from './Deck'
 import {SpecialCardElement} from './SpecialCard.ts'
 import {CardElement} from './Card.ts'
+import {ScenarioType} from "../enums/ScenarioType.ts";
+import {CardType} from "../enums/CardType.ts";
 
 @customElement('board-element')
 export class BoardElement extends LitElement {
     @property({type: Array<DeckElement>})
-    private readonly _cardDecks: Array<DeckElement>
+    private _cardDecks: Array<DeckElement>
 
     @property({type: Array<ScenarioCardElement>})
-    private readonly _discardPile: Array<SpecialCardElement>
+    private _discardPile: Array<SpecialCardElement>
 
     @property({type: Array<{ "name": string, "card": SpecialCardElement | undefined }>})
-    private readonly _players
+    private _players
 
     @property({type: Array<RoleCardElement>})
-    private readonly _roleCards
+    private _roleCards
 
     @property({type: Array<SpecialCardElement>})
-    private readonly _specialCards
+    private _specialCards
 
     @property({type: ScenarioCardElement})
     private _currentCard: ScenarioCardElement | undefined
@@ -91,6 +93,74 @@ export class BoardElement extends LitElement {
             deck?.push(player.card!)
             player.card = undefined
         })
+    }
+
+    initDecks() {
+        console.log("Initializing decks...")
+        // init test decks red blue green yellow
+        let redCards = new DeckElement();
+        for (let i = 0; i < 5; i++) {
+            const card = new ScenarioCardElement(
+                "Test" + i,
+                "Test" + i,
+                "Test" + i,
+                CardType.ScenarioCard,
+                ScenarioType.RED,
+                ["1", "2"],
+                ["1", "2"]
+            );
+            redCards.push(card);
+        }
+        let blueCards = new DeckElement();
+        for (let i = 0; i < 5; i++) {
+            const card = new ScenarioCardElement(
+                "Test" + i,
+                "Test" + i,
+                "Test" + i,
+                CardType.ScenarioCard,
+                ScenarioType.BLUE,
+                ["1", "2"],
+                ["1", "2"]
+            );
+            blueCards.push(card);
+        }
+        let greenCards = new DeckElement();
+        for (let i = 0; i < 5; i++) {
+            const card = new ScenarioCardElement(
+                "Test" + i,
+                "Test" + i,
+                "Test" + i,
+                CardType.ScenarioCard,
+                ScenarioType.GREEN,
+                ["1", "2"],
+                ["1", "2"]
+            );
+            greenCards.push(card);
+        }
+        let yellowCards = new DeckElement();
+        for (let i = 0; i < 5; i++) {
+            const card = new ScenarioCardElement(
+                "Test" + i,
+                "Test" + i,
+                "Test" + i,
+                CardType.ScenarioCard,
+                ScenarioType.YELLOW,
+                ["1", "2"],
+                ["1", "2"]
+            );
+            yellowCards.push(card);
+        }
+
+        this._cardDecks = [redCards, blueCards, greenCards, yellowCards];
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+        // init test decks red blue green yellow
+        this.initDecks();
+        this._players = [];
+        this._roleCards = [];
+        this._specialCards = [];
     }
 
     render() {
