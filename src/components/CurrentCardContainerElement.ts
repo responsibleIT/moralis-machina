@@ -13,8 +13,8 @@ export class CurrentCardContainerElement extends LitElement {
     @property({ type: Boolean })
     private _isFlipped = false;
 
-    @query('.cardHolder')
-    private _cardHolder!: HTMLElement;
+    @query('.cardModal')
+    private cardModal!: HTMLElement;
 
     get card(): Node {
         return this._card;
@@ -43,8 +43,7 @@ export class CurrentCardContainerElement extends LitElement {
     private modalIsVisible(isVisible: boolean) {
         this._isVisible = isVisible;
 
-        let cardModal = this.shadowRoot?.getElementById('cardModal') as HTMLElement;
-        cardModal.style.display = isVisible ? "flex" : "none";
+        this.cardModal.style.display = isVisible ? "flex" : "hidden";
     }
 
     connectedCallback() {
@@ -57,14 +56,16 @@ export class CurrentCardContainerElement extends LitElement {
     }
 
     private handleCurrentCardRequested(event) {
+        console.log("Handling request-set-current-card event")
         this.card = event.detail;
-        this._cardHolder.appendChild(this.card);
         this.modalIsVisible(true);
+        let cardHolder = this.shadowRoot?.querySelector('.cardHolder') as HTMLElement;
+        cardHolder.appendChild(this.card);
     }
 
     static styles = css`
         .modal {
-            display: none; /* Hidden by default */
+            display: hidden; /* Hidden by default */
             position: fixed; /* Stay in place */
             z-index: 1; /* Sit on top */
             left: 0;

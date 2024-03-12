@@ -24,7 +24,7 @@ export class BoardElement extends LitElement {
     @property({type: Array<SpecialCardElement>})
     private _specialCards
 
-    @query('current-card-container-element')
+    @property({type: CurrentCardContainerElement})
     private _currentCardContainer: CurrentCardContainerElement
 
     constructor(decks: Array<DeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>, currentCardContainer: CurrentCardContainerElement) {
@@ -57,7 +57,7 @@ export class BoardElement extends LitElement {
     // Method to emit the custom event
     private requestSetCurrentCard(currentCard: Node) {
         console.log("Requesting to set current card");
-        this.dispatchEvent(new CustomEvent('request-set-current-card', {
+        this._currentCardContainer.dispatchEvent(new CustomEvent('request-set-current-card', {
             bubbles: true, 
             composed: true,
             detail: {
