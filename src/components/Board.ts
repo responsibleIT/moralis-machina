@@ -6,6 +6,7 @@ import {DeckElement} from './Deck'
 import {SpecialCardElement} from './SpecialCard.ts'
 import {PlayerElement} from "./Player.ts";
 import {CurrentCardElement} from "./CurrentCard.ts";
+import {createRef, ref} from 'lit/directives/ref.js';
 
 import "./CurrentCard.ts";
 
@@ -26,8 +27,7 @@ export class BoardElement extends LitElement {
     @property({type: Array<SpecialCardElement>})
     private _specialCards
 
-    @property({type: CurrentCardElement})
-    private _currentCard: CurrentCardElement | undefined
+    currentCardRef: Ref<ScenarioCardElement> = createRef();
 
     constructor(decks: Array<DeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>) {
         super();
@@ -36,7 +36,6 @@ export class BoardElement extends LitElement {
         this._roleCards = roleCards;
         this._specialCards = specialCards;
         this._discardPile = [];
-        this._currentCard = undefined;
     }
 
     //Getters for the private properties
@@ -62,8 +61,8 @@ export class BoardElement extends LitElement {
         // TODO: REF TO CURRENT CARD https://lit.dev/docs/templates/directives/#ref
         if (card) {
             // set current card
-            this._currentCard = (card);
-            console.log(this._currentCard);
+            this.currentCardRef = (card);
+            console.log(this.currentCardRef);
 
             this._currentCard.showModal()
 
@@ -132,7 +131,7 @@ export class BoardElement extends LitElement {
                     ${this._discardPile.map(card => html`
                         <div>${card}</div>`)}
                 </div>
-                <current-card-element .card=${this._currentCard}></current-card-element>
+                <current-card-element .card=${ref(this.currentCardRef)}></current-card-element>
             </div>
         `
     }

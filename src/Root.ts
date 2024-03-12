@@ -53,6 +53,7 @@ export class RootElement extends LitElement {
                 ["1", "2"]
             );
             redCards.push(card);
+            redCards.setDeckType = ScenarioType.RED;
         }
         let blueCards = new DeckElement();
         for (let i = 0; i < 5; i++) {
@@ -66,6 +67,7 @@ export class RootElement extends LitElement {
                 ["1", "2"]
             );
             blueCards.push(card);
+            blueCards.setDeckType = ScenarioType.BLUE;
         }
         let greenCards = new DeckElement();
         for (let i = 0; i < 5; i++) {
@@ -79,6 +81,7 @@ export class RootElement extends LitElement {
                 ["1", "2"]
             );
             greenCards.push(card);
+            greenCards.setDeckType = ScenarioType.GREEN;
         }
         let yellowCards = new DeckElement();
         for (let i = 0; i < 5; i++) {
@@ -92,6 +95,7 @@ export class RootElement extends LitElement {
                 ["1", "2"]
             );
             yellowCards.push(card);
+            yellowCards.setDeckType = ScenarioType.YELLOW;
         }
 
         return [redCards, blueCards, greenCards, yellowCards];
@@ -101,7 +105,6 @@ export class RootElement extends LitElement {
         super.connectedCallback()
 
     }
-
 
     render() {
         return html`
