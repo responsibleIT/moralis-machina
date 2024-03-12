@@ -19,9 +19,6 @@ export abstract class CardElement extends LitElement{
     @property({type: Boolean})
     protected _isFlipped = false
 
-    @property({type: Boolean})
-    protected _isFocused = false
-
     protected constructor(cardName: string, context: string, image: string, cardType: CardType) {
         super();
         this.cardName = cardName;
@@ -36,13 +33,6 @@ export abstract class CardElement extends LitElement{
         const card = this.shadowRoot?.querySelector('.card') as HTMLElement
         card.classList.toggle('is-flipped');
 
-    }
-
-    protected focus() {
-        this._isFocused = !this._isFocused;
-
-        const card = this.shadowRoot?.querySelector('.card') as HTMLElement
-        card.classList.toggle('is-focused');
     }
 
     static styles = css`
@@ -97,10 +87,5 @@ export abstract class CardElement extends LitElement{
             transform: rotateY(180deg);
         }
         
-        .is-focused {
-            z-index: 100;
-            scale: 2;
-            transition: all .5s;
-        }
     `
 }

@@ -1,15 +1,23 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import {RoleCardElement} from "./Rolecard.ts";
 import {RoleType} from "../enums/RoleType.ts";
 
 @customElement('player-element')
 export class PlayerElement extends LitElement {
     @property({ type: String })
-    private _name: string;
+    private readonly _name: string;
 
     @property({ type: RoleType })
     private _role: RoleType;
+
+
+    get role(): RoleType {
+        return this._role;
+    }
+
+    set role(value: RoleType) {
+        this._role = value;
+    }
 
     constructor(name: string, role: RoleType) {
         super();
@@ -17,11 +25,19 @@ export class PlayerElement extends LitElement {
         this._role = role;
     }
 
+   static styles = css`
+
+   `
+
+
     render(){
         return html`
-            <div class="player">
-                <h1>${this._name}</h1>
-                <div>${this._role}</div>
+            <div>
+                <div>
+                    <div><strong>${this._name}</strong></div>
+                    <div>${this._role}</div>
+                    <hr/>
+                </div>
             </div>
         `;
     }

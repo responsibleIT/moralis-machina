@@ -4,9 +4,9 @@ import {ScenarioCardElement} from './ScenarioCard'
 import {RoleCardElement} from './RoleCard'
 import {DeckElement} from './Deck'
 import {SpecialCardElement} from './SpecialCard.ts'
-import {CardElement} from './Card.ts'
 import {ScenarioType} from "../enums/ScenarioType.ts";
 import {CardType} from "../enums/CardType.ts";
+import {PlayerElement} from "./Player.ts";
 
 @customElement('board-element')
 export class BoardElement extends LitElement {
@@ -16,8 +16,8 @@ export class BoardElement extends LitElement {
     @property({type: Array<ScenarioCardElement>})
     private _discardPile: Array<SpecialCardElement>
 
-    @property({type: Array<{ "name": string, "card": SpecialCardElement | undefined }>})
-    private _players
+    @property()
+    private _players: Array<PlayerElement>
 
     @property({type: Array<RoleCardElement>})
     private _roleCards
@@ -28,10 +28,7 @@ export class BoardElement extends LitElement {
     @property({type: ScenarioCardElement})
     private _currentCard: ScenarioCardElement | undefined
 
-    constructor(decks: Array<DeckElement>, players: Array<{
-        "name": string,
-        "card": SpecialCardElement | undefined
-    }>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>) {
+    constructor(decks: Array<DeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>) {
         super();
         this._cardDecks = decks;
         this._players = players;
@@ -46,7 +43,7 @@ export class BoardElement extends LitElement {
         return this._cardDecks;
     }
 
-    public get getPlayers(): Array<{ "name": string, "card": SpecialCardElement | undefined }> {
+    public get getPlayers(): Array<PlayerElement> {
         return this._players;
     }
 
@@ -95,98 +92,65 @@ export class BoardElement extends LitElement {
         })
     }
 
-    initDecks() {
-        console.log("Initializing decks...")
-        // init test decks red blue green yellow
-        let redCards = new DeckElement();
-        for (let i = 0; i < 5; i++) {
-            const card = new ScenarioCardElement(
-                "Test" + i,
-                "Test" + i,
-                "Test" + i,
-                CardType.ScenarioCard,
-                ScenarioType.RED,
-                ["1", "2"],
-                ["1", "2"]
-            );
-            redCards.push(card);
-        }
-        let blueCards = new DeckElement();
-        for (let i = 0; i < 5; i++) {
-            const card = new ScenarioCardElement(
-                "Test" + i,
-                "Test" + i,
-                "Test" + i,
-                CardType.ScenarioCard,
-                ScenarioType.BLUE,
-                ["1", "2"],
-                ["1", "2"]
-            );
-            blueCards.push(card);
-        }
-        let greenCards = new DeckElement();
-        for (let i = 0; i < 5; i++) {
-            const card = new ScenarioCardElement(
-                "Test" + i,
-                "Test" + i,
-                "Test" + i,
-                CardType.ScenarioCard,
-                ScenarioType.GREEN,
-                ["1", "2"],
-                ["1", "2"]
-            );
-            greenCards.push(card);
-        }
-        let yellowCards = new DeckElement();
-        for (let i = 0; i < 5; i++) {
-            const card = new ScenarioCardElement(
-                "Test" + i,
-                "Test" + i,
-                "Test" + i,
-                CardType.ScenarioCard,
-                ScenarioType.YELLOW,
-                ["1", "2"],
-                ["1", "2"]
-            );
-            yellowCards.push(card);
-        }
-
-        this._cardDecks = [redCards, blueCards, greenCards, yellowCards];
-    }
 
     connectedCallback() {
         super.connectedCallback();
         // init test decks red blue green yellow
-        this.initDecks();
-        this._players = [];
         this._roleCards = [];
         this._specialCards = [];
     }
 
     render() {
+        console.log(this._players);
         return html`
             <div class="board">
+                <div class="players">
+                    ${this._players.map(player => html`
+                        <div>${player}</div>`)}
+                </div>
                 <div class="decks">
                     ${this._cardDecks.map(deck => html`
                         <div>${deck}</div>`)}
                 </div>
-                <div class="players">
-                    ${this._players.map(player => html`
-                        <div>${player.name}</div>`)}
-                </div>
-                <div class="role-cards">
-                    ${this._roleCards.map(roleCard => html`
-                        <div>${roleCard}</div>`)}
-                </div>
-                <div class="special-cards">
-                    ${this._specialCards.map(specialCard => html`
-                        <div>${specialCard}</div>`)}
+                <div class="discard-pile">
+                    <h2>Aflegstapel</h2>
+                    ${this._discardPile.map(card => html`
+                        <div>${card}</div>`)}
                 </div>
             </div>
         `
     }
 
     static styles = css`
+        .board {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .players {
+            display: flex;
+            flex-direction: column;
+            width: 10%;
+            border-right: 1px solid #e0e0e0;
+            padding: 8px;
+        }
+
+        .decks {
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            padding: 8px;
+        }
+
+        .discard-pile {
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+            padding: 8px;
+            border-left: 1px solid #e0e0e0;
+        }
 
     `
 }
