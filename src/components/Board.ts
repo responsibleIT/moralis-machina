@@ -27,6 +27,9 @@ export class BoardElement extends LitElement {
     @property({type: Array<SpecialCardElement>})
     private _specialCards
 
+    @property({type: CurrentCardElement})
+    private _currentCard: CurrentCardElement
+
     currentCardRef: Ref<ScenarioCardElement> = createRef();
 
     constructor(decks: Array<DeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>) {
