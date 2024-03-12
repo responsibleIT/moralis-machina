@@ -6,7 +6,7 @@ export class NavBarElement extends LitElement {
 
     handleHelp() {
         // dialog box
-        alert("This is a game where you have to find the traitor in your midst. The traitor will try to sabotage your efforts to complete the mission. You have to find out who the traitor is and stop them from sabotaging the mission.")
+        alert("show help modal")
     }
     connectedCallback() {
         super.connectedCallback()

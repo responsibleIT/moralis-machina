@@ -26,18 +26,20 @@ export class PlayerElement extends LitElement {
     }
 
    static styles = css`
+       .player {
+           padding-top: 6px;
+           padding-bottom: 6px;
+       }
 
    `
 
 
     render(){
         return html`
-            <div>
-                <div>
-                    <div><strong>${this._name}</strong></div>
-                    <div>${this._role}</div>
-                    <hr/>
-                </div>
+            <div class="player">
+                <div><strong>${this._name}</strong></div>
+                <div>${this._role}</div>
+                <hr/>
             </div>
         `;
     }

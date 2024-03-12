@@ -4,8 +4,6 @@ import {ScenarioCardElement} from './ScenarioCard'
 import {RoleCardElement} from './RoleCard'
 import {DeckElement} from './Deck'
 import {SpecialCardElement} from './SpecialCard.ts'
-import {ScenarioType} from "../enums/ScenarioType.ts";
-import {CardType} from "../enums/CardType.ts";
 import {PlayerElement} from "./Player.ts";
 
 @customElement('board-element')
@@ -105,15 +103,17 @@ export class BoardElement extends LitElement {
         return html`
             <div class="board">
                 <div class="players">
+                    <h3>Spelers</h3>
                     ${this._players.map(player => html`
                         <div>${player}</div>`)}
                 </div>
                 <div class="decks">
+                    <h3>Speelstapels</h3>
                     ${this._cardDecks.map(deck => html`
                         <div>${deck}</div>`)}
                 </div>
                 <div class="discard-pile">
-                    <h2>Aflegstapel</h2>
+                    <h3>Aflegstapel</h3>
                     ${this._discardPile.map(card => html`
                         <div>${card}</div>`)}
                 </div>
@@ -135,6 +135,7 @@ export class BoardElement extends LitElement {
             width: 10%;
             border-right: 1px solid #e0e0e0;
             padding: 8px;
+            margin: 8px;
         }
 
         .decks {
@@ -142,6 +143,7 @@ export class BoardElement extends LitElement {
             flex-direction: column;
             width: 70%;
             padding: 8px;
+            margin: 8px;
         }
 
         .discard-pile {
@@ -149,6 +151,7 @@ export class BoardElement extends LitElement {
             flex-direction: column;
             width: 20%;
             padding: 8px;
+            margin: 8px;
             border-left: 1px solid #e0e0e0;
         }
 
