@@ -35,6 +35,27 @@ export abstract class CardElement extends LitElement{
 
     }
 
+    //Getters for the private properties
+    public get getCardName(): string {
+        return this.cardName;
+    }
+
+    public get getContext(): string {
+        return this.context;
+    }
+
+    public get getImage(): string {
+        return this.image;
+    }
+
+    public get getCardType(): CardType {
+        return this.cardType;
+    }
+
+    public get getIsFlipped(): boolean {
+        return this._isFlipped;
+    }
+
     static styles = css`
         .card-outer {
             perspective: 1000px;

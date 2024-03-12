@@ -53,11 +53,19 @@ export class BoardElement extends LitElement {
         return this._specialCards;
     }
 
-    public setCurrentCard(card: ScenarioCardElement) {
-        this._currentCard = card;
+    private setCurrentCard(event: Event) {
+        let deck = event.target as DeckElement;
+        let card = deck?.draw();
+        if (card) {
+            this._currentCard = card;
+            card.classList.add("current-card")
+            console.log("Current card is: " + this._currentCard?.getCardName);
+        } else {
+            console.log("Deck is empty");
+        }
     }
 
-    public discardCurrentCard() {
+    private discardCurrentCard() {
         let card = this._currentCard;
         if (card) {
             this._discardPile.push(card);
@@ -70,7 +78,7 @@ export class BoardElement extends LitElement {
     //     this._mainDeck = decks;
     // }
 
-    assignSpecialCards(players: Array<{
+    private assignSpecialCards(players: Array<{
         "name": string,
         "card": SpecialCardElement | undefined
     }>, deck: DeckElement) {
@@ -80,16 +88,15 @@ export class BoardElement extends LitElement {
         })
     }
 
-    removeSpecialCards(players: Array<{
+    private removeSpecialCards(players: Array<{
         "name": string,
-        "card": SpecialCardElement | undefined
+        "card": ScenarioCardElement | undefined
     }>, deck: DeckElement) {
         players.forEach(player => {
             deck?.push(player.card!)
             player.card = undefined
         })
     }
-
 
     connectedCallback() {
         super.connectedCallback();
@@ -99,7 +106,7 @@ export class BoardElement extends LitElement {
     }
 
     render() {
-        console.log(this._players);
+        // console.log(this._players);
         return html`
             <div class="board">
                 <div class="players">
@@ -110,7 +117,7 @@ export class BoardElement extends LitElement {
                 <div class="decks">
                     <h3>Speelstapels</h3>
                     ${this._cardDecks.map(deck => html`
-                        <div>${deck}</div>`)}
+                        <div @click=${this.setCurrentCard}>${deck}</div>`)}
                 </div>
                 <div class="discard-pile">
                     <h3>Aflegstapel</h3>

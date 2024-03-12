@@ -17,6 +17,10 @@ export class DeckElement extends LitElement {
         }
     `;
 
+    public get getCards() {
+        return this._cards;
+    }
+
     connectedCallback() {
         super.connectedCallback();
         this.shuffle();

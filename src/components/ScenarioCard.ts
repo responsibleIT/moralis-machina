@@ -72,7 +72,6 @@ export class ScenarioCardElement extends CardElement {
                 <!-- Modal Caption (Image Text) -->
                 <div id="caption"></div>
                 
-                <button>Afleggen</button>
             </div>
         `
     }
