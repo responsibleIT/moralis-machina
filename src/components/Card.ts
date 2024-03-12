@@ -27,7 +27,7 @@ export abstract class CardElement extends LitElement{
         this.cardType = cardType;
     }
 
-    protected flip() {
+    public flip() {
         this._isFlipped = !this._isFlipped;
 
         const card = this.shadowRoot?.querySelector('.card') as HTMLElement

@@ -5,6 +5,9 @@ import {RoleCardElement} from './RoleCard'
 import {DeckElement} from './Deck'
 import {SpecialCardElement} from './SpecialCard.ts'
 import {PlayerElement} from "./Player.ts";
+import {CurrentCardElement} from "./CurrentCard.ts";
+
+import "./CurrentCard.ts";
 
 @customElement('board-element')
 export class BoardElement extends LitElement {
@@ -23,8 +26,8 @@ export class BoardElement extends LitElement {
     @property({type: Array<SpecialCardElement>})
     private _specialCards
 
-    @property({type: ScenarioCardElement})
-    private _currentCard: ScenarioCardElement | undefined
+    @property({type: CurrentCardElement})
+    private _currentCard: CurrentCardElement | undefined
 
     constructor(decks: Array<DeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>) {
         super();
@@ -55,11 +58,16 @@ export class BoardElement extends LitElement {
 
     private setCurrentCard(event: Event) {
         let deck = event.target as DeckElement;
-        let card = deck?.draw();
+        let card = deck?.peek()
+        // TODO: REF TO CURRENT CARD https://lit.dev/docs/templates/directives/#ref
         if (card) {
-            this._currentCard = card;
-            card.classList.add("current-card")
-            console.log("Current card is: " + this._currentCard?.getCardName);
+            // set current card
+            this._currentCard = (card);
+            console.log(this._currentCard);
+
+            this._currentCard.showModal()
+
+
         } else {
             console.log("Deck is empty");
         }
@@ -124,6 +132,7 @@ export class BoardElement extends LitElement {
                     ${this._discardPile.map(card => html`
                         <div>${card}</div>`)}
                 </div>
+                <current-card-element .card=${this._currentCard}></current-card-element>
             </div>
         `
     }

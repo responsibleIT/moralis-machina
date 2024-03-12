@@ -35,12 +35,15 @@ export class DeckElement extends LitElement {
         this.requestUpdate();
     }
 
+    peek() {
+        return this._cards[this._cards.length - 1];
+    }
+
     draw() {
         return this._cards!.pop();
     }
 
     render() {
-        console.log(this._cards)
         return html`
             <div class="deck">
                 ${this._cards.map((card) => html`<div>${card}</div>`)}
