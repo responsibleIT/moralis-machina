@@ -64,14 +64,12 @@ export class BoardElement extends LitElement {
                 card: currentCard
             }
     }))};
-    
+
     private selectCurrentCard(event: Event) {
         let deck = event.target as DeckElement;
-        let cardOnTop = deck?.peek() as HTMLElement
-        let clonedCard = cardOnTop.cloneNode(true)
-        if (clonedCard) {
-            //Fire an event that tells 
-            this.requestSetCurrentCard(clonedCard);
+        let cardOnTop = deck?.peek() as HTMLElement;
+        if (cardOnTop) {
+            this.requestSetCurrentCard(cardOnTop);
         } else {
             console.log("Deck is empty");
             return;
