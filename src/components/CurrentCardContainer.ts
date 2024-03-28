@@ -1,8 +1,9 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { IRequestReturnCard } from '../interfaces/IRequestReturnCard';
 
 @customElement('current-card--container-element')
-export class CurrentCardContainerElement extends LitElement {
+export class CurrentCardContainerElement extends LitElement implements IRequestReturnCard {
 
     @state()
     private _card!: Node | null;
@@ -63,7 +64,7 @@ export class CurrentCardContainerElement extends LitElement {
         this.toggleModalVisibility();
     }
 
-    private requestReturnCard() {
+    requestReturnCard() {
         this.dispatchEvent(new CustomEvent('request-return-card', {
             detail: {
                 card: this._card

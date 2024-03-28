@@ -8,14 +8,15 @@ import {PlayerElement} from "./Player.ts";
 import {CurrentCardContainerElement} from "./CurrentCardContainer.ts";
 import {RoleType} from "../enums/RoleType.ts";
 import { ScenarioCardDeckElement } from './ScenarioCardDeck.ts'
+import { DiscardDeckElement } from './DiscardDeck.ts'
 
 @customElement('board-element')
 export class BoardElement extends LitElement {
     @property({type: Array<ScenarioCardDeckElement>})
     private _cardDecks: Array<ScenarioCardDeckElement>
 
-    @property({type: DeckElement})
-    private _discardPile: DeckElement
+    @property({type: DiscardDeckElement})
+    private _discardPile: DiscardDeckElement
 
     @property()
     private _players: Array<PlayerElement>
@@ -35,7 +36,7 @@ export class BoardElement extends LitElement {
         this._players = players;
         this._roleCards = roleCards;
         this._specialCards = specialCards;
-        this._discardPile = new DeckElement();
+        this._discardPile = new DiscardDeckElement();
         this._currentCardContainer = currentCardContainer;
     }
 
@@ -102,16 +103,16 @@ export class BoardElement extends LitElement {
         })
     }
 
-    private returnCurrentCard(event) {
+    private returnCard(event) {
         let card = event.detail.card as ScenarioCardElement;
         let deck = this._cardDecks.find(deck => deck.getDeckType === card.getScenarioType);
         deck?.push(card);
     }
-
+    
     connectedCallback() {
         super.connectedCallback();
         this.addEventListener('request-discard', this.discardCurrentCard)
-        this.addEventListener('request-return-card', this.returnCurrentCard)
+        this.addEventListener('request-return-card', this.returnCard)
         // init test decks red blue green yellow
         this._roleCards = [];
         this._specialCards = [];
@@ -120,7 +121,7 @@ export class BoardElement extends LitElement {
     disconnectedCallback() {
         super.disconnectedCallback();
         this.removeEventListener('request-discard', this.discardCurrentCard);
-        this.removeEventListener('request-return-card', this.returnCurrentCard);
+        this.removeEventListener('request-return-card', this.returnCard);
     }
 
     render() {

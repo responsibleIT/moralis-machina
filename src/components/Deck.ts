@@ -4,7 +4,7 @@ import { ScenarioCardElement } from './ScenarioCard.ts';
 import { ScenarioType } from '../enums/ScenarioType.ts';
 
 @customElement('deck-element')
-export class DeckElement extends LitElement {
+export abstract class DeckElement extends LitElement {
 
     @property({ type: Array })
     protected _cards: ScenarioCardElement[] = [];
@@ -18,31 +18,16 @@ export class DeckElement extends LitElement {
         }
     `;
 
-    public get getCards() {
-        return this._cards;
-    }
-
     connectedCallback() {
         super.connectedCallback();
-        this.shuffle();
     }
 
-    shuffle() {
-        this._cards.sort(() => Math.random() - 0.5);
-    }
-
-    push(card: ScenarioCardElement) {
+    public push (card: ScenarioCardElement) {
         this._cards.push(card);
         this.requestUpdate();
     }
 
-    peek() {
-        let card = this._cards[this._cards.length - 1];
-        console.log("peek count", this._cards.length)
-        return card;
-    }
-
-    draw() {
+    public draw() {
         let card = this._cards.pop();
         console.log("draw count", this._cards.length)
         return card;
