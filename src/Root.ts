@@ -10,6 +10,7 @@ import {CardType} from "./enums/CardType.ts";
 import {ScenarioType} from "./enums/ScenarioType.ts";
 import { CurrentCardContainerElement } from './components/CurrentCardContainer.ts';
 import { ScenarioCardDeckElement } from './components/ScenarioCardDeck.ts';
+import { DiscardDeckElement } from './components/DiscardDeck.ts';
 
 @customElement('root-element')
 export class RootElement extends LitElement {
@@ -108,6 +109,12 @@ export class RootElement extends LitElement {
         return currentCardContainer;
     }
 
+    initDiscardPile() {
+        console.log("Initializing discard pile...")
+        let discardPile = new DiscardDeckElement();
+        return discardPile;
+    }
+
     connectedCallback() {
         super.connectedCallback()
 
@@ -116,7 +123,7 @@ export class RootElement extends LitElement {
     render() {
         return html`
             <navbar-element></navbar-element>
-            <board-element ._players=${this.initPlayers()} ._cardDecks=${this.initDecks()} ._currentCardContainer=${this.initCurrentCardContainer()}></board-element>
+            <board-element ._players=${this.initPlayers()} ._cardDecks=${this.initDecks()} ._currentCardContainer=${this.initCurrentCardContainer()} ._discardPile=${this.initDiscardPile()}></board-element>
         `;
     }
 

@@ -2,7 +2,6 @@ import {css, html, LitElement} from 'lit'
 import {customElement, property, query} from 'lit/decorators.js'
 import {ScenarioCardElement} from './ScenarioCard'
 import {RoleCardElement} from './RoleCard'
-import {DeckElement} from './Deck'
 import {SpecialCardElement} from './SpecialCard.ts'
 import {PlayerElement} from "./Player.ts";
 import {CurrentCardContainerElement} from "./CurrentCardContainer.ts";
@@ -30,13 +29,13 @@ export class BoardElement extends LitElement {
     @property({type: CurrentCardContainerElement})
     private _currentCardContainer: CurrentCardContainerElement
 
-    constructor(decks: Array<ScenarioCardDeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>, currentCardContainer: CurrentCardContainerElement) {
+    constructor(decks: Array<ScenarioCardDeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>, currentCardContainer: CurrentCardContainerElement, discardPile: DiscardDeckElement) {
         super();
         this._cardDecks = decks;
         this._players = players;
         this._roleCards = roleCards;
         this._specialCards = specialCards;
-        this._discardPile = new DiscardDeckElement();
+        this._discardPile = discardPile;
         this._currentCardContainer = currentCardContainer;
     }
 
@@ -58,7 +57,7 @@ export class BoardElement extends LitElement {
     }
 
     // Method to emit the custom event
-    private requestSetCurrentCard(currentCard: Node) {
+    private requestSetCurrentCard(currentCard: ScenarioCardElement) {
         console.log("Requesting to set current card");
         this._currentCardContainer.dispatchEvent(new CustomEvent('request-set-current-card', {
             bubbles: true,
@@ -71,7 +70,7 @@ export class BoardElement extends LitElement {
 
     private selectCurrentCard(event: Event) {
         let deck = event.target as ScenarioCardDeckElement;
-        let cardOnTop = deck?.peek() as HTMLElement;
+        let cardOnTop = deck?.draw();
         if (cardOnTop) {
             this.requestSetCurrentCard(cardOnTop);
         } else {
@@ -82,8 +81,7 @@ export class BoardElement extends LitElement {
 
     private discardCurrentCard(event) {
         let card = event.detail.card as ScenarioCardElement;
-        let deck = this._cardDecks.find(deck => deck.getDeckType === card.getScenarioType);
-        this._discardPile.push(deck?.draw()!);
+        this._discardPile.push(card);
         this.shiftPlayerRoles();
     }
 
@@ -103,16 +101,16 @@ export class BoardElement extends LitElement {
         })
     }
 
-    private returnCard(event) {
-        let card = event.detail.card as ScenarioCardElement;
-        let deck = this._cardDecks.find(deck => deck.getDeckType === card.getScenarioType);
-        deck?.push(card);
+    private returnDiscardedCard() {
+        let discardedCard = this._discardPile.draw() as ScenarioCardElement;
+        let deck = this._cardDecks.find(deck => deck.getDeckType === discardedCard.getScenarioType) as ScenarioCardDeckElement;
+        deck?.push(discardedCard);
     }
     
     connectedCallback() {
         super.connectedCallback();
         this.addEventListener('request-discard', this.discardCurrentCard)
-        this.addEventListener('request-return-card', this.returnCard)
+        this.addEventListener('request-return-card', this.returnDiscardedCard)
         // init test decks red blue green yellow
         this._roleCards = [];
         this._specialCards = [];
@@ -121,7 +119,7 @@ export class BoardElement extends LitElement {
     disconnectedCallback() {
         super.disconnectedCallback();
         this.removeEventListener('request-discard', this.discardCurrentCard);
-        this.removeEventListener('request-return-card', this.returnCard);
+        this.removeEventListener('request-return-card', this.returnDiscardedCard);
     }
 
     render() {
@@ -140,7 +138,7 @@ export class BoardElement extends LitElement {
                 </div>
                 <div class="discard-pile">
                     <h3>Aflegstapel</h3>
-                    <div>
+                    <div @click=${this.returnDiscardedCard}>
                         ${this._discardPile}
                     </div>
                 </div>

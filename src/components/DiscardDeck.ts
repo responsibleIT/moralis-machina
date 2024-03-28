@@ -1,15 +1,9 @@
-import { customElement, property } from 'lit/decorators.js';
-import { ScenarioCardElement } from './ScenarioCard.ts';
+import { customElement } from 'lit/decorators.js';
 import { DeckElement } from './Deck.ts';
-import { IRequestReturnCard } from '../interfaces/IRequestReturnCard.ts';
 import { css, html } from 'lit';
 
 @customElement('discard-deck-element')
-export class DiscardDeckElement extends DeckElement implements IRequestReturnCard {
-
-    @property({ type: Array })
-    protected _cards: ScenarioCardElement[] = [];
-
+export class DiscardDeckElement extends DeckElement {
     static styles = css`
         .deck {
             display: flex;
@@ -27,19 +21,9 @@ export class DiscardDeckElement extends DeckElement implements IRequestReturnCar
         super.connectedCallback();
     }
 
-    requestReturnCard() {
-        this.dispatchEvent(new CustomEvent('request-return-card', {
-            detail: {
-                card: this._cards[this._cards.length - 1]
-            },
-            bubbles: true,
-            composed: true
-        }));
-    }
-
     render() {
         return html`
-            <div class="deck" @click=${this.requestReturnCard}>
+            <div class="deck">
                 ${this._cards.map((card) => html`<div>${card}</div>`)}
             </div>
         `;

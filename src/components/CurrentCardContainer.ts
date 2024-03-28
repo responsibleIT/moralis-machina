@@ -1,12 +1,12 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { IRequestReturnCard } from '../interfaces/IRequestReturnCard';
+import { ScenarioCardElement } from './ScenarioCard';
 
 @customElement('current-card--container-element')
 export class CurrentCardContainerElement extends LitElement implements IRequestReturnCard {
-
-    @state()
-    private _card!: Node | null;
+    @property({ type: ScenarioCardElement})
+    private _card!: ScenarioCardElement | null;
 
     @property({ type: Boolean })
     private _isDisplayed = false;
@@ -14,7 +14,7 @@ export class CurrentCardContainerElement extends LitElement implements IRequestR
     @property({ type: Boolean })
     private _isFlipped = false;
 
-    get card(): Node {
+    get card(): ScenarioCardElement {
         return this._card!;
     }
 
@@ -59,9 +59,9 @@ export class CurrentCardContainerElement extends LitElement implements IRequestR
     }
 
     private setCurrentCard(event) {
-        console.log("Handling request-set-current-card event")
         this._card = event.detail.card
         this.toggleModalVisibility();
+        this.requestUpdate();
     }
 
     requestReturnCard() {

@@ -1,13 +1,11 @@
 import { LitElement, css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { ScenarioCardElement } from './ScenarioCard.ts';
-import { ScenarioType } from '../enums/ScenarioType.ts';
 
 @customElement('deck-element')
 export abstract class DeckElement extends LitElement {
-
-    @property({ type: Array })
-    protected _cards: ScenarioCardElement[] = [];
+    @property({ type: Array<ScenarioCardElement> })
+    _cards: ScenarioCardElement[] = [];
 
     static styles = css`
         .deck {
@@ -29,7 +27,7 @@ export abstract class DeckElement extends LitElement {
 
     public draw() {
         let card = this._cards.pop();
-        console.log("draw count", this._cards.length)
+        this.requestUpdate();
         return card;
     }
 
