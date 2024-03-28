@@ -37,11 +37,12 @@ export class CurrentCardContainerElement extends LitElement {
     }
 
     private requestDiscard() {
-        const board = this.querySelector('.board');
-        board?.dispatchEvent(new CustomEvent('request-discard', {
+        this.dispatchEvent(new CustomEvent('request-discard', {
             detail: {
                 card: this._card
-            }
+            },
+            bubbles: true, 
+            composed: true
         }));
         this.toggleModalVisibility();
     }

@@ -12,8 +12,8 @@ export class BoardElement extends LitElement {
     @property({type: Array<DeckElement>})
     private _cardDecks: Array<DeckElement>
 
-    @property({type: Array<ScenarioCardElement>})
-    private _discardPile: Array<SpecialCardElement>
+    @property({type: Array<DeckElement>})
+    private _discardPile: Array<ScenarioCardElement>
 
     @property()
     private _players: Array<PlayerElement>
@@ -147,9 +147,7 @@ export class BoardElement extends LitElement {
                     ${this._discardPile.map(card => html`
                         <div>${card}</div>`)}
                 </div>
-                <div class="current-card">
-                    ${this._currentCardContainer}
-                </div>
+                ${this._currentCardContainer}
             </div>
         `
     }
