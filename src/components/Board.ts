@@ -6,6 +6,7 @@ import {DeckElement} from './Deck'
 import {SpecialCardElement} from './SpecialCard.ts'
 import {PlayerElement} from "./Player.ts";
 import {CurrentCardContainerElement} from "./CurrentCardContainer.ts";
+import {RoleType} from "../enums/RoleType.ts";
 
 @customElement('board-element')
 export class BoardElement extends LitElement {
@@ -77,48 +78,32 @@ export class BoardElement extends LitElement {
         }
     }
 
-    // private discardCurrentCard() {
-    //     let card = this._currentCardContainer;
-    //     if (card) {
-    //         this._discardPile.push(card);
-    //         this._currentCardContainer = undefined;
-    //     }
-    // }
-
-    //Setters for the private properties
-    // private set setDecks(decks: Array<DeckElement>) {
-    //     this._mainDeck = decks;
-    // }
-
-    // private assignSpecialCards(players: Array<{
-    //     "name": string,
-    //     "card": SpecialCardElement | undefined
-    // }>, deck: DeckElement) {
-    //     //Assign a special card to each player until the deck is empty
-    //     players.forEach(player => {
-    //         player.card = deck?.draw()
-    //     })
-    // }
-    //
-    // private removeSpecialCards(players: Array<{
-    //     "name": string,
-    //     "card": ScenarioCardElement | undefined
-    // }>, deck: DeckElement) {
-    //     players.forEach(player => {
-    //         deck?.push(player.card!)
-    //         player.card = undefined
-    //     })
-    // }
-
-    private handleDiscardsRequested(event) {
+    private discardCurrentCard(event) {
         let card = event.detail.card as ScenarioCardElement;
         let deck = this._cardDecks.find(deck => deck.getDeckType === card.getScenarioType);
         this._discardPile.push(deck?.draw()!);
+        this.shiftPlayerRoles();
+    }
+
+    private shiftPlayerRoles() {
+        let allRolesInOrder: RoleType[] = []
+        this._players.forEach(player => {
+            allRolesInOrder.push(player.role)
+        })
+
+        // shift roles one to the right
+        let lastRole = allRolesInOrder.pop()
+        allRolesInOrder.unshift(lastRole!)
+
+        // update roles
+        this._players.forEach((player, index) => {
+            player.role = allRolesInOrder[index]
+        })
     }
 
     connectedCallback() {
         super.connectedCallback();
-        this.addEventListener('request-discard', this.handleDiscardsRequested)
+        this.addEventListener('request-discard', this.discardCurrentCard)
         // init test decks red blue green yellow
         this._roleCards = [];
         this._specialCards = [];
@@ -126,7 +111,7 @@ export class BoardElement extends LitElement {
 
     disconnectedCallback() {
         super.disconnectedCallback();
-        this.removeEventListener('request-discard', this.handleDiscardsRequested);
+        this.removeEventListener('request-discard', this.discardCurrentCard);
     }
 
     render() {
