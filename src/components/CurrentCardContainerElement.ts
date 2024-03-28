@@ -36,6 +36,16 @@ export class CurrentCardContainerElement extends LitElement {
         }
     }
 
+    private requestDiscard() {
+        const board = this.querySelector('.board');
+        board?.dispatchEvent(new CustomEvent('request-discard', {
+            detail: {
+                card: this._card
+            }
+        }));
+        this.toggleModalVisibility();
+    }
+
     connectedCallback() {
         super.connectedCallback();
         console.log("Listening for request-set-current-card event")
@@ -85,7 +95,7 @@ export class CurrentCardContainerElement extends LitElement {
                 <div class="cardHolder">
                     ${this._card}
                 </div>
-                <button>Afleggen</button>
+                <button @click="${this.requestDiscard}">Afleggen</button>
             </div>
         `;
     }

@@ -109,11 +109,23 @@ export class BoardElement extends LitElement {
         })
     }
 
+    private handleDiscardsRequested(event) {
+        let card = event.detail.card as ScenarioCardElement;
+        console.log(card)
+        this._discardPile.push(card);
+    }
+
     connectedCallback() {
         super.connectedCallback();
+        this.addEventListener('request-discard', this.handleDiscardsRequested)
         // init test decks red blue green yellow
         this._roleCards = [];
         this._specialCards = [];
+    }
+
+    disconnectedCallback() {
+        super.disconnectedCallback();
+        this.removeEventListener('request-discard', this.handleDiscardsRequested);
     }
 
     render() {
