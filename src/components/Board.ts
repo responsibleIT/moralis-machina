@@ -5,15 +5,15 @@ import {RoleCardElement} from './RoleCard'
 import {DeckElement} from './Deck'
 import {SpecialCardElement} from './SpecialCard.ts'
 import {PlayerElement} from "./Player.ts";
-import {CurrentCardContainerElement} from "./CurrentCardContainerElement.ts";
+import {CurrentCardContainerElement} from "./CurrentCardContainer.ts";
 
 @customElement('board-element')
 export class BoardElement extends LitElement {
     @property({type: Array<DeckElement>})
     private _cardDecks: Array<DeckElement>
 
-    @property({type: Array<DeckElement>})
-    private _discardPile: Array<ScenarioCardElement>
+    @property({type: DeckElement})
+    private _discardPile: DeckElement
 
     @property()
     private _players: Array<PlayerElement>
@@ -33,7 +33,7 @@ export class BoardElement extends LitElement {
         this._players = players;
         this._roleCards = roleCards;
         this._specialCards = specialCards;
-        this._discardPile = [];
+        this._discardPile = new DeckElement();
         this._currentCardContainer = currentCardContainer;
     }
 
@@ -58,12 +58,13 @@ export class BoardElement extends LitElement {
     private requestSetCurrentCard(currentCard: Node) {
         console.log("Requesting to set current card");
         this._currentCardContainer.dispatchEvent(new CustomEvent('request-set-current-card', {
-            bubbles: true, 
+            bubbles: true,
             composed: true,
             detail: {
                 card: currentCard
             }
-    }))};
+        }))
+    };
 
     private selectCurrentCard(event: Event) {
         let deck = event.target as DeckElement;
@@ -89,30 +90,30 @@ export class BoardElement extends LitElement {
     //     this._mainDeck = decks;
     // }
 
-    private assignSpecialCards(players: Array<{
-        "name": string,
-        "card": SpecialCardElement | undefined
-    }>, deck: DeckElement) {
-        //Assign a special card to each player until the deck is empty
-        players.forEach(player => {
-            player.card = deck?.draw()
-        })
-    }
-
-    private removeSpecialCards(players: Array<{
-        "name": string,
-        "card": ScenarioCardElement | undefined
-    }>, deck: DeckElement) {
-        players.forEach(player => {
-            deck?.push(player.card!)
-            player.card = undefined
-        })
-    }
+    // private assignSpecialCards(players: Array<{
+    //     "name": string,
+    //     "card": SpecialCardElement | undefined
+    // }>, deck: DeckElement) {
+    //     //Assign a special card to each player until the deck is empty
+    //     players.forEach(player => {
+    //         player.card = deck?.draw()
+    //     })
+    // }
+    //
+    // private removeSpecialCards(players: Array<{
+    //     "name": string,
+    //     "card": ScenarioCardElement | undefined
+    // }>, deck: DeckElement) {
+    //     players.forEach(player => {
+    //         deck?.push(player.card!)
+    //         player.card = undefined
+    //     })
+    // }
 
     private handleDiscardsRequested(event) {
         let card = event.detail.card as ScenarioCardElement;
-        console.log(card)
-        this._discardPile.push(card);
+        let deck = this._cardDecks.find(deck => deck.getDeckType === card.getScenarioType);
+        this._discardPile.push(deck?.draw()!);
     }
 
     connectedCallback() {
@@ -144,8 +145,9 @@ export class BoardElement extends LitElement {
                 </div>
                 <div class="discard-pile">
                     <h3>Aflegstapel</h3>
-                    ${this._discardPile.map(card => html`
-                        <div>${card}</div>`)}
+                    <div>
+                        ${this._discardPile}
+                    </div>
                 </div>
                 ${this._currentCardContainer}
             </div>

@@ -5,7 +5,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 export class CurrentCardContainerElement extends LitElement {
 
     @state()
-    private _card!: HTMLElement;
+    private _card!: null;
 
     @property({ type: Boolean })
     private _isDisplayed = false;
@@ -28,7 +28,7 @@ export class CurrentCardContainerElement extends LitElement {
     private toggleModalVisibility() {
         // Toggle the display state
         this._isDisplayed = !this._isDisplayed;
-    
+
         let cardModal = this.shadowRoot?.querySelector('.modal') as HTMLElement;
         if (cardModal) {
             // Use _isDisplayed to determine the display style
@@ -41,7 +41,7 @@ export class CurrentCardContainerElement extends LitElement {
             detail: {
                 card: this._card
             },
-            bubbles: true, 
+            bubbles: true,
             composed: true
         }));
         this.toggleModalVisibility();
@@ -50,17 +50,21 @@ export class CurrentCardContainerElement extends LitElement {
     connectedCallback() {
         super.connectedCallback();
         console.log("Listening for request-set-current-card event")
-        this.addEventListener('request-set-current-card', this.handleCurrentCardRequested);
+        this.addEventListener('request-set-current-card', this.setCurrentCard);
     }
 
     disconnectedCallback() {
         super.disconnectedCallback();
-        this.removeEventListener('request-set-current-card', this.handleCurrentCardRequested);
     }
 
-    private handleCurrentCardRequested(event) {
+    private setCurrentCard(event) {
         console.log("Handling request-set-current-card event")
         this._card = event.detail.card
+        this.toggleModalVisibility();
+    }
+
+    private unsetCurrentCard(event) {
+        this._card = null;
         this.toggleModalVisibility();
     }
 
@@ -86,13 +90,14 @@ export class CurrentCardContainerElement extends LitElement {
             font-size: 40px;
             font-weight: bold;
             transition: 0.3s;
+            cursor: pointer;
         }
     `
 
     render() {
         return html`
             <div id="cardModal" class="modal">
-                <span class="close" @click="${this.toggleModalVisibility}">&times;</span>
+                <span class="close" @click="${this.unsetCurrentCard}">&times;</span>
                 <div class="cardHolder">
                     ${this._card}
                 </div>

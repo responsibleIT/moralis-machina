@@ -9,7 +9,7 @@ import {DeckElement} from "./components/Deck.ts";
 import {ScenarioCardElement} from "./components/ScenarioCard.ts";
 import {CardType} from "./enums/CardType.ts";
 import {ScenarioType} from "./enums/ScenarioType.ts";
-import { CurrentCardContainerElement } from './components/CurrentCardContainerElement.ts';
+import { CurrentCardContainerElement } from './components/CurrentCardContainer.ts';
 
 @customElement('root-element')
 export class RootElement extends LitElement {

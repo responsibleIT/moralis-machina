@@ -25,7 +25,7 @@ export class DeckElement extends LitElement {
         return this._cards;
     }
 
-    public get getDeckType() { 
+    public get getDeckType() {
         return this._deckType;
     }
 
@@ -48,11 +48,15 @@ export class DeckElement extends LitElement {
     }
 
     peek() {
-        return this._cards[this._cards.length - 1];
+        let card = this._cards[this._cards.length - 1];
+        console.log("peek count", this._cards.length)
+        return card;
     }
 
     draw() {
-        return this._cards!.pop();
+        let card = this._cards.pop();
+        console.log("draw count", this._cards.length)
+        return card;
     }
 
     render() {
