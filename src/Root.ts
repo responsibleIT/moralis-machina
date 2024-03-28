@@ -5,11 +5,11 @@ import './components/NavBar.ts'
 import './components/Board.ts'
 import {PlayerElement} from "./components/Player.ts";
 import {RoleType} from "./enums/RoleType.ts";
-import {DeckElement} from "./components/Deck.ts";
 import {ScenarioCardElement} from "./components/ScenarioCard.ts";
 import {CardType} from "./enums/CardType.ts";
 import {ScenarioType} from "./enums/ScenarioType.ts";
 import { CurrentCardContainerElement } from './components/CurrentCardContainer.ts';
+import { ScenarioCardDeckElement } from './components/ScenarioCardDeck.ts';
 
 @customElement('root-element')
 export class RootElement extends LitElement {
@@ -42,7 +42,7 @@ export class RootElement extends LitElement {
     initDecks() {
         console.log("Initializing decks...")
         // init test decks red blue green yellow
-        let redCards = new DeckElement();
+        let redCards = new ScenarioCardDeckElement();
         for (let i = 0; i < 5; i++) {
             const card = new ScenarioCardElement(
                 "Test" + i,
@@ -56,7 +56,7 @@ export class RootElement extends LitElement {
             redCards.push(card);
             redCards.setDeckType = ScenarioType.RED;
         }
-        let blueCards = new DeckElement();
+        let blueCards = new ScenarioCardDeckElement();
         for (let i = 0; i < 5; i++) {
             const card = new ScenarioCardElement(
                 "Test" + i,
@@ -70,7 +70,7 @@ export class RootElement extends LitElement {
             blueCards.push(card);
             blueCards.setDeckType = ScenarioType.BLUE;
         }
-        let greenCards = new DeckElement();
+        let greenCards = new ScenarioCardDeckElement();
         for (let i = 0; i < 5; i++) {
             const card = new ScenarioCardElement(
                 "Test" + i,
@@ -84,7 +84,7 @@ export class RootElement extends LitElement {
             greenCards.push(card);
             greenCards.setDeckType = ScenarioType.GREEN;
         }
-        let yellowCards = new DeckElement();
+        let yellowCards = new ScenarioCardDeckElement();
         for (let i = 0; i < 5; i++) {
             const card = new ScenarioCardElement(
                 "Test" + i,

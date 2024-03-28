@@ -2,12 +2,12 @@ import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ScenarioCardElement } from './ScenarioCard.ts';
 import { ScenarioType } from '../enums/ScenarioType.ts';
+import { DeckElement } from './Deck.ts';
 
-@customElement('deck-element')
-export class DeckElement extends LitElement {
-
-    @property({ type: Array })
-    protected _cards: ScenarioCardElement[] = [];
+@customElement('scenariocard-deck-element')
+export class ScenarioCardDeckElement extends DeckElement {
+    @property({ type: ScenarioType })
+    private _deckType: ScenarioType = ScenarioType.RED;
 
     static styles = css`
         .deck {
@@ -20,6 +20,14 @@ export class DeckElement extends LitElement {
 
     public get getCards() {
         return this._cards;
+    }
+
+    public get getDeckType() {
+        return this._deckType;
+    }
+
+    public set setDeckType(deckType: ScenarioType) {
+        this._deckType = deckType;
     }
 
     connectedCallback() {

@@ -5,7 +5,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 export class CurrentCardContainerElement extends LitElement {
 
     @state()
-    private _card!: null;
+    private _card!: Node | null;
 
     @property({ type: Boolean })
     private _isDisplayed = false;
@@ -14,7 +14,7 @@ export class CurrentCardContainerElement extends LitElement {
     private _isFlipped = false;
 
     get card(): Node {
-        return this._card;
+        return this._card!;
     }
 
     get isDisplayed(): boolean {
@@ -63,7 +63,18 @@ export class CurrentCardContainerElement extends LitElement {
         this.toggleModalVisibility();
     }
 
-    private unsetCurrentCard(event) {
+    private requestReturnCard() {
+        this.dispatchEvent(new CustomEvent('request-return-card', {
+            detail: {
+                card: this._card
+            },
+            bubbles: true,
+            composed: true
+        }));
+    }
+
+    private unsetCurrentCard() {
+        this.requestReturnCard();
         this._card = null;
         this.toggleModalVisibility();
     }

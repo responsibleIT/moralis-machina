@@ -7,11 +7,12 @@ import {SpecialCardElement} from './SpecialCard.ts'
 import {PlayerElement} from "./Player.ts";
 import {CurrentCardContainerElement} from "./CurrentCardContainer.ts";
 import {RoleType} from "../enums/RoleType.ts";
+import { ScenarioCardDeckElement } from './ScenarioCardDeck.ts'
 
 @customElement('board-element')
 export class BoardElement extends LitElement {
-    @property({type: Array<DeckElement>})
-    private _cardDecks: Array<DeckElement>
+    @property({type: Array<ScenarioCardDeckElement>})
+    private _cardDecks: Array<ScenarioCardDeckElement>
 
     @property({type: DeckElement})
     private _discardPile: DeckElement
@@ -28,7 +29,7 @@ export class BoardElement extends LitElement {
     @property({type: CurrentCardContainerElement})
     private _currentCardContainer: CurrentCardContainerElement
 
-    constructor(decks: Array<DeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>, currentCardContainer: CurrentCardContainerElement) {
+    constructor(decks: Array<ScenarioCardDeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>, currentCardContainer: CurrentCardContainerElement) {
         super();
         this._cardDecks = decks;
         this._players = players;
@@ -39,7 +40,7 @@ export class BoardElement extends LitElement {
     }
 
     //Getters for the private properties
-    public get getDecks(): Array<DeckElement> {
+    public get getDecks(): Array<ScenarioCardDeckElement> {
         return this._cardDecks;
     }
 
@@ -51,7 +52,7 @@ export class BoardElement extends LitElement {
         return this._roleCards;
     }
 
-    public get getSpecialCards(): Array<ScenarioCardElement> {
+    public get getSpecialCards(): Array<SpecialCardElement> {
         return this._specialCards;
     }
 
@@ -68,7 +69,7 @@ export class BoardElement extends LitElement {
     };
 
     private selectCurrentCard(event: Event) {
-        let deck = event.target as DeckElement;
+        let deck = event.target as ScenarioCardDeckElement;
         let cardOnTop = deck?.peek() as HTMLElement;
         if (cardOnTop) {
             this.requestSetCurrentCard(cardOnTop);
@@ -101,9 +102,16 @@ export class BoardElement extends LitElement {
         })
     }
 
+    private returnCurrentCard(event) {
+        let card = event.detail.card as ScenarioCardElement;
+        let deck = this._cardDecks.find(deck => deck.getDeckType === card.getScenarioType);
+        deck?.push(card);
+    }
+
     connectedCallback() {
         super.connectedCallback();
         this.addEventListener('request-discard', this.discardCurrentCard)
+        this.addEventListener('request-return-card', this.returnCurrentCard)
         // init test decks red blue green yellow
         this._roleCards = [];
         this._specialCards = [];
@@ -112,6 +120,7 @@ export class BoardElement extends LitElement {
     disconnectedCallback() {
         super.disconnectedCallback();
         this.removeEventListener('request-discard', this.discardCurrentCard);
+        this.removeEventListener('request-return-card', this.returnCurrentCard);
     }
 
     render() {
