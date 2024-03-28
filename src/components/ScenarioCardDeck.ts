@@ -1,20 +1,17 @@
-import { LitElement, css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { ScenarioCardElement } from './ScenarioCard.ts';
-import { ScenarioType } from '../enums/ScenarioType.ts';
-import { DeckElement } from './Deck.ts';
+import {LitElement, css, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+import {ScenarioCardElement} from './ScenarioCard.ts';
+import {ScenarioType} from '../enums/ScenarioType.ts';
+import {DeckElement} from './Deck.ts';
 
 @customElement('scenariocard-deck-element')
 export class ScenarioCardDeckElement extends DeckElement {
-    @property({ type: ScenarioType })
+    @property({type: ScenarioType})
     private _deckType: ScenarioType = ScenarioType.RED;
 
     static styles = css`
         .deck {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
         }
     `;
 
@@ -59,7 +56,8 @@ export class ScenarioCardDeckElement extends DeckElement {
     render() {
         return html`
             <div class="deck">
-                ${this._cards.map((card) => html`<div>${card}</div>`)}
+                ${this._cards.map((card, index) => html`
+                    <div style="grid-area: 1/1/1/1; padding-top: ${10 * index /4}px;">${card}</div>`)}
             </div>
         `;
     }

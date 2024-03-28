@@ -135,8 +135,10 @@ export class BoardElement extends LitElement {
                 </div>
                 <div class="decks">
                     <h3>Speelstapels</h3>
-                    ${this._cardDecks.map(deck => html`
-                        <div @click=${this.selectCurrentCard}>${deck}</div>`)}
+                    <div class="decks-container">
+                        ${this._cardDecks.map(deck => html`
+                            <div @click=${this.selectCurrentCard}>${deck}</div>`)}
+                    </div>
                 </div>
                 <div class="discard-pile">
                     <h3>Aflegstapel</h3>

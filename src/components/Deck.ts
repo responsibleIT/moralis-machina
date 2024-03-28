@@ -1,12 +1,12 @@
-import { LitElement, css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { ScenarioCardElement } from './ScenarioCard.ts';
-import { ScenarioType } from '../enums/ScenarioType.ts';
+import {LitElement, css, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+import {ScenarioCardElement} from './ScenarioCard.ts';
+import {ScenarioType} from '../enums/ScenarioType.ts';
 
 @customElement('deck-element')
 export abstract class DeckElement extends LitElement {
 
-    @property({ type: Array })
+    @property({type: Array})
     protected _cards: ScenarioCardElement[] = [];
 
     static styles = css`
@@ -36,7 +36,8 @@ export abstract class DeckElement extends LitElement {
     render() {
         return html`
             <div class="deck">
-                ${this._cards.map((card) => html`<div>${card}</div>`)}
+                ${this._cards.map((card) => html`
+                    <div style="grid-area: 1/1/2/2">${card}</div>`)}
             </div>
         `;
     }

@@ -73,6 +73,7 @@ export abstract class CardElement extends LitElement{
             transform-style: preserve-3d;
             border-radius: 10px;
             box-shadow: 4px 8px 4px 0 rgba(0, 0, 0, 0.2);
+            border: 1px solid black;
         }
 
         .card-face {
