@@ -70,7 +70,8 @@ export class BoardElement extends LitElement {
 
     private selectCurrentCard(event: Event) {
         let deck = event.target as ScenarioCardDeckElement;
-        let cardOnTop = deck?.draw();
+        //TODO fix peek
+        let cardOnTop = deck?.peek();
         if (cardOnTop) {
             this.requestSetCurrentCard(cardOnTop);
         } else {
@@ -106,7 +107,7 @@ export class BoardElement extends LitElement {
         let deck = this._cardDecks.find(deck => deck.getDeckType === discardedCard.getScenarioType) as ScenarioCardDeckElement;
         deck?.push(discardedCard);
     }
-    
+
     connectedCallback() {
         super.connectedCallback();
         this.addEventListener('request-discard', this.discardCurrentCard)
@@ -183,5 +184,9 @@ export class BoardElement extends LitElement {
             border-left: 1px solid #e0e0e0;
         }
 
+        .decks-container {
+            display: flex;
+            flex-wrap: wrap;  
+        }
     `
 }

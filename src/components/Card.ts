@@ -1,9 +1,9 @@
 import {LitElement, css, CSSResultGroup} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-import { CardType } from '../enums/CardType'
+import {CardType} from '../enums/CardType'
 
 @customElement('card-element')
-export abstract class CardElement extends LitElement{
+export abstract class CardElement extends LitElement {
     @property({type: String})
     protected readonly cardName
 
@@ -32,7 +32,6 @@ export abstract class CardElement extends LitElement{
 
         const card = this.shadowRoot?.querySelector('.card') as HTMLElement
         card.classList.toggle('is-flipped');
-
     }
 
     //Getters for the private properties
@@ -104,10 +103,14 @@ export abstract class CardElement extends LitElement{
             font-weight: bold;
             margin-top: 8px;
         }
-        
+
         .is-flipped {
             transform: rotateY(180deg);
+
+            .card-front {
+                display: none;
+            }
         }
-        
+
     ` as CSSResultGroup
 }

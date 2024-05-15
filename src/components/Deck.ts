@@ -31,6 +31,11 @@ export abstract class DeckElement extends LitElement {
         return card;
     }
 
+    public peek() {
+        return this._cards[0]
+
+    }
+
     render() {
         return html`
             <div class="deck">
