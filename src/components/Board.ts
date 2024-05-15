@@ -1,5 +1,5 @@
 import {css, html, LitElement} from 'lit'
-import {customElement, property, query} from 'lit/decorators.js'
+import {customElement, property} from 'lit/decorators.js'
 import {ScenarioCardElement} from './ScenarioCard'
 import {RoleCardElement} from './RoleCard'
 import {SpecialCardElement} from './SpecialCard.ts'
@@ -56,9 +56,18 @@ export class BoardElement extends LitElement {
         return this._specialCards;
     }
 
+    connectedCallback() {
+        super.connectedCallback();
+        this._roleCards = [];
+        this._specialCards = [];
+    }
+
+    disconnectedCallback() {
+        super.disconnectedCallback();
+    }
+
     // Method to emit the custom event
     private requestSetCurrentCard(currentCard: ScenarioCardElement) {
-        console.log("Requesting to set current card");
         this._currentCardContainer.dispatchEvent(new CustomEvent('request-set-current-card', {
             bubbles: true,
             composed: true,
@@ -68,22 +77,21 @@ export class BoardElement extends LitElement {
         }))
     };
 
-    private selectCurrentCard(event: Event) {
+    private requestUnsetCurrentCard() {
+        this._currentCardContainer.dispatchEvent(new CustomEvent('request-unset-current-card', {
+            bubbles: true,
+            composed: true
+        }))
+    }
+
+    private setCurrentCard(event: Event) {
         let deck = event.target as ScenarioCardDeckElement;
-        //TODO fix peek
-        let cardOnTop = deck?.peek();
+        let cardOnTop = deck?.draw();
         if (cardOnTop) {
             this.requestSetCurrentCard(cardOnTop);
         } else {
-            console.log("Deck is empty");
             return;
         }
-    }
-
-    private discardCurrentCard(event) {
-        let card = event.detail.card as ScenarioCardElement;
-        this._discardPile.push(card);
-        this.shiftPlayerRoles();
     }
 
     private shiftPlayerRoles() {
@@ -106,25 +114,17 @@ export class BoardElement extends LitElement {
         let discardedCard = this._discardPile.draw() as ScenarioCardElement;
         let deck = this._cardDecks.find(deck => deck.getDeckType === discardedCard.getScenarioType) as ScenarioCardDeckElement;
         deck?.push(discardedCard);
+        this.requestUpdate();
     }
 
-    connectedCallback() {
-        super.connectedCallback();
-        this.addEventListener('request-discard', this.discardCurrentCard)
-        this.addEventListener('request-return-card', this.returnDiscardedCard)
-        // init test decks red blue green yellow
-        this._roleCards = [];
-        this._specialCards = [];
-    }
-
-    disconnectedCallback() {
-        super.disconnectedCallback();
-        this.removeEventListener('request-discard', this.discardCurrentCard);
-        this.removeEventListener('request-return-card', this.returnDiscardedCard);
+    private returnCurrentCard(event) {
+        let currentCard = event.detail.card as ScenarioCardElement;
+        let deck = this._cardDecks.find(deck => deck.getDeckType === currentCard.getScenarioType) as ScenarioCardDeckElement;
+        deck?.push(currentCard);
+        this.requestUpdate();
     }
 
     render() {
-        // console.log(this._players);
         return html`
             <div class="board">
                 <div class="players">
@@ -136,13 +136,13 @@ export class BoardElement extends LitElement {
                     <h3>Speelstapels</h3>
                     <div class="decks-container">
                         ${this._cardDecks.map(deck => html`
-                            <div @click=${this.selectCurrentCard}>${deck}</div>`)}
+                            <div @click=${this.setCurrentCard}>${deck}</div>`)}
                     </div>
                 </div>
                 <div class="discard-pile">
                     <h3>Aflegstapel</h3>
-                    <div @click=${this.returnDiscardedCard}>
-                        ${this._discardPile}
+                    ${this._discardPile.getCards.map(card => html`
+                        <div @click=${this.selectDiscardedCard}> ${card}</div>`)}
                     </div>
                 </div>
                 ${this._currentCardContainer}

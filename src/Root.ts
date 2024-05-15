@@ -18,8 +18,6 @@ import scenarioCards from './assets/scenariocards.json'
 export class RootElement extends LitElement {
 
     initPlayers() {
-        console.log("init players")
-
         let players: Array<PlayerElement> = []
         for (let i = 0; i < 10; i++) {
             players.push(new PlayerElement(
@@ -36,16 +34,12 @@ export class RootElement extends LitElement {
             leaderIndex = Math.floor(Math.random() * players.length)
         }
         players[leaderIndex].role = RoleType.Redenaar
-        console.log(players)
 
 
         return players
     }
 
     initDecks() {
-        console.log("Initializing decks...")
-        // init test decks red blue green yellow
-
         let redCards = new ScenarioCardDeckElement();
         let blueCards = new ScenarioCardDeckElement();
         let greenCards = new ScenarioCardDeckElement();
@@ -108,13 +102,11 @@ export class RootElement extends LitElement {
     }
 
     initCurrentCardContainer() {
-        console.log("Initializing current card container...")
         let currentCardContainer = new CurrentCardContainerElement();
         return currentCardContainer;
     }
 
     initDiscardPile() {
-        console.log("Initializing discard pile...")
         let discardPile = new DiscardDeckElement();
         return discardPile;
     }

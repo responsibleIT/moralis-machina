@@ -1,18 +1,29 @@
-import { LitElement, css, html } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { IRequestReturnCard } from '../interfaces/IRequestReturnCard';
-import { ScenarioCardElement } from './ScenarioCard';
+import {LitElement, css, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+import {ScenarioCardElement} from './ScenarioCard';
 
 @customElement('current-card--container-element')
-export class CurrentCardContainerElement extends LitElement implements IRequestReturnCard {
-    @property({ type: ScenarioCardElement})
+export class CurrentCardContainerElement extends LitElement{
+    @property({type: ScenarioCardElement})
     private _card!: ScenarioCardElement | null;
 
-    @property({ type: Boolean })
+    @property({type: Boolean})
     private _isDisplayed = false;
 
-    @property({ type: Boolean })
+    @property({type: Boolean})
     private _isFlipped = false;
+
+    connectedCallback() {
+        super.connectedCallback();
+        this.addEventListener('request-set-current-card', this.setCurrentCard);
+        this.addEventListener('request-unset-current-card', this.unsetCurrentCard);
+    }
+
+    disconnectedCallback() {
+        super.disconnectedCallback();
+        this.removeEventListener('request-set-current-card', this.setCurrentCard);
+        this.removeEventListener('request-unset-current-card', this.unsetCurrentCard);
+    }
 
     get card(): ScenarioCardElement {
         return this._card!;
@@ -37,25 +48,14 @@ export class CurrentCardContainerElement extends LitElement implements IRequestR
         }
     }
 
-    private requestDiscard() {
-        this.dispatchEvent(new CustomEvent('request-discard', {
+    private requestUnsetCurrentCard() {
+        this.dispatchEvent(new CustomEvent('request-unset-current-card', {
+            bubbles: true,
+            composed: true,
             detail: {
                 card: this._card
-            },
-            bubbles: true,
-            composed: true
+            }
         }));
-        this.toggleModalVisibility();
-    }
-
-    connectedCallback() {
-        super.connectedCallback();
-        console.log("Listening for request-set-current-card event")
-        this.addEventListener('request-set-current-card', this.setCurrentCard);
-    }
-
-    disconnectedCallback() {
-        super.disconnectedCallback();
     }
 
     private setCurrentCard(event) {
@@ -64,20 +64,10 @@ export class CurrentCardContainerElement extends LitElement implements IRequestR
         this.requestUpdate();
     }
 
-    requestReturnCard() {
-        this.dispatchEvent(new CustomEvent('request-return-card', {
-            detail: {
-                card: this._card
-            },
-            bubbles: true,
-            composed: true
-        }));
-    }
-
     private unsetCurrentCard() {
-        this.requestReturnCard();
         this._card = null;
         this.toggleModalVisibility();
+        this.requestUpdate();
     }
 
     static styles = css`
@@ -109,7 +99,7 @@ export class CurrentCardContainerElement extends LitElement implements IRequestR
     render() {
         return html`
             <div id="cardModal" class="modal">
-                <span class="close" @click="${this.unsetCurrentCard}">&times;</span>
+                <button @click="${this.unsetCurrentCard}">Terugzetten</button>
                 <div class="cardHolder">
                     ${this._card}
                 </div>
