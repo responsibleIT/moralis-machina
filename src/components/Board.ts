@@ -201,6 +201,7 @@ export class BoardElement extends LitElement {
             padding: 8px;
             margin: 8px;
             border-left: 1px solid #e0e0e0;
+            overflow-y: scroll;
         }
 
         .decks-container {
