@@ -15,14 +15,16 @@ export class CurrentCardContainerElement extends LitElement{
 
     connectedCallback() {
         super.connectedCallback();
+
+        // @ts-ignore
         this.addEventListener('request-set-current-card', this.setCurrentCard);
-        this.addEventListener('request-unset-current-card', this.unsetCurrentCard);
     }
 
     disconnectedCallback() {
         super.disconnectedCallback();
+
+        // @ts-ignore
         this.removeEventListener('request-set-current-card', this.setCurrentCard);
-        this.removeEventListener('request-unset-current-card', this.unsetCurrentCard);
     }
 
     get card(): ScenarioCardElement {
@@ -48,7 +50,13 @@ export class CurrentCardContainerElement extends LitElement{
         }
     }
 
-    private requestUnsetCurrentCard() {
+    private setCurrentCard(event: CustomEvent) {
+        this._card = event.detail.card
+        this.toggleModalVisibility();
+        this.requestUpdate();
+    }
+
+    private unsetCurrentCard() {
         this.dispatchEvent(new CustomEvent('request-unset-current-card', {
             bubbles: true,
             composed: true,
@@ -56,15 +64,21 @@ export class CurrentCardContainerElement extends LitElement{
                 card: this._card
             }
         }));
-    }
 
-    private setCurrentCard(event) {
-        this._card = event.detail.card
+        this._card = null;
         this.toggleModalVisibility();
         this.requestUpdate();
     }
 
-    private unsetCurrentCard() {
+    private requestDiscard() {
+        this.dispatchEvent(new CustomEvent('request-discard', {
+            bubbles: true,
+            composed: true,
+            detail: {
+                card: this._card
+            }
+        }));
+
         this._card = null;
         this.toggleModalVisibility();
         this.requestUpdate();

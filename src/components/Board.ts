@@ -6,8 +6,8 @@ import {SpecialCardElement} from './SpecialCard.ts'
 import {PlayerElement} from "./Player.ts";
 import {CurrentCardContainerElement} from "./CurrentCardContainer.ts";
 import {RoleType} from "../enums/RoleType.ts";
-import { ScenarioCardDeckElement } from './ScenarioCardDeck.ts'
-import { DiscardDeckElement } from './DiscardDeck.ts'
+import {ScenarioCardDeckElement} from './ScenarioCardDeck.ts'
+import {DiscardDeckElement} from './DiscardDeck.ts'
 
 @customElement('board-element')
 export class BoardElement extends LitElement {
@@ -28,6 +28,8 @@ export class BoardElement extends LitElement {
 
     @property({type: CurrentCardContainerElement})
     private _currentCardContainer: CurrentCardContainerElement
+
+    private _currentIsDiscarded = false;
 
     constructor(decks: Array<ScenarioCardDeckElement>, players: Array<PlayerElement>, roleCards: Array<RoleCardElement>, specialCards: Array<ScenarioCardElement>, currentCardContainer: CurrentCardContainerElement, discardPile: DiscardDeckElement) {
         super();
@@ -60,37 +62,68 @@ export class BoardElement extends LitElement {
         super.connectedCallback();
         this._roleCards = [];
         this._specialCards = [];
+
+        // @ts-ignore
+        this.addEventListener('request-unset-current-card', this.unsetCurrentCard)
+        // @ts-ignore
+        this.addEventListener('request-discard', this.discardCurrentCard)
     }
 
     disconnectedCallback() {
         super.disconnectedCallback();
+
+        // @ts-ignore
+        this.removeEventListener('request-unset-current-card', this.unsetCurrentCard);
+        // @ts-ignore
+        this.removeEventListener('request-discard', this.discardCurrentCard)
     }
 
-    // Method to emit the custom event
-    private requestSetCurrentCard(currentCard: ScenarioCardElement) {
+    private setCurrentCard(event: CustomEvent) {
+        let deck = event.target as ScenarioCardDeckElement;
+        let cardOnTop = deck?.draw();
+        if (cardOnTop) {
+            this._currentCardContainer.dispatchEvent(new CustomEvent('request-set-current-card', {
+                bubbles: true,
+                composed: true,
+                detail: {
+                    card: cardOnTop
+                }
+            }))
+        } else {
+            return;
+        }
+    }
+
+    private setDiscardedCardAsCurrent(event: CustomEvent) {
+        let card = event.target
         this._currentCardContainer.dispatchEvent(new CustomEvent('request-set-current-card', {
             bubbles: true,
             composed: true,
             detail: {
-                card: currentCard
+                card: card
             }
         }))
-    };
 
-    private requestUnsetCurrentCard() {
-        this._currentCardContainer.dispatchEvent(new CustomEvent('request-unset-current-card', {
-            bubbles: true,
-            composed: true
-        }))
+        this._currentIsDiscarded = true;
     }
 
-    private setCurrentCard(event: Event) {
-        let deck = event.target as ScenarioCardDeckElement;
-        let cardOnTop = deck?.draw();
-        if (cardOnTop) {
-            this.requestSetCurrentCard(cardOnTop);
-        } else {
-            return;
+    private unsetCurrentCard(event: CustomEvent) {
+        let card = event.detail.card as ScenarioCardElement;
+        let deck = this._cardDecks.find(deck => deck.getDeckType === card.getScenarioType) as ScenarioCardDeckElement;
+        deck?.push(card);
+        this.requestUpdate();
+    }
+
+    private discardCurrentCard(event: CustomEvent) {
+        let card = event.detail.card as ScenarioCardElement;
+        this._discardPile.push(card);
+        if (!this._currentIsDiscarded) {
+            this.shiftPlayerRoles();
+        }
+        this.requestUpdate();
+
+        if (this._currentIsDiscarded) {
+            this._currentIsDiscarded = false;
         }
     }
 
@@ -108,20 +141,6 @@ export class BoardElement extends LitElement {
         this._players.forEach((player, index) => {
             player.role = allRolesInOrder[index]
         })
-    }
-
-    private returnDiscardedCard() {
-        let discardedCard = this._discardPile.draw() as ScenarioCardElement;
-        let deck = this._cardDecks.find(deck => deck.getDeckType === discardedCard.getScenarioType) as ScenarioCardDeckElement;
-        deck?.push(discardedCard);
-        this.requestUpdate();
-    }
-
-    private returnCurrentCard(event) {
-        let currentCard = event.detail.card as ScenarioCardElement;
-        let deck = this._cardDecks.find(deck => deck.getDeckType === currentCard.getScenarioType) as ScenarioCardDeckElement;
-        deck?.push(currentCard);
-        this.requestUpdate();
     }
 
     render() {
@@ -142,10 +161,10 @@ export class BoardElement extends LitElement {
                 <div class="discard-pile">
                     <h3>Aflegstapel</h3>
                     ${this._discardPile.getCards.map(card => html`
-                        <div @click=${this.selectDiscardedCard}> ${card}</div>`)}
-                    </div>
+                        <div @click=${this.setDiscardedCardAsCurrent}> ${card}</div>`)}
                 </div>
-                ${this._currentCardContainer}
+            </div>
+            ${this._currentCardContainer}
             </div>
         `
     }
@@ -186,7 +205,7 @@ export class BoardElement extends LitElement {
 
         .decks-container {
             display: flex;
-            flex-wrap: wrap;  
+            flex-wrap: wrap;
         }
     `
 }
