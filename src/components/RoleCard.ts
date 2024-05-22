@@ -1,9 +1,8 @@
-import {css, html} from 'lit'
-import {customElement, property} from 'lit/decorators.js'
+import { html} from 'lit'
+import {customElement} from 'lit/decorators.js'
 
 import {CardElement} from "./Card.ts";
 import {CardType} from "../enums/CardType.ts";
-import {PlayerElement} from "./Player.ts";
 
 @customElement('role-card-element')
 export class RoleCardElement extends CardElement {

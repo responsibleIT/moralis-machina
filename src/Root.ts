@@ -51,7 +51,7 @@ export class RootElement extends LitElement {
                     redCards.push(new ScenarioCardElement(
                         card.name,
                         card.context,
-                        `./src/assets/card-images/${card.image}.png`,
+                        `./card-images/${card.image}.png`,
                         CardType.ScenarioCard,
                         ScenarioType.RED,
                         card.questions,
@@ -63,7 +63,7 @@ export class RootElement extends LitElement {
                     blueCards.push(new ScenarioCardElement(
                         card.name,
                         card.context,
-                        `./src/assets/card-images/${card.image}.png`,
+                        `./card-images/${card.image}.png`,
                         CardType.ScenarioCard,
                         ScenarioType.BLUE,
                         card.questions,
@@ -75,7 +75,7 @@ export class RootElement extends LitElement {
                     greenCards.push(new ScenarioCardElement(
                         card.name,
                         card.context,
-                        `./src/assets/card-images/${card.image}.png`,
+                        `./card-images/${card.image}.png`,
                         CardType.ScenarioCard,
                         ScenarioType.GREEN,
                         card.questions,
@@ -87,7 +87,7 @@ export class RootElement extends LitElement {
                     yellowCards.push(new ScenarioCardElement(
                         card.name,
                         card.context,
-                        `./src/assets/card-images/${card.image}.png`,
+                        `./card-images/${card.image}.png`,
                         CardType.ScenarioCard,
                         ScenarioType.YELLOW,
                         card.questions,
