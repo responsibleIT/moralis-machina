@@ -63,14 +63,14 @@ export abstract class CardElement extends LitElement {
         .card {
             display: flex;
             flex-direction: column;
-            width: 10rem;
-            height: 16rem;
+            width: 13rem;
+            height: 20rem;
             padding: 16px;
             margin: 8px;
             position: relative;
             transition: transform 0.8s;
             transform-style: preserve-3d;
-            border-radius: 10px;
+            border-radius: 4px;
             box-shadow: 4px 8px 4px 0 rgba(0, 0, 0, 0.2);
             border: 1px solid black;
         }
@@ -83,18 +83,80 @@ export abstract class CardElement extends LitElement {
         .card-front {
             display: flex;
             flex-direction: column;
+            font-family: "Abril Fatface", serif;
         }
 
         .card-rear {
             display: flex;
             flex-direction: column;
             transform: rotateY(180deg);
+            font-family: "Roboto", sans-serif;
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-rear > .rear-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding-bottom: 0.5em;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+            text-align: center;
+        }
+
+        .card-rear > .rear-context {
+            font-size: 0.8rem;
+        }
+
+        .card-rear > .rear-hr {
+            width: 80%;
+            height: 0;
+            border: 0.01em solid black;
+            margin: 0.5em auto;
+        }
+        
+        .question-container > .rear-question1 {
+            font-size: 0.9rem;
+            padding-bottom: 1em;
+        }
+
+        .question-container > .rear-question2 {
+            font-size: 0.9rem;
+        }
+        
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 1em;
+        }
+        
+        .card-rear > .filler {
+            flex-grow: 1;
+        }
+        
+        .tag-container > .rear-tag1 {
+            font-size: 0.5rem;
+            padding-right: 0.5em;
+        }
+
+        .tag-container > .rear-tag2 {
+            font-size: 0.5rem;
+        }
+        
+        .tag-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
         }
 
         .card img {
-            width: 100%;
-            height: 100%;
+            width: 14em;
+            height: 14em;
             object-fit: contain;
+            padding-bottom: 2em;
         }
 
         .card-name {
@@ -110,6 +172,19 @@ export abstract class CardElement extends LitElement {
             .card-front {
                 display: none;
             }
+        }
+
+        .flip-button {
+            position: absolute;
+            width: 18%;
+            height: 12%;
+            top: 0;
+            right: 0;
+            background-image: linear-gradient(to bottom left, black, black 50%, transparent 50%, transparent);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            z-index: 10;
         }
 
     ` as CSSResultGroup
