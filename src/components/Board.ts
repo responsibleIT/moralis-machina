@@ -112,6 +112,8 @@ export class BoardElement extends LitElement {
         let deck = this._cardDecks.find(deck => deck.getDeckType === card.getScenarioType) as ScenarioCardDeckElement;
         deck?.push(card);
         this.requestUpdate();
+
+        this._currentIsDiscarded = false;
     }
 
     private discardCurrentCard(event: CustomEvent) {
@@ -122,9 +124,7 @@ export class BoardElement extends LitElement {
         }
         this.requestUpdate();
 
-        if (this._currentIsDiscarded) {
-            this._currentIsDiscarded = false;
-        }
+        this._currentIsDiscarded = false;
     }
 
     private shiftPlayerRoles() {
