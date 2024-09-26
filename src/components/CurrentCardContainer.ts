@@ -46,7 +46,8 @@ export class CurrentCardContainerElement extends LitElement{
         let cardModal = this.shadowRoot?.querySelector('.modal') as HTMLElement;
         if (cardModal) {
             // Use _isDisplayed to determine the display style
-            cardModal.style.display = this._isDisplayed ? "flex" : "none";
+            cardModal.style.visibility = this._isDisplayed ? "visible" : "hidden";
+            cardModal.style.opacity = this._isDisplayed ? "1" : "0"
         }
     }
 
@@ -86,10 +87,11 @@ export class CurrentCardContainerElement extends LitElement{
 
     static styles = css`
         .modal {
-            display: none; /* None by default */
+            visibility: hidden;
             position: fixed; /* Stay in place */
             z-index: 1; /* Sit on top */
             left: 0;
+            right: 0;
             top: 0;
             width: 100%; /* Full width */
             height: 100%; /* Full height */
@@ -98,7 +100,9 @@ export class CurrentCardContainerElement extends LitElement{
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            scale: 2;
+            scale: 1;
+            opacity: 0;
+            transition: 0.5s ease-in-out;
         }
 
         .close {
@@ -108,16 +112,52 @@ export class CurrentCardContainerElement extends LitElement{
             transition: 0.3s;
             cursor: pointer;
         }
+
+        .card-holder-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            max-width: 1350px;
+            margin: 0px auto;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            right: 0;
+            top: 0;
+            overflow: hidden;
+        }
+
+        .cardHolder {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            grid-column: span 3;
+            gap: 2rem;
+            align-items: flex-end;
+            transform-origin: 92% center;
+            scale: 1.2;
+        }
+
+        .cardHolder > button {
+            height: 2rem;
+        }
+
+        .overlay {
+
+        }
     `
 
     render() {
         return html`
             <div id="cardModal" class="modal">
-                <button @click="${this.unsetCurrentCard}">Terugzetten</button>
-                <div class="cardHolder">
-                    ${this._card}
+                <div class="card-holder-container">
+                    <div class="cardHolder">
+                        <button @click="${this.unsetCurrentCard}">Terugzetten</button>
+                        ${this._card}
+                        <button @click="${this.requestDiscard}">Afleggen</button>
+                    </div>
                 </div>
-                <button @click="${this.requestDiscard}">Afleggen</button>
+                <div class="modal-overlay"></div>
             </div>
         `;
     }

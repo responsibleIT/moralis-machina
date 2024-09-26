@@ -47,14 +47,14 @@ export class ScenarioCardElement extends CardElement {
         let color = ScenarioColor[this._scenarioType]
         return html`
             <div class="card-outer">
-                <div class="card" style="background-color: ${color}">
-                    <button class="flip-button" @click=${this.flip}></button>
+                <div class="card" style="background-color: ${color}" @click=${this.flip}>
+                    <!-- <button class="flip-button"></button> -->
                     <div class="card-face card-front">
                         <img src="${this.image}" alt="image">
-                        <div class="card-name">${this.cardName}</div>
+                        <h3 class="card-name">${this.cardName}</h3>
                     </div>
-                    <div class="card-face card-rear">
-                        <div class="rear-name">${this.cardName}</div>
+                    <div class="card-face card-back"">
+                        <h3 class="rear-name">${this.cardName}</h3>
                         <div class="rear-context">${this.context}</div>
                         <div class="rear-hr"></div>
                             <!--                        <div class="rear-scenario">${this._scenarioType}</div>-->

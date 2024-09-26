@@ -79,19 +79,19 @@ export class BoardElement extends LitElement {
     }
 
     private setCurrentCard(event: CustomEvent) {
-        let deck = event.target as ScenarioCardDeckElement;
-        let cardOnTop = deck?.draw();
-        if (cardOnTop) {
-            this._currentCardContainer.dispatchEvent(new CustomEvent('request-set-current-card', {
-                bubbles: true,
-                composed: true,
-                detail: {
-                    card: cardOnTop
-                }
-            }))
-        } else {
-            return;
-        }
+        // let deck = event.target as ScenarioCardDeckElement;
+        // let cardOnTop = deck?.draw();
+        // if (cardOnTop) {
+        //     this._currentCardContainer.dispatchEvent(new CustomEvent('request-set-current-card', {
+        //         bubbles: true,
+        //         composed: true,
+        //         detail: {
+        //             card: cardOnTop
+        //         }
+        //     }))
+        // } else {
+        //     return;
+        // }
     }
 
     private setDiscardedCardAsCurrent(event: CustomEvent) {
@@ -145,25 +145,27 @@ export class BoardElement extends LitElement {
 
     render() {
         return html`
-            <div class="board">
+            <section class="board">
                 <!-- <div class="players">
                     <h3>Spelers</h3>
                     ${this._players.map(player => html`
                         <div>${player}</div>`)}
                 </div> -->
-                <div class="decks">
-                    <h3>Speelstapels</h3>
+                <section class="decks">
+                    <!-- <h3>Speelstapels</h3> -->
                     <div class="decks-container">
                         ${this._cardDecks.map(deck => html`
-                            <div @click=${this.setCurrentCard}>${deck}</div>`)}
+                            <div class="single-deck-container" @click=${this.setCurrentCard}>${deck}</div>`)}
                     </div>
-                </div>
+                </section>
                 <div class="discard-pile">
                     <h3>Aflegstapel</h3>
-                    ${this._discardPile.getCards.map(card => html`
-                        <div @click=${this.setDiscardedCardAsCurrent}> ${card}</div>`)}
+                    <div class="discard-pile-deck">
+                        ${this._discardPile.getCards.map((card, index) => html`
+                        <div @click=${this.setDiscardedCardAsCurrent} style="grid-area: 1/1/1/1; padding-top: ${20 * index /4}px;"> ${card}</div>`)}
+                    </div>
                 </div>
-            </div>
+            </section>
             ${this._currentCardContainer}
             </div>
         `
@@ -171,10 +173,16 @@ export class BoardElement extends LitElement {
 
     static styles = css`
         .board {
-            display: flex;
-            flex-direction: row;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            // flex-direction: row;
+            // align-items: center;
+            gap: 2rem;
             width: 100%;
+            // height: 80vh;
             overflow: hidden;
+            max-width: 1350px;
+            margin: 0 auto;
         }
 
         .players {
@@ -189,24 +197,47 @@ export class BoardElement extends LitElement {
         .decks {
             display: flex;
             flex-direction: column;
-            width: 70%;
-            padding: 0.8rem;
-            margin: 0.8rem;
+            grid-column: span 4;
+            // padding: 0.8rem;
+            // margin: 0.8rem;
         }
 
         .discard-pile {
             display: flex;
             flex-direction: column;
-            width: 20%;
-            padding: 0.8rem;
-            margin: 0.8rem;
-            border-left: 1px solid #e0e0e0;
+            grid-column: span 1;
+            gap: 3rem;
+            height: 50rem;
+            padding-top: 2rem;
             overflow-y: scroll;
+            border-radius: 1rem;
+            // border: 1px solid #cccccc;
+            // padding: 0.8rem;
+            // margin: 0.8rem;
+            border-left: 1px solid #cccccc;
+        }
+
+        .discard-pile h3 {
+            margin: 0;
+            padding: 0rem 3rem 0rem 2rem;
+            font-size: 2rem;
+            font-weight: 100;
+            text-transform: math-auto;
+            color: #9f9f9f;
+        }
+
+        .discard-pile-deck {
+            display: grid;
+            margin: 0rem 0rem 0rem 2rem;
         }
 
         .decks-container {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            align-items: center;
+            grid-template-columns: repeat(auto-fill, minmax(25em, 1fr));
+            gap: 2rem;
+            // display: flex;
+            // flex-wrap: wrap;
         }
     `
 }

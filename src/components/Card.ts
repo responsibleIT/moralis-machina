@@ -29,9 +29,29 @@ export abstract class CardElement extends LitElement {
 
     public flip() {
         this._isFlipped = !this._isFlipped;
-
-        const card = this.shadowRoot?.querySelector('.card') as HTMLElement
+    
+        const cardContainer = this.closest('.card-container') as HTMLElement;
+        if (cardContainer) {
+            cardContainer.classList.toggle('is-container-flipped');
+        }
+        const card = this.shadowRoot?.querySelector('.card') as HTMLElement;
         card.classList.toggle('is-flipped');
+    
+        const handleClickOutside = (event: MouseEvent) => {
+            const target = event.target as HTMLElement;
+            if (!card.contains(target) && target !== card) {
+                this._isFlipped = !this._isFlipped;
+                card.classList.toggle('is-flipped');
+                if (cardContainer) {
+                    cardContainer.classList.toggle('is-container-flipped');
+                }
+                document.removeEventListener('click', handleClickOutside);
+            }
+        };
+    
+        setTimeout(() => {
+            document.addEventListener('click', handleClickOutside);
+        }, 0);
     }
 
     //Getters for the private properties
@@ -58,21 +78,25 @@ export abstract class CardElement extends LitElement {
     static styles = css`
         .card-outer {
             perspective: 100rem;
+            height: 100%
         }
 
         .card {
             display: flex;
             flex-direction: column;
-            width: 13rem;
-            height: 20rem;
-            padding: 1.6rem;
-            margin: 0.8rem;
+            width: 100%;
+            max-width: 25rem;
+            height: 40rem;
+            // padding: 1.6rem;
+            // margin: 0.8rem;
             position: relative;
-            transition: transform 0.8s;
             transform-style: preserve-3d;
-            border-radius: 0.4rem;
-            box-shadow: 0.4rem 0.8rem 0.4rem 0 rgba(0, 0, 0, 0.2);
-            border: 1px solid black;
+            transition: transform 0.6s ease-in-out, top 0.6s ease-in-out, left 0.6s ease-in-out;
+            cursor: pointer;
+            border-radius: 1rem;
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2), 0px -2px 5px rgba(0, 0, 0, 0.2);
+            // box-shadow: 0.4rem 0.8rem 0.4rem 0 rgba(0, 0, 0, 0.2);
+            // border: 1px solid black;
         }
 
         .card-face {
@@ -83,33 +107,42 @@ export abstract class CardElement extends LitElement {
         .card-front {
             display: flex;
             flex-direction: column;
-            font-family: "Abril Fatface", serif;
-        }
-
-        .card-rear {
-            display: flex;
-            flex-direction: column;
-            transform: rotateY(180deg);
-            font-family: "Roboto", sans-serif;
+            font-family: "Como", serif;
+            position: absolute;
             width: 100%;
             height: 100%;
+            backface-visibility: hidden;
+            justify-content: center;
+            align-items: center;
         }
 
-        .card-rear > .rear-name {
+        .card-back {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transform: rotateY(180deg);
+            font-family: "Roboto", sans-serif;
+            height: 100%;
+            padding: 2rem;
+            // border: solid 2px;
+            border-radius: 1rem;
+            // background-color: #ffffff;
+        }
+
+        .card-back > .rear-name {
+            font-family: "Como", sans-serif;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 2rem;
             padding-bottom: 0.5rem;
-            margin-left: auto;
-            margin-right: auto;
-            width: 80%;
+            margin: 0 auto;
             text-align: center;
         }
 
-        .card-rear > .rear-context {
-            font-size: 0.8rem;
+        .card-back > .rear-context {
+            font-size: 1.5rem;
         }
 
-        .card-rear > .rear-hr {
+        .card-back > .rear-hr {
             width: 80%;
             height: 0;
             border: 0.01em solid black;
@@ -117,12 +150,12 @@ export abstract class CardElement extends LitElement {
         }
         
         .question-container > .rear-question1 {
-            font-size: 0.9rem;
+            font-size: 1.3rem;
             padding-bottom: 1rem;
         }
 
         .question-container > .rear-question2 {
-            font-size: 0.9rem;
+            font-size: 1.3rem;
         }
         
         .question-container {
@@ -133,23 +166,23 @@ export abstract class CardElement extends LitElement {
             padding-top: 1rem;
         }
         
-        .card-rear > .filler {
+        .card-back > .filler {
             flex-grow: 1;
         }
         
         .tag-container > .rear-tag1 {
-            font-size: 0.5rem;
-            padding-right: 0.5rem;
+            font-size: 1rem;
         }
 
         .tag-container > .rear-tag2 {
-            font-size: 0.5rem;
+            font-size: 1rem;
         }
         
         .tag-container {
             display: flex;
-            flex-direction: row;
+            flex-flow: wrap;
             justify-content: flex-end;
+            gap: 0.5rem;
         }
 
         .card img {
@@ -161,30 +194,30 @@ export abstract class CardElement extends LitElement {
 
         .card-name {
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: bold;
             margin-top: 0.8rem;
         }
 
         .is-flipped {
-            transform: rotateY(180deg);
-
-            .card-front {
-                display: none;
-            }
+            // transition: 2s ease-in-out;
+            // transform: rotateY(-180deg);
+            transform: translate(50%, 10px) rotateY(-180deg);
         }
 
         .flip-button {
-            position: absolute;
-            width: 18%;
-            height: 12%;
-            top: 0;
-            right: 0;
-            background-image: linear-gradient(to bottom left, black, black 50%, transparent 50%, transparent);
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
-            z-index: 10;
+            // position: absolute;
+            // width: 18%;
+            // height: 12%;
+            // top: 0;
+            // right: 0;
+            // background-image: linear-gradient(to bottom left, black, black 50%, transparent 50%, transparent);
+            // color: white;
+            // font-size: 1rem;
+            // cursor: pointer;
+            // z-index: 10;
+            background: none;
+            border: none;
         }
 
     ` as CSSResultGroup

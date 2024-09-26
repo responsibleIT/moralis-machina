@@ -12,6 +12,15 @@ export class ScenarioCardDeckElement extends DeckElement {
         .deck {
             display: grid;
         }
+
+        .is-container-flipped {
+            z-index: 999;
+            position: absolute;
+            left: 25%;
+            top: 25%;
+            // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
     `;
 
     public get getCards() {
@@ -39,7 +48,7 @@ export class ScenarioCardDeckElement extends DeckElement {
         return html`
             <div class="deck">
                 ${this._cards.map((card, index) => html`
-                    <div style="grid-area: 1/1/1/1; padding-top: ${10 * index /4}px;">${card}</div>`)}
+                    <div class="card-container" style="grid-area: 1/1/1/1; padding-top: ${20 * index /4}px;">${card}</div>`)}
             </div>
         `;
     }
