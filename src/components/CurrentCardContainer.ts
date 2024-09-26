@@ -103,7 +103,7 @@ export class CurrentCardContainerElement extends LitElement{
 
         .close {
             color: #f1f1f1;
-            font-size: 40px;
+            font-size: 4rem;
             font-weight: bold;
             transition: 0.3s;
             cursor: pointer;

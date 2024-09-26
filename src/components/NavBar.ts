@@ -17,19 +17,25 @@ export class NavBarElement extends LitElement {
         return html`
             <nav>
                 <a href="/"><h1>Moralis Machina</h1></a>
-                <h1 class="help-button" @click=${this.handleHelp}>?</h1>
+                <button class="help-button" @click=${this.handleHelp}>?</button>
             </nav>
         `;
     }
 
 
     static styles = css`
+        h1 {
+            font-family: "Abril Fatface", serif;
+            font-size: 4rem;
+            font-weight: 100;
+        }
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 0 2rem;
+            // border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid rgb(255 0 0);
         }
 
         nav > a {
@@ -37,15 +43,18 @@ export class NavBarElement extends LitElement {
             color: black;
         }
 
-        .help-button {
+        button.help-button {
             cursor: pointer;
             border: 2px solid gray;
-            border-radius: 1000px;
-            width: 40px;
-            height: 40px;
+            font-family: "Abril Fatface", serif;
+            border-radius: 100rem;
+            width: 4rem;
+            height: 4rem;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: transparent;
+            font-size: 3rem;
         }
     `
 }

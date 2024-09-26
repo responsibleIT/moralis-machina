@@ -57,7 +57,7 @@ export abstract class CardElement extends LitElement {
 
     static styles = css`
         .card-outer {
-            perspective: 1000px;
+            perspective: 100rem;
         }
 
         .card {
@@ -65,13 +65,13 @@ export abstract class CardElement extends LitElement {
             flex-direction: column;
             width: 13rem;
             height: 20rem;
-            padding: 16px;
-            margin: 8px;
+            padding: 1.6rem;
+            margin: 0.8rem;
             position: relative;
             transition: transform 0.8s;
             transform-style: preserve-3d;
-            border-radius: 4px;
-            box-shadow: 4px 8px 4px 0 rgba(0, 0, 0, 0.2);
+            border-radius: 0.4rem;
+            box-shadow: 0.4rem 0.8rem 0.4rem 0 rgba(0, 0, 0, 0.2);
             border: 1px solid black;
         }
 
@@ -98,7 +98,7 @@ export abstract class CardElement extends LitElement {
         .card-rear > .rear-name {
             font-weight: bold;
             font-size: 1.2rem;
-            padding-bottom: 0.5em;
+            padding-bottom: 0.5rem;
             margin-left: auto;
             margin-right: auto;
             width: 80%;
@@ -113,12 +113,12 @@ export abstract class CardElement extends LitElement {
             width: 80%;
             height: 0;
             border: 0.01em solid black;
-            margin: 0.5em auto;
+            margin: 0.5rem auto;
         }
         
         .question-container > .rear-question1 {
             font-size: 0.9rem;
-            padding-bottom: 1em;
+            padding-bottom: 1rem;
         }
 
         .question-container > .rear-question2 {
@@ -130,7 +130,7 @@ export abstract class CardElement extends LitElement {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 1em;
+            padding-top: 1rem;
         }
         
         .card-rear > .filler {
@@ -139,7 +139,7 @@ export abstract class CardElement extends LitElement {
         
         .tag-container > .rear-tag1 {
             font-size: 0.5rem;
-            padding-right: 0.5em;
+            padding-right: 0.5rem;
         }
 
         .tag-container > .rear-tag2 {
@@ -153,17 +153,17 @@ export abstract class CardElement extends LitElement {
         }
 
         .card img {
-            width: 14em;
-            height: 14em;
+            width: 100%;
+            height: 14rem;
             object-fit: contain;
-            padding-bottom: 2em;
+            padding-bottom: 2rem;
         }
 
         .card-name {
             text-align: center;
             font-size: 1.5rem;
             font-weight: bold;
-            margin-top: 8px;
+            margin-top: 0.8rem;
         }
 
         .is-flipped {

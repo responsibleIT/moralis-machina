@@ -146,11 +146,11 @@ export class BoardElement extends LitElement {
     render() {
         return html`
             <div class="board">
-                <div class="players">
+                <!-- <div class="players">
                     <h3>Spelers</h3>
                     ${this._players.map(player => html`
                         <div>${player}</div>`)}
-                </div>
+                </div> -->
                 <div class="decks">
                     <h3>Speelstapels</h3>
                     <div class="decks-container">
@@ -182,24 +182,24 @@ export class BoardElement extends LitElement {
             flex-direction: column;
             width: 10%;
             border-right: 1px solid #e0e0e0;
-            padding: 8px;
-            margin: 8px;
+            padding: 0.8rem;
+            margin: 0.8rem;
         }
 
         .decks {
             display: flex;
             flex-direction: column;
             width: 70%;
-            padding: 8px;
-            margin: 8px;
+            padding: 0.8rem;
+            margin: 0.8rem;
         }
 
         .discard-pile {
             display: flex;
             flex-direction: column;
             width: 20%;
-            padding: 8px;
-            margin: 8px;
+            padding: 0.8rem;
+            margin: 0.8rem;
             border-left: 1px solid #e0e0e0;
             overflow-y: scroll;
         }

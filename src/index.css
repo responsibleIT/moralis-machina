@@ -1,3 +1,16 @@
+:root {
+}
+
 *, html {
   font-family: 'Open Sans', sans-serif;
+}
+
+/* Px to REM: Override root font-size: 62.5% */
+html {
+    font-size: 62.5%;
+}
+
+body {
+  overflow: hidden;
+  background-color: #F1DED4;
 }

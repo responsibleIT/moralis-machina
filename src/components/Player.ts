@@ -27,8 +27,8 @@ export class PlayerElement extends LitElement {
 
    static styles = css`
        .player {
-           padding-top: 6px;
-           padding-bottom: 6px;
+           padding-top: 0.6rem;
+           padding-bottom: 0.6rem;
        }
 
    `

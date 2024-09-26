@@ -6,8 +6,8 @@ export enum ScenarioType {
 }
 
 export const ScenarioColor = {
-    [ScenarioType.BLUE]: '#35C0C8',
-    [ScenarioType.GREEN]: '#7EC45B',
-    [ScenarioType.RED]: '#EB665A',
-    [ScenarioType.YELLOW]: '#F9C528',
+    [ScenarioType.BLUE]: '#62BDC6',
+    [ScenarioType.GREEN]: '#8EC268',
+    [ScenarioType.RED]: '#E8705F',
+    [ScenarioType.YELLOW]: '#F1C74E',
 };
