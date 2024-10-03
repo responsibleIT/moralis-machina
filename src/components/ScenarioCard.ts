@@ -42,18 +42,23 @@ export class ScenarioCardElement extends CardElement {
         return this._questions;
     }
 
+    _handleButtonClick() {
+        console.log('Button clicked!');
+        // geel - blauw - groen - rood
+    }
+
 
     render() {
         let color = ScenarioColor[this._scenarioType]
         return html`
-            <div class="card-outer">
-                <div class="card" style="background-color: ${color}" @click=${this.flip}>
+            <div class="card-outer" @click=${this.flip}>
+                <div class="card" style="background-color: ${color}">
                     <!-- <button class="flip-button"></button> -->
                     <div class="card-face card-front">
                         <img src="${this.image}" alt="image">
                         <h3 class="card-name">${this.cardName}</h3>
                     </div>
-                    <div class="card-face card-back"">
+                    <div class="card-face card-back" @click=${this.flip}>
                         <h3 class="rear-name">${this.cardName}</h3>
                         <div class="rear-context">${this.context}</div>
                         <div class="rear-hr"></div>
@@ -68,6 +73,9 @@ export class ScenarioCardElement extends CardElement {
                             <div class="rear-tag1">${this._tags[0]}</div>
                             <div class="rear-tag2">${this._tags[1]}</div>
                         </div>
+                        <button @click="${this._handleButtonClick}" class="card-button">
+                            Click Me
+                        </button>
                     </div>
                 </div>
             </div>

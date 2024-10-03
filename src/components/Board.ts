@@ -5,7 +5,7 @@ import {RoleCardElement} from './RoleCard'
 import {SpecialCardElement} from './SpecialCard.ts'
 import {PlayerElement} from "./Player.ts";
 import {CurrentCardContainerElement} from "./CurrentCardContainer.ts";
-import {RoleType} from "../enums/RoleType.ts";
+import {SpecialType} from "../enums/SpecialType.ts";
 import {ScenarioCardDeckElement} from './ScenarioCardDeck.ts'
 import {DiscardDeckElement} from './DiscardDeck.ts'
 
@@ -60,8 +60,6 @@ export class BoardElement extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
-        this._roleCards = [];
-        this._specialCards = [];
 
         // @ts-ignore
         this.addEventListener('request-unset-current-card', this.unsetCurrentCard)
@@ -128,7 +126,7 @@ export class BoardElement extends LitElement {
     }
 
     private shiftPlayerRoles() {
-        let allRolesInOrder: RoleType[] = []
+        let allRolesInOrder: SpecialType[] = []
         this._players.forEach(player => {
             allRolesInOrder.push(player.role)
         })
@@ -142,8 +140,10 @@ export class BoardElement extends LitElement {
             player.role = allRolesInOrder[index]
         })
     }
+    
 
     render() {
+        console.log(this._roleCards);
         return html`
             <section class="board">
                 <!-- <div class="players">
@@ -151,12 +151,13 @@ export class BoardElement extends LitElement {
                     ${this._players.map(player => html`
                         <div>${player}</div>`)}
                 </div> -->
-                <section class="decks">
-                    <!-- <h3>Speelstapels</h3> -->
-                    <div class="decks-container">
-                        ${this._cardDecks.map(deck => html`
-                            <div class="single-deck-container" @click=${this.setCurrentCard}>${deck}</div>`)}
-                    </div>
+                <section class="decks-container">
+                    ${this._cardDecks.map(deck => html`
+                        <div class="single-deck-container" @click=${this.setCurrentCard}>${deck}</div>`)}
+                </section>
+                <section class="role-cards-container">
+                        ${this._roleCards.map(card => html`
+                        <div class="card-container">${card}</div>`)}
                 </section>
                 <div class="discard-pile">
                     <h3>Aflegstapel</h3>
@@ -175,11 +176,10 @@ export class BoardElement extends LitElement {
         .board {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            // flex-direction: row;
-            // align-items: center;
+            grid-template-rows: auto auto;
             gap: 2rem;
             width: 100%;
-            // height: 80vh;
+            min-height: 80vh;
             overflow: hidden;
             max-width: 1350px;
             margin: 0 auto;
@@ -195,11 +195,14 @@ export class BoardElement extends LitElement {
         }
 
         .decks {
-            display: flex;
-            flex-direction: column;
+        }
+
+        .role-cards-container{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(25em, 1fr));
+            gap: 2rem;
             grid-column: span 4;
-            // padding: 0.8rem;
-            // margin: 0.8rem;
+            grid-row: 2;
         }
 
         .discard-pile {
@@ -207,13 +210,8 @@ export class BoardElement extends LitElement {
             flex-direction: column;
             grid-column: span 1;
             gap: 3rem;
-            height: 50rem;
             padding-top: 2rem;
             overflow-y: scroll;
-            border-radius: 1rem;
-            // border: 1px solid #cccccc;
-            // padding: 0.8rem;
-            // margin: 0.8rem;
             border-left: 1px solid #cccccc;
         }
 
@@ -233,11 +231,19 @@ export class BoardElement extends LitElement {
 
         .decks-container {
             display: grid;
-            align-items: center;
             grid-template-columns: repeat(auto-fill, minmax(25em, 1fr));
             gap: 2rem;
-            // display: flex;
-            // flex-wrap: wrap;
+            position: relative;
+            grid-column: span 4;
+            grid-row: 1;
+        }
+
+        .single-deck-container {
+            position: relative;
+        }
+
+        .card-container{
+            
         }
     `
 }

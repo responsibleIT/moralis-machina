@@ -1,20 +1,34 @@
-import { html} from 'lit'
-import {customElement} from 'lit/decorators.js'
+import { css, html} from 'lit'
+import {customElement, property} from 'lit/decorators.js'
 
 import {CardElement} from "./Card.ts";
 import {CardType} from "../enums/CardType.ts";
+import {RoleColor, RoleType} from "../enums/RoleType.ts";
 
 @customElement('role-card-element')
 export class RoleCardElement extends CardElement {
 
+    @property({type: RoleType})
+    private readonly _roleType
+
     constructor(cardName: string,
                 context: string,
                 image: string,
+                roleType: RoleType,
                 cardType: CardType,) {
         super(cardName, context, image, cardType);
+        this._roleType = roleType;
     }
 
     render() {
-        return html` `
+        let color = RoleColor[this._roleType]
+        return html`
+                <div class="card role-card" style="background-color: ${color}">
+                    <div class="card-face card-front">
+                        <h3 class="card-name">${this.cardName}</h3>  
+                        <img src="./card-images/${this.image}.webp" alt="image">                   
+                    </div>
+                </div>
+        `
     }
 }

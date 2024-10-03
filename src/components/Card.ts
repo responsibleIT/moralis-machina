@@ -91,7 +91,7 @@ export abstract class CardElement extends LitElement {
             // margin: 0.8rem;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.6s ease-in-out, top 0.6s ease-in-out, left 0.6s ease-in-out;
+            transition: transform 0.25s ease-in-out, top 0.25s ease-in-out, left 0.25s ease-in-out;
             cursor: pointer;
             border-radius: 1rem;
             box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2), 0px -2px 5px rgba(0, 0, 0, 0.2);
@@ -187,9 +187,11 @@ export abstract class CardElement extends LitElement {
 
         .card img {
             width: 100%;
-            height: 14rem;
+            height: 20rem;
             object-fit: contain;
-            padding-bottom: 2rem;
+            pointer-events: none;
+            user-select: none;
+            // padding-bottom: 2rem;
         }
 
         .card-name {
@@ -202,7 +204,9 @@ export abstract class CardElement extends LitElement {
         .is-flipped {
             // transition: 2s ease-in-out;
             // transform: rotateY(-180deg);
-            transform: translate(50%, 10px) rotateY(-180deg);
+            // transform: translate(50%, 10px) rotateY(-180deg);
+            // transform: translate(50%, 30px) rotateY(-180deg) scale(1.2);
+            transform: rotateY(-180deg);
         }
 
         .flip-button {
@@ -218,6 +222,25 @@ export abstract class CardElement extends LitElement {
             // z-index: 10;
             background: none;
             border: none;
+        }
+
+        .card-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+            
+        .card-button:hover {
+            background-color: #0056b3;
+        }
+
+        .role-card {
+            cursor: unset;
         }
 
     ` as CSSResultGroup

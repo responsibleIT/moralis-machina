@@ -1,1 +1,26 @@
-[{"name":"De Redacteur","context":"De Redacteur verbetert je teksten - denk aan het vertalen, leesbaarder maken of het veranderen van de toon van tekst.","color":"#F9C528","image":10},{"name":"De Schrijver","context":"De Schrijver schrijft nieuwe teksten op jouw verzoek - denk aan het schrijven van een eerste concept van een brief, beleidsstuk of plan.","color":"#EB665A","image":18},{"name":"De Leeshulp","context":"De Leeshulp helpt je bij het lezen van teksten - denk aan het samenvatten of beantwoorden van vragen over (grote hoeveelheden) tekst.","color":"#35C0C8","image":2},{"name":"Het Orakel","context":"Het Orakel is er om al je vragen te beantwoorden - denk aan het opvragen van informatie, uitleg krijgen, brainstormen en gesprekken voeren.","color":"#7EC45B","image":19}]
+[
+  {
+    "name": "De Redacteur",
+    "context": "De Redacteur verbetert je teksten - denk aan het vertalen, leesbaarder maken of het veranderen van de toon van tekst.",
+    "color": "#F9C528",
+    "image": "de-redacteur"
+  },
+  {
+    "name": "De Leeshulp",
+    "context": "De Leeshulp helpt je bij het lezen van teksten - denk aan het samenvatten of beantwoorden van vragen over (grote hoeveelheden) tekst.",
+    "color": "#35C0C8",
+    "image": "de-leeshulp"
+  },
+  {
+    "name": "Het Orakel",
+    "context": "Het Orakel is er om al je vragen te beantwoorden - denk aan het opvragen van informatie, uitleg krijgen, brainstormen en gesprekken voeren.",
+    "color": "#7EC45B",
+    "image": "het-orakel"
+  },
+  {
+    "name": "De Schrijver",
+    "context": "De Schrijver schrijft nieuwe teksten op jouw verzoek - denk aan het schrijven van een eerste concept van een brief, beleidsstuk of plan.",
+    "color": "#EB665A",
+    "image": "de-schrijver"
+  }
+]

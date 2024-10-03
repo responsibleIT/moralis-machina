@@ -26,12 +26,13 @@ export class NavBarElement extends LitElement {
     static styles = css`
         h1 {
             font-family: "Abril Fatface", serif;
-            font-size: 5rem;
+            font-size: 4rem;
             font-weight: 100;
-            // margin: 3rem 0px 6rem 0;
+            margin: 1.5rem 0rem 2rem;
         }
         nav {
             max-width: 1350px;
+            max-height: 20vh;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;

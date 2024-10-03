@@ -13,12 +13,19 @@ export class ScenarioCardDeckElement extends DeckElement {
             display: grid;
         }
 
+        .card-container{
+            width: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            transition: top 0.5s ease-in-out, left 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
         .is-container-flipped {
             z-index: 999;
-            position: absolute;
-            left: 25%;
-            top: 25%;
-            // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            top: 100px;
+            left: 200px;
+            transform: translate(50%, 30px) scale(1.2);
         }
         
     `;

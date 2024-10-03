@@ -4,7 +4,7 @@ import {customElement} from 'lit/decorators.js'
 import './components/NavBar.ts'
 import './components/Board.ts'
 import {PlayerElement} from "./components/Player.ts";
-import {RoleType} from "./enums/RoleType.ts";
+import {SpecialType} from "./enums/SpecialType.ts";
 import {ScenarioCardElement} from "./components/ScenarioCard.ts";
 import {CardType} from "./enums/CardType.ts";
 import {ScenarioType} from "./enums/ScenarioType.ts";
@@ -13,6 +13,9 @@ import {ScenarioCardDeckElement} from './components/ScenarioCardDeck.ts';
 import {DiscardDeckElement} from './components/DiscardDeck.ts';
 
 import scenarioCards from './assets/scenariocards.json'
+import roleCards from './assets/rolecards.json'
+import { RoleType } from './enums/RoleType.ts';
+import { RoleCardElement } from './components/RoleCard.ts';
 
 @customElement('root-element')
 export class RootElement extends LitElement {
@@ -22,18 +25,18 @@ export class RootElement extends LitElement {
         for (let i = 0; i < 10; i++) {
             players.push(new PlayerElement(
                 `Player ${i}`,
-                RoleType.Normaal,
+                SpecialType.Normaal,
             ))
         }
 
         let traitorIndex = Math.floor(Math.random() * players.length)
-        players[traitorIndex].role = RoleType.Dissident
+        players[traitorIndex].role = SpecialType.Dissident
 
         let leaderIndex = Math.floor(Math.random() * players.length)
         while (leaderIndex === traitorIndex) {
             leaderIndex = Math.floor(Math.random() * players.length)
         }
-        players[leaderIndex].role = RoleType.Redenaar
+        players[leaderIndex].role = SpecialType.Redenaar
 
 
         return players
@@ -98,7 +101,54 @@ export class RootElement extends LitElement {
             }
         });
 
-        return [redCards, blueCards, greenCards, yellowCards];
+        return [yellowCards, blueCards, greenCards, redCards];
+
+    }
+
+    initRoleCards() {
+        let roleCardArray = new Array<RoleCardElement>
+
+        roleCards.forEach((card: any) => {
+            switch (card.name) {
+                case RoleType.BLUE:
+                   let blueCard = new RoleCardElement(
+                        card.name,
+                        card.context,
+                        card.image,
+                        RoleType.BLUE,
+                        CardType.RoleCard)
+                    roleCardArray.push(blueCard)
+                    break;
+                case RoleType.RED:
+                    let redCard = new RoleCardElement(
+                        card.name,
+                        card.context,
+                        card.image,
+                        RoleType.RED,
+                        CardType.RoleCard)                    
+                        roleCardArray.push(redCard)
+                    break;
+                case RoleType.GREEN:
+                    let greenCard = new RoleCardElement(
+                        card.name,
+                        card.context,
+                        card.image,
+                        RoleType.GREEN,
+                        CardType.RoleCard)
+                        roleCardArray.push(greenCard)
+                    break;
+                case RoleType.YELLOW:
+                    let yellowCard = new RoleCardElement(
+                        card.name,
+                        card.context,
+                        card.image,
+                        RoleType.YELLOW,
+                        CardType.RoleCard)
+                        roleCardArray.push(yellowCard)
+                    break;
+            }
+        });
+        return roleCardArray
     }
 
     initCurrentCardContainer() {
@@ -119,7 +169,7 @@ export class RootElement extends LitElement {
     render() {
         return html`
             <navbar-element></navbar-element>
-            <board-element ._players=${this.initPlayers()} ._cardDecks=${this.initDecks()} ._currentCardContainer=${this.initCurrentCardContainer()} ._discardPile=${this.initDiscardPile()}></board-element>
+            <board-element ._players=${this.initPlayers()} ._roleCards=${this.initRoleCards()} ._cardDecks=${this.initDecks()} ._currentCardContainer=${this.initCurrentCardContainer()} ._discardPile=${this.initDiscardPile()}></board-element>
         `;
     }
 

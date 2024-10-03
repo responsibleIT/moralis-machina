@@ -1,25 +1,25 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import {RoleType} from "../enums/RoleType.ts";
+import {SpecialType} from "../enums/SpecialType.ts";
 
 @customElement('player-element')
 export class PlayerElement extends LitElement {
     @property({ type: String })
     private readonly _name: string;
 
-    @property({ type: RoleType })
-    private _role: RoleType;
+    @property({ type: SpecialType })
+    private _role: SpecialType;
 
 
-    get role(): RoleType {
+    get role(): SpecialType {
         return this._role;
     }
 
-    set role(value: RoleType) {
+    set role(value: SpecialType) {
         this._role = value;
     }
 
-    constructor(name: string, role: RoleType) {
+    constructor(name: string, role: SpecialType) {
         super();
         this._name = name;
         this._role = role;
