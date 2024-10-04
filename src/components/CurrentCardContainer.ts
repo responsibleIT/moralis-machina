@@ -141,10 +141,6 @@ export class CurrentCardContainerElement extends LitElement{
         .cardHolder > button {
             height: 2rem;
         }
-
-        .overlay {
-
-        }
     `
 
     render() {

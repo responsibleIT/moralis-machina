@@ -6,8 +6,8 @@ export enum RoleType {
 }
 
 export const RoleColor = {
-    [RoleType.YELLOW]: '#f1c74e96',
-    [RoleType.BLUE]: '#62bdc69c',
-    [RoleType.GREEN]: '#8ec26896',
-    [RoleType.RED]: '#e8705f94',
+    [RoleType.YELLOW]: '#F1C74E',
+    [RoleType.BLUE]: '#62BDC6',
+    [RoleType.GREEN]: '#8EC268',
+    [RoleType.RED]: '#E8705F',
 }

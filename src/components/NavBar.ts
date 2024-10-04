@@ -25,10 +25,10 @@ export class NavBarElement extends LitElement {
 
     static styles = css`
         h1 {
-            font-family: "Abril Fatface", serif;
+            font-family: "Abril Fatface", sans-serif;
             font-size: 4rem;
             font-weight: 100;
-            margin: 1.5rem 0rem 2rem;
+            margin: 1.5rem 0 0 0;
         }
         nav {
             max-width: 1350px;

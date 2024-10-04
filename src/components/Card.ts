@@ -30,20 +30,28 @@ export abstract class CardElement extends LitElement {
     public flip() {
         this._isFlipped = !this._isFlipped;
     
+        const body = document.querySelector('body') as HTMLElement;
+        
         const cardContainer = this.closest('.card-container') as HTMLElement;
+        // const overlay = document.querySelector(".overlay") as HTMLElement;
+
         if (cardContainer) {
             cardContainer.classList.toggle('is-container-flipped');
+            // overlay.classList.toggle('show-overlay');
         }
         const card = this.shadowRoot?.querySelector('.card') as HTMLElement;
         card.classList.toggle('is-flipped');
+        body.classList.toggle('overlay-active');
     
         const handleClickOutside = (event: MouseEvent) => {
             const target = event.target as HTMLElement;
             if (!card.contains(target) && target !== card) {
                 this._isFlipped = !this._isFlipped;
                 card.classList.toggle('is-flipped');
+                body.classList.toggle('overlay-active');
                 if (cardContainer) {
                     cardContainer.classList.toggle('is-container-flipped');
+                    // overlay.classList.toggle('show-overlay');
                 }
                 document.removeEventListener('click', handleClickOutside);
             }
@@ -121,7 +129,8 @@ export abstract class CardElement extends LitElement {
             flex-direction: column;
             gap: 1rem;
             transform: rotateY(180deg);
-            font-family: "Roboto", sans-serif;
+            // font-family: "Roboto", sans-serif;
+            font-family: "Open Sans", sans-serif;
             height: 100%;
             padding: 2rem;
             // border: solid 2px;
@@ -139,7 +148,8 @@ export abstract class CardElement extends LitElement {
         }
 
         .card-back > .rear-context {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            line-height: 1.2;
         }
 
         .card-back > .rear-hr {
@@ -149,13 +159,13 @@ export abstract class CardElement extends LitElement {
             margin: 0.5rem auto;
         }
         
-        .question-container > .rear-question1 {
-            font-size: 1.3rem;
+        .question-container > .rear-question1{
             padding-bottom: 1rem;
         }
 
-        .question-container > .rear-question2 {
-            font-size: 1.3rem;
+        .question-container > .rear-question1, .question-container > .rear-question2   {
+            font-size: 1.2rem;
+            line-height: 1.2;
         }
         
         .question-container {
@@ -163,7 +173,7 @@ export abstract class CardElement extends LitElement {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 1rem;
+            // padding-top: 1rem;
         }
         
         .card-back > .filler {
@@ -209,6 +219,14 @@ export abstract class CardElement extends LitElement {
             transform: rotateY(-180deg);
         }
 
+        .card-yellow .is-flipped, .card-blue .is-flipped{
+            transform: rotateY(-180deg);
+        }
+
+        .card-green .is-flipped, .card-red .is-flipped{
+            transform: rotateY(180deg);
+        }
+
         .flip-button {
             // position: absolute;
             // width: 18%;
@@ -225,22 +243,48 @@ export abstract class CardElement extends LitElement {
         }
 
         .card-button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
+            align-self: flex-end;
+            font-family: "Open Sans", sans-serif;
+            text-transform: uppercase;
+            width: fit-content;
+            background: #333333;
+            border: 1px solid #000;
+            color: #ffffff;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
             border-radius: 0.25rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: 0.25s ease-in-out;
         }
             
         .card-button:hover {
-            background-color: #0056b3;
+            background: none;
+            color: #000000;
         }
 
         .role-card {
+            height: 35rem;
             cursor: unset;
+            border: none;
+            box-shadow: none;
+        }
+
+        .role-card h3.card-name {
+            margin-top: 0;
+            margin-bottom: 0;
+            border-bottom: 3px solid #f00;
+            padding-bottom: 1rem;
+        }
+
+        .role-card .card-front {
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .role-card .card-context {
+            font-family: "Open Sans", sans-serif;
+            font-size: 1.3rem;
+            line-height: 1.2;
         }
 
     ` as CSSResultGroup

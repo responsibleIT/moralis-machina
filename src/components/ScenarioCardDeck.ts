@@ -23,9 +23,28 @@ export class ScenarioCardDeckElement extends DeckElement {
 
         .is-container-flipped {
             z-index: 999;
-            top: 100px;
-            left: 200px;
-            transform: translate(50%, 30px) scale(1.2);
+            // transform: translate(150%, 0px) scale(1.2);
+            // transform-origin: left;
+        }
+
+        .deck-yellow .is-container-flipped {
+            transform: translate(152%, 0px) scale(1.2);
+            transform-origin: left;
+        }
+
+        .deck-blue .is-container-flipped {
+            transform: translate(44%, 0px) scale(1.2);
+            transform-origin: left;
+        }
+
+        .deck-green .is-container-flipped {
+            transform: translate(-44%, 0px) scale(1.2);
+            transform-origin: right;
+        }
+
+        .deck-red .is-container-flipped {
+            transform: translate(-152%, 0px) scale(1.2);
+            transform-origin: right;
         }
         
     `;
@@ -51,12 +70,34 @@ export class ScenarioCardDeckElement extends DeckElement {
         this._cards.sort(() => Math.random() - 0.5);
     }
 
+    getDeckClass() {
+        const scenarioType = this._cards.length > 0 ? this._cards[0].getScenarioType : null;
+        // console.log(scenarioType)
+        switch (scenarioType) {
+            case ScenarioType.YELLOW:
+                return 'deck-yellow';
+            case ScenarioType.BLUE:
+                return 'deck-blue';
+            case ScenarioType.GREEN:
+                return 'deck-green';
+            case ScenarioType.RED:
+                return 'deck-red';
+            default:
+                return '';
+        }
+    }
+
     render() {
         return html`
-            <div class="deck">
-                ${this._cards.map((card, index) => html`
-                    <div class="card-container" style="grid-area: 1/1/1/1; padding-top: ${20 * index /4}px;">${card}</div>`)}
+            <div class="deck ${this.getDeckClass()}">
+                ${this._cards.map((card, index) => {
+                    return html`
+                        <div class="card-container" style="grid-area: 1/1/1/1; padding-top: ${20 * index / 4}px;">
+                            ${card}
+                        </div>
+                    `;
+                })}
             </div>
         `;
-    }
+    } 
 }

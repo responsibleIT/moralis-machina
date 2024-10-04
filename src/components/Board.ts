@@ -203,6 +203,8 @@ export class BoardElement extends LitElement {
             gap: 2rem;
             grid-column: span 4;
             grid-row: 2;
+            // border-top: 1px solid #ccc;
+            padding-top: 2rem;
         }
 
         .discard-pile {
@@ -236,14 +238,14 @@ export class BoardElement extends LitElement {
             position: relative;
             grid-column: span 4;
             grid-row: 1;
+            align-items: center;
+            margin-top: 5rem;
+            margin-left: .5rem;
         }
 
         .single-deck-container {
             position: relative;
         }
 
-        .card-container{
-            
-        }
     `
 }

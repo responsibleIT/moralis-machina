@@ -47,11 +47,25 @@ export class ScenarioCardElement extends CardElement {
         // geel - blauw - groen - rood
     }
 
+    _getCardClass() {
+        switch (this._scenarioType) {
+            case ScenarioType.YELLOW:
+                return 'card-yellow';
+            case ScenarioType.BLUE:
+                return 'card-blue';
+            case ScenarioType.GREEN:
+                return 'card-green';
+            case ScenarioType.RED:
+                return 'card-red';
+            default:
+                return '';
+        }
+    }
 
     render() {
         let color = ScenarioColor[this._scenarioType]
         return html`
-            <div class="card-outer" @click=${this.flip}>
+            <div class="card-outer ${this._getCardClass()}" @click=${this.flip}>
                 <div class="card" style="background-color: ${color}">
                     <!-- <button class="flip-button"></button> -->
                     <div class="card-face card-front">
@@ -74,7 +88,7 @@ export class ScenarioCardElement extends CardElement {
                             <div class="rear-tag2">${this._tags[1]}</div>
                         </div>
                         <button @click="${this._handleButtonClick}" class="card-button">
-                            Click Me
+                            Afleggen
                         </button>
                     </div>
                 </div>
