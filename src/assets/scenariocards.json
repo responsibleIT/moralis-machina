@@ -1,167 +1,167 @@
 [
   {
     "name": "Botte verbeteringen",
-    "context": " \"We gebruiken AI om onze communicatie te verbeteren en vergemakkelijken. Reacties van ontvangers suggereren dat onze berichten te algemeen zijn en hun persoonlijke \u2018touch\u2019 hebben verloren.\"",
+    "context": "We gebruiken AI om onze communicatie te verbeteren. Nu zeggen ontvangers dat onze berichten te algemeen en niet persoonlijk genoeg zijn.",
     "scenario": " De Redacteur",
     "image": "botte-verbeteringen",
     "questions": [
-      " Hoe houden we persoonlijke nuances in stand bij het gebruik van AI in de communicatie?",
-      " Wat is ervoor nodig om onze communicatie voldoende authentiek te maken?"
+      "Hoe houden we berichten persoonlijk wanneer we gebruik maken van AI?",
+      "Wat hebben we nodig om onze communicatie voldoende authentiek te maken?"
     ],
-    "tags": [" #CREATIVITEIT", " #AUTHENTICITEIT"]
+    "tags": [" #Creativiteit", " #Authenticiteit"]
   },
   {
     "name": "Redactie- robots",
-    "context": "Een AI-tool heeft de taak gekregen om onze teksten te redigeren, wat resulteert in aanzienlijke tijdwinst. Hierdoor zijn sommige collega's onzeker over hun toekomstige rol en waarde.",
+    "context": "Een AI-tool redigeert onze teksten. Dit verandert de manier waarop we schrijven en bespaart veel tijd. Hierdoor zijn sommige collega’s onzeker over hun toegevoegde waarde.",
     "scenario": "De Redacteur",
     "image": "redactie-robots",
     "questions": [
-      "Hoe kunnen we onze rol en taken herdefini\u00ebren nu AI sommige van onze taken overneemt?",
-      "Welke nieuwe vaardigheden of trainingen zijn nodig om de voordelen van AI te benutten?"
+      "Hoe verandert ons werk nu AI een deel van onze taken overneemt?",
+      "Welke nieuwe kennis en vaardigheden hebben we nodig om goed met AI-tekstverwerkers te werken?"
     ],
-    "tags": ["#WAARDIGHEID", "#AANPASSINGSVERMOGEN"]
+    "tags": ["#Aanpassingsvermogen", "#Waardigheid"]
   },
   {
     "name": "Authentieke interactie",
-    "context": "We maken gebruik van generatieve AI voor communicatie met burgers en bedrijven. Er komen kritische vragen binnen over de authenticiteit van deze berichten.",
+    "context": "We gebruiken AI om met burgers en bedrijven te communiceren. Ontvangers vragen zich af of die berichten wel authentiek zijn.",
     "scenario": "De Schrijver",
     "image": "authentieke-interactie",
     "questions": [
-      "Welke mate van transparantie rondom het gebruik van AI in de creatie van onze publieke uitingen is er nodig?",
-      "Wat zijn de gevolgen voor het publieke vertrouwen wanneer AI wordt gebruikt voor onze communicatie?"
+      "Hoe open en transparant moeten we zijn over AI-gebruik?",
+      "Hoe beïnvloedt AI-gebruik het vertrouwen van het publiek in onze organisatie?"
     ],
-    "tags": ["#INTEGRITEIT", "#TRANSPARANTIE"]
+    "tags": ["#Integriteit", "#Transparantie"]
   },
   {
     "name": "De symbiose",
-    "context": "We beginnen meer en meer te vertrouwen op de uitkomsten en voorstellen van AI, waardoor eigen inspanningen en leermomenten afnemen.",
+    "context": "Naarmate we AI steeds meer voor ons laten doen, verandert onze manier van leren en het ontwikkelen van onze vaardigheden.",
     "scenario": "De Schrijver",
     "image": "de-symbiose",
     "questions": [
-      "Hoe cre\u00ebren we evenwicht tussen effici\u00ebntie en persoonlijke ontwikkeling in het maakproces?",
-      "Op welke manier maken we op een slimme manier gebruik van de kwaliteiten van AI terwijl we ook onze vaardigheden blijven ontwikkelen?"
+      "Kunnen we AI gebruiken op een manier die zowel efficiëntie als persoonlijke groei bevordert?",
+      "Hoe maken we gebruik van de sterke punten van AI en blijven we onze eigen vaardigheden verbeteren?"
     ],
-    "tags": ["#PROFESSIONALITEIT", "#SAMENWERKING"]
+    "tags": ["#Samenwerking", "#Professionaliteit"]
   },
   {
     "name": "De taalpolitie",
-    "context": "We maken gebruik van een AI-tool die helpt bij het aanpassen van de schrijfstijl voor specifieke doelgroepen. Doordat dit op grote schaal gebeurt leidt dit tot verwarring over de neutraliteit en consistentie in onze communicatie.",
+    "context": "We maken gebruik van een AI-tool om onze schrijfstijl aan te passen aan diverse doelgroepen. Dit leidt soms tot verwarring over de neutraliteit en consistentie van onze berichten.",
     "scenario": "De Redacteur",
     "image": "de-taalpolitie",
     "questions": [
-      "Hoe zorgen we voor een neutrale en coherente schrijfstijl terwijl we boodschappen afstemmen op verschillende doelgroepen?",
-      "Welke richtlijnen zouden er moeten zijn voor wanneer en hoe de schrijfstijl kan worden aangepast?"
+      "Hoe houden we onze berichten neutraal en consistent voor verschillende doelgroepen?",
+      "Moeten we bepaalde richtlijnen hanteren voor het aanpassen van de schrijfstijl?"
     ],
-    "tags": ["#ONAFHANKELIJKHEID", "#TOEGANKELIJKHEID"]
+    "tags": ["#Onafhankelijkheid", "#Toegankelijkheid"]
   },
   {
     "name": "Kopzorgen over kopij",
-    "context": "We gebruiken een AI-tool om teksten te genereren, maar de AI-tool neemt zonder bronvermelding teksten van andere auteurs over.",
+    "context": "De AI-tool die we gebruiken kopieert soms teksten van andere auteurs zonder bronvermelding.",
     "scenario": "De Schrijver",
     "image": "kopzorgen-over-kopij",
     "questions": [
-      "Hoe gaan we om met eventuele auteursrechten en AI- gegenereerde content?",
-      "Wat kunnen we doen om de originaliteit en verwijzing van content te waarborgen?"
+      "Hoe gaan we om met auteursrechten en AI-gegenereerde content?",
+      "Hoe zorgen we voor originele content met juiste verwijzingen?"
     ],
-    "tags": ["#AUTHENTICITEIT", "#INTEGRITEIT"]
+    "tags": ["#Authenticiteit", "#Integriteit"]
   },
   {
     "name": "Recht van spreken",
-    "context": "Met behulp van AI schrijven we een belangrijk stuk. Uit feedback blijkt dat er mogelijk sprake is van onbedoelde vooroordelen in de formuleringen. We krijgen er zelfs klachten over.",
+    "context": "Met AI schrijven we een belangrijk stuk, maar uit feedback blijkt dat er onbedoelde vooroordelen in zitten.",
     "scenario": "De Schrijver",
     "image": "recht-van-spreken",
     "questions": [
-      "Hoe herkennen we onbedoelde vooroordelen in AI-gegenereerde content en hoe corrigeren we die?",
-      "Hoe zorgen we ervoor dat mensen, organisaties en onderwerpen gelijk en eerlijk worden gerepresenteerd in AI-content?"
+      "Hoe voorkomen we onbedoelde vooroordelen in AI-content?",
+      "Hoe zorgen we ervoor dat mensen en onderwerpen gelijk gerepresenteerd worden in AI-content?"
     ],
-    "tags": ["#EERLIJKHEID", "#INCLUSIVITEIT"]
+    "tags": ["#Eerlijkheid", "#Inclusiviteit"]
   },
   {
     "name": "Creatieve crisis",
-    "context": "We gebruiken regelmatig AI om eerste concepten van documenten te genereren. Sommigen ervaren dit als een belemmering voor hun creatieve proces.",
+    "context": "AI neemt steeds meer van ons (schrijf)werk over. Sommigen ervaren dit als belemmering voor hun creativiteit.",
     "scenario": "De Schrijver",
     "image": "creatieve-crisis",
     "questions": [
-      "Hoe moedigen we creativiteit aan als we door de komst van AI steeds minder idee\u00ebn zelf hoeven te bedenken?",
-      "Welke werkwijze kunnen we hanteren om te zorgen dat AI wordt gebruikt als een creatief hulpmiddel en niet als doel op zichzelf?"
+      "Hoe kunnen we onze eigen creativiteit stimuleren terwijl we steeds meer AI gebruiken voor (schrijf)werk?",
+      "Hoe zorgen we dat AI een hulpmiddel blijft en niet een doel op zich wordt?"
     ],
-    "tags": ["#CREATIVITEIT", "#AUTONOMIE"]
+    "tags": ["#Creativiteit", "#Autonomie"]
   },
   {
     "name": "Het doorgeefluik",
-    "context": "Sommige collega's plaatsen onbedoeld gevoelige documenten in een AI-tool van een leverancier waarmee onze organisatie geen overeenkomst heeft. Hierdoor komt informatie van de organisatie bij een derde partij te liggen.",
+    "context": "Sommige collega's plaatsen gevoelige documenten in een AI-tool van een partij waarmee we geen overeenkomst hebben. Daardoor komt onze informatie bij derden terecht.",
     "scenario": "De Leeshulp",
     "image": "het-doorgeefluik",
     "questions": [
-      "Hoe beperken we de risico's op datalekken?",
-      "Wat is ervoor nodig om bewustzijn te cre\u00ebren over welke informatie we met AI-tools kunnen verwerken en welke niet?"
+      "Hoe verminderen we het risico op datalekken?",
+      "Weten we welke informatie we wel en niet in AI-tools kunnen zetten?"
     ],
-    "tags": ["#PRIVACY", "#VEILIGHEID"]
+    "tags": ["#Privacy", "#Veiligheid"]
   },
   {
     "name": "De ratrace",
-    "context": "We maken gebruik van AI-tools om grote hoeveelheden rapporten te lezen en samen te vatten. Dit stelt beleidsmakers en managers in staat stelt om sneller beslissingen te nemen. Sommige collega's voelen zich overweldigd door de snelheid en de verwachting dat zij hun werk nu sneller moeten doen.",
+    "context": "We gebruiken AI-tools om documenten samen te vatten, zodat we sneller kunnen werken. Sommige collega's vinden het tempo te hoog en voelen zich onder druk gezet.",
     "scenario": "De Leeshulp",
     "image": "de-ratrace",
     "questions": [
-      "Hoe kaarten we de verwachtingen rond snelheid van lezen en besluit- vorming door AI-versneld onderzoek aan?",
-      "Welke maatregelen kunnen we nemen om ervoor te zorgen dat er een gezonde werkbelasting is en er geen beslissingsmoeheid ontstaat?"
+      "Hoe bespreken we de verwachtingen over het wel/niet gebruik maken van AI?",
+      "Hoe kunnen we ervoor zorgen dat er geen grote verschillen ontstaan tussen collega's bij het werken met AI?"
     ],
-    "tags": ["#ZORGVULDIGHEID", "#VITALITEIT"]
+    "tags": ["#Aanpassingsvermogen", "#Vitaliteit"]
   },
   {
     "name": "Samengevat vertrouwen",
-    "context": "We vertrouwen blindelings op AI- samenvattingen en -antwoorden voor het werk. We ontdekken dat we belangrijke informatie over het hoofd zien, met significante implicaties.",
+    "context": "We vertrouwen op AI voor samenvattingen en antwoorden, maar missen belangrijke details.",
     "scenario": "De Leeshulp",
     "image": "samengevat-vertrouwen",
     "questions": [
-      "Hoe zorgen we ervoor dat de informatie van AI-gegeneerde samenvattingen klopt en volledig is?",
-      "Welke verantwoordelijkheden blijven bij de mens liggen in de controle van AI-gegenereerde samenvattingen?"
+      "Hoe zorgen we ervoor dat AI-gegenereerde samenvattingen nauwkeurig genoeg zijn?",
+      "Welke controles op AI-samenvattingen en antwoorden moeten blijven bestaan?"
     ],
-    "tags": ["#BETROUWBAARHEID", "#VERANTWOORDELIJKHEID"]
+    "tags": ["#Betrouwbaarheid", "#Verantwoordelijkheid"]
   },
   {
     "name": "Een splijtzwam in ons midden",
-    "context": "Sinds de introductie van AI is de kennisdeling en interactie tussen collega's verminderd en neemt het silo denken toe.",
+    "context": "Collega's brainstormen steeds vaker met AI, waardoor er onderling minder kennis en ervaring wordt gedeeld.",
     "scenario": "Het Orakel",
     "image": "een-splijtzwam-in-ons-midden",
     "questions": [
-      "Hoe bevorderen we kennisdeling en samenwerking rondom het gebruik van AI-tools?",
-      "Welke activiteiten kunnen we introduceren om kennisdeling en samenwerking te behouden tussen collega's die heel verschillend denken?"
+      "Hoe stimuleren we kennisdeling en samenwerking met AI-tools?",
+      "Wat kan de samenwerking en kennisdeling tussen verschillende collega's verbeteren?"
     ],
-    "tags": ["#SAMENWERKING", "#INCLUSIVITEIT"]
+    "tags": ["#Samenwerking", "#Inclusiviteit"]
   },
   {
     "name": "De luiwammes",
-    "context": "De AI-tool beantwoordt vragen slechts oppervlakkig, waardoor we belangrijke context missen en suboptimale beslissingen nemen.",
+    "context": "De AI-tool geeft oppervlakkige antwoorden, waardoor we belangrijke context missen.",
     "scenario": "Het Orakel",
     "image": "de-luiwammes",
     "questions": [
-      "Hoe zorgen we ervoor dat de context en complexiteit van problemen behouden blijft wanneer we meer vertrouwen op de kracht van AI?",
-      "Wat zijn manieren om het kritisch denkvermogen van zowel de AI-tool als onszelf te vergroten?"
+      "Hoe zorgen we ervoor dat we voldoende begrip voor de context en complexiteit van problemen blijven houden?",
+      "Hoe verbeteren we het kritisch denken van zowel de AI-tool als onszelf?"
     ],
-    "tags": ["#PROFESSIONALITEIT", "ONAFHANKELIJKHEID"]
+    "tags": ["#Professionaliteit", "Onafhankelijkheid"]
   },
   {
     "name": "Fantastische content",
-    "context": "Een AI-tool genereert foutieve antwoorden die leiden tot foutieve beslissingen. We beseffen dat al te veel vertrouwen in de betrouwbaarheid van de technologie risicovol is.",
+    "context": "Een AI-tool maakt fouten die kunnen leiden tot verkeerde conclusies of beslissingen. Blind vertrouwen op de technologie is riskant.",
     "scenario": "Het Orakel",
     "image": "fantastische-content",
     "questions": [
-      "Welke procedures voor fact-checking en validering van AI-gegenereerde antwoorden willen we hanteren?",
-      "Hoe kunnen we synergie tussen menselijke expertise, brononderzoek en AI-genereerde content cre\u00ebren?"
+      "Hoe blijven we de uitkomsten van AI controleren?",
+      "Hoe zien we de verhouding tussen menselijke expertise, brononderzoek en AI?"
     ],
-    "tags": ["#BETROUWBAARHEID", "#VALIDITEIT"]
+    "tags": ["#Betrouwbaarheid", "#Validiteit"]
   },
   {
     "name": "Allemaal snellezers",
-    "context": "Door de komst van AI lezen we nu veel meer stukken dan voorheen. Het begrip van de context van de stukken wordt vergeten. De diepgang van onze analyses lijdt eronder.",
+    "context": "Met behulp van AI vergaren we meer informatie dan voorheen. We vergeten echter vaak de context van deze informatie. Onze analyses missen daardoor diepgang.",
     "scenario": "De Leeshulp",
     "image": "allemaal-snellezers",
     "questions": [
-      "Hoe bewaken we de balans tussen kwantiteit en kwaliteit?",
-      "Welke maatstaven hanteren we om voor voldoende begrip en diepgang in ons werk te zorgen?"
+      "Hoe houden we een goed evenwicht tussen hoeveelheid en kwaliteit in het werken met AI?",
+      "Hoe zorgen we voor voldoende begrip en diepgang als we werken met AI?"
     ],
-    "tags": ["#BETROUWBAARHEID", "#VALIDITEIT"]
+    "tags": ["#Betrouwbaarheid", "#Validiteit"]
   }
 ]
