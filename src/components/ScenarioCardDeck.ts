@@ -13,13 +13,15 @@ export class ScenarioCardDeckElement extends DeckElement {
             display: grid;
         }
 
-        .card-container{
+        scenario-card-element{
+            grid-area: 1/1/1/1;
             width: 100%;
             position: relative;
             top: 0;
             left: 0;
             transition: top 0.5s ease-in-out, left 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
+        
 
         .is-container-flipped {
             z-index: 999;
@@ -91,11 +93,7 @@ export class ScenarioCardDeckElement extends DeckElement {
         return html`
             <div class="deck ${this.getDeckClass()}">
                 ${this._cards.map((card, index) => {
-                    return html`
-                        <div class="card-container" style="grid-area: 1/1/1/1; padding-top: ${20 * index / 4}px;">
-                            ${card}
-                        </div>
-                    `;
+                    return html`${card}`;
                 })}
             </div>
         `;

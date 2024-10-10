@@ -92,27 +92,22 @@ export class BoardElement extends LitElement {
         // }
     }
 
-    private setDiscardedCardAsCurrent(event: CustomEvent) {
-        let card = event.target
-        this._currentCardContainer.dispatchEvent(new CustomEvent('request-set-current-card', {
-            bubbles: true,
-            composed: true,
-            detail: {
-                card: card
-            }
-        }))
-
-        this._currentIsDiscarded = true;
-    }
-
-    private unsetCurrentCard(event: CustomEvent) {
-        let card = event.detail.card as ScenarioCardElement;
+    private returnCard() {
+        let card = this._discardPile.draw() as ScenarioCardElement;
+        card.classList.remove("discard-card")
         let deck = this._cardDecks.find(deck => deck.getDeckType === card.getScenarioType) as ScenarioCardDeckElement;
         deck?.push(card);
         this.requestUpdate();
-
-        this._currentIsDiscarded = false;
     }
+
+    // private unsetCurrentCard(event: CustomEvent) {
+    //     let card = event.detail.card as ScenarioCardElement;
+    //     let deck = this._cardDecks.find(deck => deck.getDeckType === card.getScenarioType) as ScenarioCardDeckElement;
+    //     deck?.push(card);
+    //     this.requestUpdate();
+
+    //     this._currentIsDiscarded = false;
+    // }
 
     private discardCurrentCard(event: CustomEvent) {
         let card = event.detail.card as ScenarioCardElement;
@@ -143,7 +138,6 @@ export class BoardElement extends LitElement {
     
 
     render() {
-        console.log(this._roleCards);
         return html`
             <section class="board">
                 <!-- <div class="players">
@@ -153,17 +147,21 @@ export class BoardElement extends LitElement {
                 </div> -->
                 <section class="decks-container">
                     ${this._cardDecks.map(deck => html`
-                        <div class="single-deck-container" @click=${this.setCurrentCard}>${deck}</div>`)}
+                        <div class="single-deck-container">${deck}</div>`)}
                 </section>
                 <section class="role-cards-container">
                         ${this._roleCards.map(card => html`
                         <div class="card-container">${card}</div>`)}
                 </section>
+                <section class="special-cards-container">
+                       ${this._specialCards.map(card => html`
+                        <div class="card-container">${card}</div>`)}
+                </section>
                 <div class="discard-pile">
                     <h3>Aflegstapel</h3>
-                    <div class="discard-pile-deck">
+                    <div @click="${this.returnCard}" class="discard-pile-deck">
                         ${this._discardPile.getCards.map((card, index) => html`
-                        <div @click=${this.setDiscardedCardAsCurrent} style="grid-area: 1/1/1/1; padding-top: ${20 * index /4}px;"> ${card}</div>`)}
+                        <div class="card-container" style="grid-area: 1/1/1/1; padding-top: ${20 * index /4}px;"> ${card}</div>`)}
                     </div>
                 </div>
             </section>
@@ -207,14 +205,28 @@ export class BoardElement extends LitElement {
             padding-top: 2rem;
         }
 
+        .special-cards-container {
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+            column-gap: 0.5rem;
+            margin-top: 5rem;
+            z-index: 999;
+            // margin-left: 5rem;
+        }
+
+        .special-cards-container .card-container {
+            height: fit-content;
+            flex-shrink: 1
+        }
+
         .discard-pile {
             display: flex;
             flex-direction: column;
             grid-column: span 1;
             gap: 3rem;
-            padding-top: 2rem;
-            overflow-y: scroll;
-            border-left: 1px solid #cccccc;
+            // overflow-y: scroll;
+            // border-left: 1px solid #cccccc;
         }
 
         .discard-pile h3 {
@@ -228,7 +240,7 @@ export class BoardElement extends LitElement {
 
         .discard-pile-deck {
             display: grid;
-            margin: 0rem 0rem 0rem 2rem;
+            // margin: 0rem 0rem 0rem 2rem;
         }
 
         .decks-container {

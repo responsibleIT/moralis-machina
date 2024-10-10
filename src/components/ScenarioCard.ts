@@ -42,9 +42,16 @@ export class ScenarioCardElement extends CardElement {
         return this._questions;
     }
 
-    _handleButtonClick() {
-        console.log('Button clicked!');
-        // geel - blauw - groen - rood
+    private requestDiscard() {
+        this.dispatchEvent(new CustomEvent('request-discard', {
+            bubbles: true,
+            composed: true,
+            detail: {
+                card: this
+            }
+        }));
+        this.classList.add("discard-card")
+        this.requestUpdate();
     }
 
     _getCardClass() {
@@ -61,6 +68,7 @@ export class ScenarioCardElement extends CardElement {
                 return '';
         }
     }
+
 
     render() {
         let color = ScenarioColor[this._scenarioType]
@@ -87,7 +95,7 @@ export class ScenarioCardElement extends CardElement {
                             <div class="rear-tag1">${this._tags[0]}</div>
                             <div class="rear-tag2">${this._tags[1]}</div>
                         </div>
-                        <button @click="${this._handleButtonClick}" class="card-button">
+                        <button @click="${this.requestDiscard}" class="card-button">
                             Afleggen
                         </button>
                     </div>

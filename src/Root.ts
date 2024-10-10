@@ -14,8 +14,10 @@ import {DiscardDeckElement} from './components/DiscardDeck.ts';
 
 import scenarioCards from './assets/scenariocards.json'
 import roleCards from './assets/rolecards.json'
+import specialCards from './assets/specialcards.json'
 import { RoleType } from './enums/RoleType.ts';
 import { RoleCardElement } from './components/RoleCard.ts';
+import { SpecialCardElement } from './components/SpecialCard.ts';
 
 @customElement('root-element')
 export class RootElement extends LitElement {
@@ -151,6 +153,34 @@ export class RootElement extends LitElement {
         return roleCardArray
     }
 
+    initSpecialCards() {
+        let specialCardArray = new Array<SpecialCardElement>
+
+        specialCards.forEach((card: any) => {
+            switch (card.name) {
+                case SpecialType.Redenaar:
+                   let redenaar = new SpecialCardElement(
+                        card.name,
+                        card.context,
+                        card.image,
+                        SpecialType.Redenaar,
+                        CardType.SpecialCard)
+                        specialCardArray.push(redenaar)
+                    break;
+                case SpecialType.Dissident:
+                    let dissident = new SpecialCardElement(
+                        card.name,
+                        card.context,
+                        card.image,
+                        SpecialType.Dissident,
+                        CardType.SpecialCard)
+                        specialCardArray.push(dissident)
+                    break;
+            }
+        });
+        return specialCardArray
+    }
+
     initCurrentCardContainer() {
         let currentCardContainer = new CurrentCardContainerElement();
         return currentCardContainer;
@@ -169,7 +199,7 @@ export class RootElement extends LitElement {
     render() {
         return html`
             <navbar-element></navbar-element>
-            <board-element ._players=${this.initPlayers()} ._roleCards=${this.initRoleCards()} ._cardDecks=${this.initDecks()} ._currentCardContainer=${this.initCurrentCardContainer()} ._discardPile=${this.initDiscardPile()}></board-element>
+            <board-element ._players=${this.initPlayers()} ._roleCards=${this.initRoleCards()} ._specialCards=${this.initSpecialCards()} ._cardDecks=${this.initDecks()} ._currentCardContainer=${this.initCurrentCardContainer()} ._discardPile=${this.initDiscardPile()}></board-element>
         `;
     }
 

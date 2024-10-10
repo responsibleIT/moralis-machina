@@ -28,11 +28,15 @@ export abstract class CardElement extends LitElement {
     }
 
     public flip() {
+        if(this.classList.contains("discard-card")){
+            return;
+        }
+
         this._isFlipped = !this._isFlipped;
     
         const body = document.querySelector('body') as HTMLElement;
         
-        const cardContainer = this.closest('.card-container') as HTMLElement;
+        const cardContainer = this.closest('scenario-card-element') as HTMLElement;
         // const overlay = document.querySelector(".overlay") as HTMLElement;
 
         if (cardContainer) {
@@ -180,12 +184,9 @@ export abstract class CardElement extends LitElement {
             flex-grow: 1;
         }
         
-        .tag-container > .rear-tag1 {
+        .tag-container > .rear-tag1, .tag-container > .rear-tag2 {
             font-size: 1rem;
-        }
-
-        .tag-container > .rear-tag2 {
-            font-size: 1rem;
+            text-transform: uppercase;
         }
         
         .tag-container {
@@ -285,6 +286,57 @@ export abstract class CardElement extends LitElement {
             font-family: "Open Sans", sans-serif;
             font-size: 1.3rem;
             line-height: 1.2;
+        }
+
+        .special-card {
+            width: 10rem;
+            height: 15rem;
+            transition: 1s ease-in-out;
+        }
+
+        .special-card p.card-context {
+            opacity: 0;
+            font-family: "Open Sans", sans-serif;
+            height: 0;
+            overflow: hidden;
+            padding: 0rem;
+            margin: 0;
+            text-align: center;
+            font-size: 0;
+            transition: height 1s ease-in-out, opacity 0.5s ease-in-out 0.8s;
+        }
+
+        .special-card h3.card-name {
+            font-size: 1.3rem;
+            margin: 0;
+            transition: 1s ease-in-out;
+        }
+
+        .special-card img {
+            height: auto;
+            width: 100%;
+            transition: 1s ease-in-out;
+        }
+
+        .special-card-active {
+            height: 28rem;
+            width: 15.5rem;
+        }
+
+        .special-card-active h3.card-name {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+
+        .special-card-active p.card-context {
+            opacity: 1;
+            height: 100%;
+            padding: 1rem 1.5rem 0rem 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .special-card-active img{
+            width: 100%;
         }
 
     ` as CSSResultGroup
