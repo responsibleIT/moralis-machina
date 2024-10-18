@@ -21,7 +21,31 @@ export class ScenarioCardDeckElement extends DeckElement {
             left: 0;
             transition: top 0.5s ease-in-out, left 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
-        
+
+        scenario-card-element:nth-of-type(1){
+            padding-top: 0;
+            // padding-left: 0;
+        }
+
+        scenario-card-element:nth-of-type(2){
+            padding-top: 0.5rem;
+            // padding-left: 0.5rem;
+        }
+
+        scenario-card-element:nth-of-type(3){
+            padding-top: 1rem;
+            // padding-left: 1rem;
+        }
+
+        scenario-card-element:nth-of-type(4){
+            padding-top: 1.5rem;
+            // padding-left: 1.5rem;
+        }
+
+        scenario-card-element:nth-of-type(5){
+            padding-top: 2rem;
+            // padding-left: 2rem;
+        }
 
         .is-container-flipped {
             z-index: 999;
@@ -47,6 +71,11 @@ export class ScenarioCardDeckElement extends DeckElement {
         .deck-red .is-container-flipped {
             transform: translate(-152%, 0px) scale(1.2);
             transform-origin: right;
+        }
+
+        .flip-to-discard {
+            transform: translate(100%, 100%);
+            z-index: 999;
         }
         
     `;

@@ -153,17 +153,19 @@ export class BoardElement extends LitElement {
                         ${this._roleCards.map(card => html`
                         <div class="card-container">${card}</div>`)}
                 </section>
-                <section class="special-cards-container">
-                       ${this._specialCards.map(card => html`
-                        <div class="card-container">${card}</div>`)}
-                </section>
-                <div class="discard-pile">
-                    <h3>Aflegstapel</h3>
-                    <div @click="${this.returnCard}" class="discard-pile-deck">
-                        ${this._discardPile.getCards.map((card, index) => html`
-                        <div class="card-container" style="grid-area: 1/1/1/1; padding-top: ${20 * index /4}px;"> ${card}</div>`)}
+                <section class="side">
+                    <section class="special-cards-container">
+                        ${this._specialCards.map(card => html`
+                            <div class="card-container">${card}</div>`)}
+                    </section>
+                    <div class="discard-pile">
+                        <h3>Aflegstapel</h3>
+                        <div @click="${this.returnCard}" class="discard-pile-deck">
+                            ${this._discardPile.getCards.map((card, index) => html`
+                            <div class="card-container" style="grid-area: 1/1/1/1; position: absolute; padding-top: ${20 * index /4}px; padding-left: ${20 * index /4}px;"> ${card}</div>`)}
+                        </div>
                     </div>
-                </div>
+                </section>
             </section>
             ${this._currentCardContainer}
             </div>
@@ -177,9 +179,8 @@ export class BoardElement extends LitElement {
             grid-template-rows: auto auto;
             gap: 2rem;
             width: 100%;
-            min-height: 80vh;
-            overflow: hidden;
-            max-width: 1350px;
+            min-height: 100vh;
+            max-width: 140rem;
             margin: 0 auto;
         }
 
@@ -202,7 +203,14 @@ export class BoardElement extends LitElement {
             grid-column: span 4;
             grid-row: 2;
             // border-top: 1px solid #ccc;
-            padding-top: 2rem;
+            // padding-top: 2rem;
+        }
+
+        .side {
+            grid-row: 1 / span 2;
+            justify-content: space-between;
+            display: flex;
+            flex-direction: column;
         }
 
         .special-cards-container {
@@ -210,7 +218,7 @@ export class BoardElement extends LitElement {
             display: flex;
             justify-content: flex-end;
             column-gap: 0.5rem;
-            margin-top: 5rem;
+            margin-top: 2rem;
             z-index: 999;
             // margin-left: 5rem;
         }
@@ -223,23 +231,27 @@ export class BoardElement extends LitElement {
         .discard-pile {
             display: flex;
             flex-direction: column;
-            grid-column: span 1;
-            gap: 3rem;
+            gap: 2rem;
+            margin-bottom: 5rem;
             // overflow-y: scroll;
             // border-left: 1px solid #cccccc;
         }
 
         .discard-pile h3 {
-            margin: 0;
-            padding: 0rem 3rem 0rem 2rem;
+            margin: auto;
             font-size: 2rem;
             font-weight: 100;
-            text-transform: math-auto;
+            text-align: center;
             color: #9f9f9f;
         }
 
         .discard-pile-deck {
             display: grid;
+            border: 1px dashed rgb(248, 117, 97);
+            min-height: 40rem;
+            border-radius: 1rem;
+            margin-bottom: 5rem;
+            padding: .7rem 0 .7rem .7rem;
             // margin: 0rem 0rem 0rem 2rem;
         }
 
@@ -250,14 +262,15 @@ export class BoardElement extends LitElement {
             position: relative;
             grid-column: span 4;
             grid-row: 1;
-            align-items: center;
-            margin-top: 5rem;
+            align-items: baseline;
+            margin-top: 2rem;
             margin-left: .5rem;
         }
 
         .single-deck-container {
             position: relative;
         }
+
 
     `
 }

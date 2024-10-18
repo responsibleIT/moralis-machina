@@ -43,6 +43,11 @@ export class ScenarioCardElement extends CardElement {
     }
 
     private requestDiscard() {
+        const cardContainer = this.closest('scenario-card-element') as HTMLElement;
+        // cardContainer?.classList.add('flip-to-discard');
+        setTimeout(() => {
+            
+        }, 1000);
         this.dispatchEvent(new CustomEvent('request-discard', {
             bubbles: true,
             composed: true,
@@ -50,7 +55,7 @@ export class ScenarioCardElement extends CardElement {
                 card: this
             }
         }));
-        this.classList.add("discard-card")
+        this.classList.add("discard-card");
         this.requestUpdate();
     }
 

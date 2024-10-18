@@ -28,43 +28,37 @@ export abstract class CardElement extends LitElement {
     }
 
     public flip() {
-        if(this.classList.contains("discard-card")){
-            return;
-        }
-
-        this._isFlipped = !this._isFlipped;
+        if (this.classList.contains("discard-card")) return;
     
+        this._isFlipped = !this._isFlipped;
         const body = document.querySelector('body') as HTMLElement;
-        
         const cardContainer = this.closest('scenario-card-element') as HTMLElement;
-        // const overlay = document.querySelector(".overlay") as HTMLElement;
-
-        if (cardContainer) {
-            cardContainer.classList.toggle('is-container-flipped');
-            // overlay.classList.toggle('show-overlay');
-        }
         const card = this.shadowRoot?.querySelector('.card') as HTMLElement;
-        card.classList.toggle('is-flipped');
+    
+        cardContainer?.classList.toggle('is-container-flipped');
+        card?.classList.toggle('is-flipped');
         body.classList.toggle('overlay-active');
     
         const handleClickOutside = (event: MouseEvent) => {
-            const target = event.target as HTMLElement;
-            if (!card.contains(target) && target !== card) {
+            const path = event.composedPath();
+            const clickedOnSpecialCard = path.some(el => (el as HTMLElement).classList?.contains('special-card'));
+    
+            if (path.includes(card) || (!clickedOnSpecialCard && !path.includes(card))) {
                 this._isFlipped = !this._isFlipped;
-                card.classList.toggle('is-flipped');
+                card?.classList.toggle('is-flipped');
                 body.classList.toggle('overlay-active');
-                if (cardContainer) {
-                    cardContainer.classList.toggle('is-container-flipped');
-                    // overlay.classList.toggle('show-overlay');
-                }
+                cardContainer?.classList.toggle('is-container-flipped');
                 document.removeEventListener('click', handleClickOutside);
             }
         };
     
-        setTimeout(() => {
-            document.addEventListener('click', handleClickOutside);
-        }, 0);
+        setTimeout(() => document.addEventListener('click', handleClickOutside), 0);
     }
+    
+    
+    
+    
+    
 
     //Getters for the private properties
     public get getCardName(): string {
@@ -106,7 +100,7 @@ export abstract class CardElement extends LitElement {
             transition: transform 0.25s ease-in-out, top 0.25s ease-in-out, left 0.25s ease-in-out;
             cursor: pointer;
             border-radius: 1rem;
-            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2), 0px -2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2), -1px -1px 5px rgba(0, 0, 0, 0.2);
             // box-shadow: 0.4rem 0.8rem 0.4rem 0 rgba(0, 0, 0, 0.2);
             // border: 1px solid black;
         }
@@ -291,7 +285,7 @@ export abstract class CardElement extends LitElement {
         .special-card {
             width: 10rem;
             height: 15rem;
-            transition: 1s ease-in-out;
+            transition: .5s ease-in-out;
         }
 
         .special-card p.card-context {
@@ -303,24 +297,24 @@ export abstract class CardElement extends LitElement {
             margin: 0;
             text-align: center;
             font-size: 0;
-            transition: height 1s ease-in-out, opacity 0.5s ease-in-out 0.8s;
+            transition: height .5s ease-in-out, opacity 0.5s ease-in-out 0.4s;
         }
 
         .special-card h3.card-name {
             font-size: 1.3rem;
             margin: 0;
-            transition: 1s ease-in-out;
+            transition: .5s ease-in-out;
         }
 
         .special-card img {
             height: auto;
             width: 100%;
-            transition: 1s ease-in-out;
+            transition: .5s ease-in-out;
         }
 
         .special-card-active {
-            height: 28rem;
-            width: 15.5rem;
+            height: 26rem;
+            width: 14.8rem;
         }
 
         .special-card-active h3.card-name {
