@@ -2,13 +2,13 @@
   {
     "name": "Botte verbeteringen",
     "context": "We gebruiken AI om onze communicatie te verbeteren. Nu zeggen ontvangers dat onze berichten te algemeen en niet persoonlijk genoeg zijn.",
-    "scenario": " De Redacteur",
+    "scenario": "De Redacteur",
     "image": "botte-verbeteringen",
     "questions": [
       "Hoe houden we berichten persoonlijk wanneer we gebruik maken van AI?",
       "Wat hebben we nodig om onze communicatie voldoende authentiek te maken?"
     ],
-    "tags": [" #Creativiteit", " #Authenticiteit"]
+    "tags": ["#Creativiteit", "#Authenticiteit"]
   },
   {
     "name": "Redactie- robots",
@@ -140,7 +140,7 @@
       "Hoe zorgen we ervoor dat we voldoende begrip voor de context en complexiteit van problemen blijven houden?",
       "Hoe verbeteren we het kritisch denken van zowel de AI-tool als onszelf?"
     ],
-    "tags": ["#Professionaliteit", "Onafhankelijkheid"]
+    "tags": ["#Professionaliteit", "#Onafhankelijkheid"]
   },
   {
     "name": "Fantastische content",

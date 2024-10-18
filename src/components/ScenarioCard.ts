@@ -43,11 +43,6 @@ export class ScenarioCardElement extends CardElement {
     }
 
     private requestDiscard() {
-        const cardContainer = this.closest('scenario-card-element') as HTMLElement;
-        // cardContainer?.classList.add('flip-to-discard');
-        setTimeout(() => {
-            
-        }, 1000);
         this.dispatchEvent(new CustomEvent('request-discard', {
             bubbles: true,
             composed: true,
@@ -74,13 +69,11 @@ export class ScenarioCardElement extends CardElement {
         }
     }
 
-
     render() {
         let color = ScenarioColor[this._scenarioType]
         return html`
             <div class="card-outer ${this._getCardClass()}" @click=${this.flip}>
                 <div class="card" style="background-color: ${color}">
-                    <!-- <button class="flip-button"></button> -->
                     <div class="card-face card-front">
                         <img src="${this.image}" alt="image">
                         <h3 class="card-name">${this.cardName}</h3>
@@ -89,7 +82,6 @@ export class ScenarioCardElement extends CardElement {
                         <h3 class="rear-name">${this.cardName}</h3>
                         <div class="rear-context">${this.context}</div>
                         <div class="rear-hr"></div>
-                            <!--                        <div class="rear-scenario">${this._scenarioType}</div>-->
                         <div class="question-container">
                             <div class="rear-question1">${this._questions[0]}</div>
                             <div class="rear-question2">${this._questions[1]}</div>

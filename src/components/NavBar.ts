@@ -18,8 +18,6 @@ export class NavBarElement extends LitElement {
 
   toggleGameRulesMenu() {
     this.isGameRulesOpen = !this.isGameRulesOpen;
-    // const body = document.querySelector("body") as HTMLElement;
-    // body.classList.toggle("overlay-active");
   }
 
   showGameRulesContent() {
@@ -94,19 +92,19 @@ export class NavBarElement extends LitElement {
               </p>
               <ul>
                 <li>
-                  <img src="../deck-icons/deck-redacteur.png" />
+                  <img src="../game-rules-images/deck-redacteur.png" />
                   <p>Stapel 1: De Redacteur</p>
                 </li>
                 <li>
-                  <img src="../deck-icons/deck-leeshulp.png" />
+                  <img src="../game-rules-images/deck-leeshulp.png" />
                   <p>Stapel 2: De Leeshulp</p>
                 </li>
                 <li>
-                  <img src="../deck-icons/deck-orakel.png" />
+                  <img src="../game-rules-images/deck-orakel.png" />
                   <p>Stapel 3: Het Orakel</p>
                 </li>
                 <li>
-                  <img src="../deck-icons/deck-schrijver.png" />
+                  <img src="../game-rules-images/deck-schrijver.png" />
                   <p>Stapel 4: De Schrijver</p>
                 </li>
               </ul>
@@ -171,7 +169,7 @@ export class NavBarElement extends LitElement {
             </section>
             <section class="text-container">
               <p>We horen graag je mening over dit spel</p>
-              <img src="../survey-qr-code.png" />
+              <img src="../game-rules-images/survey-qr-code.png" />
               <a href="https://moralis.responsible-it.nl/" target="_blank"
                 >https://moralis.responsible-it.nl</a
               >
@@ -197,16 +195,12 @@ export class NavBarElement extends LitElement {
       margin: auto;
     }
     nav {
-      // display: none;
       display: flex;
       max-width: 140rem;
       max-height: 20vh;
       margin: 2rem auto 0 auto;
       justify-content: space-between;
       align-items: center;
-      // padding: 0 2rem;
-      // border-bottom: 1px solid #e0e0e0;
-      // border-bottom: 1px solid rgb(255 0 0);
     }
 
     nav > a {
@@ -234,16 +228,13 @@ export class NavBarElement extends LitElement {
       overflow-y: scroll;
       z-index: 9999;
       width: 35vw;
-      // padding: 3rem;
       position: absolute;
       top: 0;
       right: 0;
       height: 100vh;
       background-color: #ffffff;
-      // background-color: #f1ded4f2;
       transition: 0.5s ease-in-out;
       transform: translateX(100%);
-      //   backdrop-filter: blur(5px);
       border-left: 2px solid #000000;
 
       ul.tabs {

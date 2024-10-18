@@ -55,11 +55,6 @@ export abstract class CardElement extends LitElement {
         setTimeout(() => document.addEventListener('click', handleClickOutside), 0);
     }
     
-    
-    
-    
-    
-
     //Getters for the private properties
     public get getCardName(): string {
         return this.cardName;
@@ -93,16 +88,12 @@ export abstract class CardElement extends LitElement {
             width: 100%;
             max-width: 25rem;
             height: 40rem;
-            // padding: 1.6rem;
-            // margin: 0.8rem;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.25s ease-in-out, top 0.25s ease-in-out, left 0.25s ease-in-out;
             cursor: pointer;
             border-radius: 1rem;
             box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2), -1px -1px 5px rgba(0, 0, 0, 0.2);
-            // box-shadow: 0.4rem 0.8rem 0.4rem 0 rgba(0, 0, 0, 0.2);
-            // border: 1px solid black;
         }
 
         .card-face {
@@ -127,13 +118,10 @@ export abstract class CardElement extends LitElement {
             flex-direction: column;
             gap: 1rem;
             transform: rotateY(180deg);
-            // font-family: "Roboto", sans-serif;
             font-family: "Open Sans", sans-serif;
             height: 100%;
             padding: 2rem;
-            // border: solid 2px;
             border-radius: 1rem;
-            // background-color: #ffffff;
         }
 
         .card-back > .rear-name {
@@ -171,7 +159,6 @@ export abstract class CardElement extends LitElement {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            // padding-top: 1rem;
         }
         
         .card-back > .filler {
@@ -196,7 +183,6 @@ export abstract class CardElement extends LitElement {
             object-fit: contain;
             pointer-events: none;
             user-select: none;
-            // padding-bottom: 2rem;
         }
 
         .card-name {
@@ -207,10 +193,6 @@ export abstract class CardElement extends LitElement {
         }
 
         .is-flipped {
-            // transition: 2s ease-in-out;
-            // transform: rotateY(-180deg);
-            // transform: translate(50%, 10px) rotateY(-180deg);
-            // transform: translate(50%, 30px) rotateY(-180deg) scale(1.2);
             transform: rotateY(-180deg);
         }
 
@@ -220,21 +202,6 @@ export abstract class CardElement extends LitElement {
 
         .card-green .is-flipped, .card-red .is-flipped{
             transform: rotateY(180deg);
-        }
-
-        .flip-button {
-            // position: absolute;
-            // width: 18%;
-            // height: 12%;
-            // top: 0;
-            // right: 0;
-            // background-image: linear-gradient(to bottom left, black, black 50%, transparent 50%, transparent);
-            // color: white;
-            // font-size: 1rem;
-            // cursor: pointer;
-            // z-index: 10;
-            background: none;
-            border: none;
         }
 
         .card-button {

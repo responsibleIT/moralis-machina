@@ -1,4 +1,4 @@
-import { css, html} from 'lit'
+import { html} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 
 import {CardElement} from "./Card.ts";
@@ -40,7 +40,6 @@ export class SpecialCardElement extends CardElement {
             this.toggleActive();
         }
     };
-
 
     render() {
         let color = SpecialColor[this._specialType]

@@ -33,7 +33,6 @@ export class PlayerElement extends LitElement {
 
    `
 
-
     render(){
         return html`
             <div class="player">

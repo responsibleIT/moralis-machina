@@ -8,7 +8,6 @@ import {SpecialType} from "./enums/SpecialType.ts";
 import {ScenarioCardElement} from "./components/ScenarioCard.ts";
 import {CardType} from "./enums/CardType.ts";
 import {ScenarioType} from "./enums/ScenarioType.ts";
-import {CurrentCardContainerElement} from './components/CurrentCardContainer.ts';
 import {ScenarioCardDeckElement} from './components/ScenarioCardDeck.ts';
 import {DiscardDeckElement} from './components/DiscardDeck.ts';
 
@@ -181,11 +180,6 @@ export class RootElement extends LitElement {
         return specialCardArray
     }
 
-    initCurrentCardContainer() {
-        let currentCardContainer = new CurrentCardContainerElement();
-        return currentCardContainer;
-    }
-
     initDiscardPile() {
         let discardPile = new DiscardDeckElement();
         return discardPile;
@@ -199,7 +193,7 @@ export class RootElement extends LitElement {
     render() {
         return html`
             <navbar-element></navbar-element>
-            <board-element ._players=${this.initPlayers()} ._roleCards=${this.initRoleCards()} ._specialCards=${this.initSpecialCards()} ._cardDecks=${this.initDecks()} ._currentCardContainer=${this.initCurrentCardContainer()} ._discardPile=${this.initDiscardPile()}></board-element>
+            <board-element ._players=${this.initPlayers()} ._roleCards=${this.initRoleCards()} ._specialCards=${this.initSpecialCards()} ._cardDecks=${this.initDecks()} ._discardPile=${this.initDiscardPile()}></board-element>
         `;
     }
 

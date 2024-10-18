@@ -24,33 +24,26 @@ export class ScenarioCardDeckElement extends DeckElement {
 
         scenario-card-element:nth-of-type(1){
             padding-top: 0;
-            // padding-left: 0;
         }
 
         scenario-card-element:nth-of-type(2){
             padding-top: 0.5rem;
-            // padding-left: 0.5rem;
         }
 
         scenario-card-element:nth-of-type(3){
             padding-top: 1rem;
-            // padding-left: 1rem;
         }
 
         scenario-card-element:nth-of-type(4){
             padding-top: 1.5rem;
-            // padding-left: 1.5rem;
         }
 
         scenario-card-element:nth-of-type(5){
             padding-top: 2rem;
-            // padding-left: 2rem;
         }
 
         .is-container-flipped {
             z-index: 999;
-            // transform: translate(150%, 0px) scale(1.2);
-            // transform-origin: left;
         }
 
         .deck-yellow .is-container-flipped {
@@ -103,7 +96,7 @@ export class ScenarioCardDeckElement extends DeckElement {
 
     getDeckClass() {
         const scenarioType = this._cards.length > 0 ? this._cards[0].getScenarioType : null;
-        // console.log(scenarioType)
+
         switch (scenarioType) {
             case ScenarioType.YELLOW:
                 return 'deck-yellow';
@@ -121,7 +114,7 @@ export class ScenarioCardDeckElement extends DeckElement {
     render() {
         return html`
             <div class="deck ${this.getDeckClass()}">
-                ${this._cards.map((card, index) => {
+                ${this._cards.map(card => {
                     return html`${card}`;
                 })}
             </div>
