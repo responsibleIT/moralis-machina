@@ -28,7 +28,7 @@ export class RoleCardElement extends CardElement {
                     <div class="card-face card-front">
                         <h3 class="card-name" style="border-color: ${color}">${this.cardName}</h3>
                         <p class="card-context">${this.context}</p>
-                        <img src="./card-images/${this.image}.webp" alt="image">                   
+                        <img src="./card-images/${this.image}.png" alt="image">                   
                     </div>
                 </div>
         `

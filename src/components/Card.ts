@@ -36,6 +36,12 @@ export abstract class CardElement extends LitElement {
         const card = this.shadowRoot?.querySelector('.card') as HTMLElement;
     
         cardContainer?.classList.toggle('is-container-flipped');
+
+        cardContainer?.classList.add('flip-back');
+        // setTimeout(() => {
+            
+        // }, 1000);   
+        
         card?.classList.toggle('is-flipped');
         body.classList.toggle('overlay-active');
     
@@ -48,6 +54,9 @@ export abstract class CardElement extends LitElement {
                 card?.classList.toggle('is-flipped');
                 body.classList.toggle('overlay-active');
                 cardContainer?.classList.toggle('is-container-flipped');
+                setTimeout(() => {
+                    cardContainer?.classList.remove('flip-back');
+                }, 500);
                 document.removeEventListener('click', handleClickOutside);
             }
         };
@@ -78,8 +87,10 @@ export abstract class CardElement extends LitElement {
 
     static styles = css`
         .card-outer {
+            height: 100%;
+            display: flex;
+            justify-content: center;
             perspective: 100rem;
-            height: 100%
         }
 
         .card {
@@ -104,7 +115,7 @@ export abstract class CardElement extends LitElement {
         .card-front {
             display: flex;
             flex-direction: column;
-            font-family: "Como", serif;
+            font-family: "casus", serif;
             position: absolute;
             width: 100%;
             height: 100%;
@@ -118,30 +129,36 @@ export abstract class CardElement extends LitElement {
             flex-direction: column;
             gap: 1rem;
             transform: rotateY(180deg);
-            font-family: "Open Sans", sans-serif;
+            font-family: "casus", sans-serif;
             height: 100%;
-            padding: 2rem;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background-color: #ffffff;
+            border: solid .5rem;
             border-radius: 1rem;
         }
 
         .card-back > .rear-name {
-            font-family: "Como", sans-serif;
+            font-family: "casus", sans-serif;
             font-weight: bold;
             font-size: 2rem;
             padding-bottom: 0.5rem;
             margin: 0 auto;
             text-align: center;
+            text-transform: uppercase;
         }
 
         .card-back > .rear-context {
+            font-family: "trade-gothic-next", sans-serif;
             font-size: 1.2rem;
             line-height: 1.2;
+            text-align: center;
         }
 
         .card-back > .rear-hr {
             width: 80%;
             height: 0;
-            border: 0.01em solid black;
+            border: 0.01em solid #cccccc;
             margin: 0.5rem auto;
         }
         
@@ -150,7 +167,8 @@ export abstract class CardElement extends LitElement {
         }
 
         .question-container > .rear-question1, .question-container > .rear-question2   {
-            font-size: 1.2rem;
+            font-family: "trade-gothic-next", sans-serif;
+            font-size: 1.3rem;
             line-height: 1.2;
         }
         
@@ -171,6 +189,7 @@ export abstract class CardElement extends LitElement {
         }
         
         .tag-container {
+            font-family: "trade-gothic-next", sans-serif;
             display: flex;
             flex-flow: wrap;
             justify-content: flex-end;
@@ -190,6 +209,8 @@ export abstract class CardElement extends LitElement {
             font-size: 2rem;
             font-weight: bold;
             margin-top: 0.8rem;
+            text-transform: uppercase;
+            user-select: none;
         }
 
         .is-flipped {
@@ -206,12 +227,12 @@ export abstract class CardElement extends LitElement {
 
         .card-button {
             align-self: flex-end;
-            font-family: "Open Sans", sans-serif;
+            font-family: "trade-gothic-next", sans-serif;
             text-transform: uppercase;
             width: fit-content;
-            background: #333333;
+            background: none;
             border: 1px solid #000;
-            color: #ffffff;
+            // color: #ffffff;
             padding: 1rem 2rem;
             font-size: 1.2rem;
             border-radius: 0.25rem;
@@ -220,11 +241,12 @@ export abstract class CardElement extends LitElement {
         }
             
         .card-button:hover {
-            background: none;
-            color: #000000;
+            background: #333333;
+            color: #ffffff;
         }
 
         .role-card {
+            max-width: 100%;
             height: 35rem;
             cursor: unset;
             border: none;
@@ -236,17 +258,24 @@ export abstract class CardElement extends LitElement {
             margin-bottom: 0;
             border-bottom: 3px solid #f00;
             padding-bottom: 1rem;
+            user-select: none;
         }
 
         .role-card .card-front {
             justify-content: flex-start;
-            align-items: flex-start;
+            align-items: center;
+            background-color: #f1ded4;
         }
 
         .role-card .card-context {
-            font-family: "Open Sans", sans-serif;
-            font-size: 1.3rem;
-            line-height: 1.2;
+            font-family: "trade-gothic-next", sans-serif;
+            font-size: 1.5rem;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .role-card img {
+            mix-blend-mode: multiply;
         }
 
         .special-card {
@@ -257,7 +286,7 @@ export abstract class CardElement extends LitElement {
 
         .special-card p.card-context {
             opacity: 0;
-            font-family: "Open Sans", sans-serif;
+            font-family: "trade-gothic-next", sans-serif;
             height: 0;
             overflow: hidden;
             padding: 0rem;

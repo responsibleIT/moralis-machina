@@ -75,11 +75,11 @@ export class ScenarioCardElement extends CardElement {
             <div class="card-outer ${this._getCardClass()}" @click=${this.flip}>
                 <div class="card" style="background-color: ${color}">
                     <div class="card-face card-front">
-                        <img src="${this.image}" alt="image">
                         <h3 class="card-name">${this.cardName}</h3>
+                        <img src="${this.image}" alt="image">
                     </div>
-                    <div class="card-face card-back" @click=${this.flip}>
-                        <h3 class="rear-name">${this.cardName}</h3>
+                    <div class="card-face card-back" style="border-color: ${color}" @click=${this.flip}>
+                        <h3 class="rear-name" style="color: ${color}">${this.cardName}</h3>
                         <div class="rear-context">${this.context}</div>
                         <div class="rear-hr"></div>
                         <div class="question-container">

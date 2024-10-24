@@ -46,6 +46,10 @@ export class ScenarioCardDeckElement extends DeckElement {
             z-index: 999;
         }
 
+        .flip-back {
+            z-index: 999;
+        }
+
         .deck-yellow .is-container-flipped {
             transform: translate(152%, 0px) scale(1.2);
             transform-origin: left;

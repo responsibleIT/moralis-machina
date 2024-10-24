@@ -35,7 +35,7 @@ export class NavBarElement extends LitElement {
       <nav>
         <a href="/"><h1>Moralis Machina</h1></a>
         <button class="help-button" @click=${this.toggleGameRulesMenu}>
-          ♦️ Spelregels ♦️
+          Hoe werkt het spel?
         </button>
       </nav>
       <section
@@ -189,9 +189,10 @@ export class NavBarElement extends LitElement {
 
   static styles = css`
     h1 {
-      font-family: "Abril Fatface", sans-serif;
-      font-size: 4rem;
+      font-family: "casus", sans-serif;
+      font-size: 5rem;
       font-weight: 100;
+      font-style: italic;
       margin: auto;
     }
     nav {
@@ -209,12 +210,12 @@ export class NavBarElement extends LitElement {
     }
 
     button.help-button {
+      font-family: "casus", sans-serif;
       cursor: pointer;
       background: none;
       border: 1px solid #000000;
       padding: 0.5rem 2rem;
       font-size: 1.7rem;
-      text-transform: uppercase;
       transition: 0.25s ease-in-out;
       filter: grayscale(1);
 
@@ -228,7 +229,7 @@ export class NavBarElement extends LitElement {
       overflow-y: scroll;
       z-index: 9999;
       width: 35vw;
-      position: absolute;
+      position: fixed;
       top: 0;
       right: 0;
       height: 100vh;
@@ -247,6 +248,7 @@ export class NavBarElement extends LitElement {
 
         li {
           button {
+            font-family: "casus", sans-serif;
             width: 100%;
             height: 100%;
             background: none;
@@ -328,13 +330,16 @@ export class NavBarElement extends LitElement {
         display: flex;
         flex-direction: column;
         padding: 0 3rem;
+
+        h3, h4{
+         font-family: "casus", serif;
+        }
         h3 {
           font-size: 2rem;
           margin: 0;
         }
 
         h4 {
-          font-size: 1.6rem;
           margin: 0;
         }
 
@@ -344,7 +349,9 @@ export class NavBarElement extends LitElement {
         }
 
         p,
-        li {
+        li,
+        a {
+          font-family: "trade-gothic-next", sans-serif;
           font-size: 1.4rem;
           line-height: 1.2;
         }
@@ -411,11 +418,11 @@ export class NavBarElement extends LitElement {
         font-size: 2rem;
         cursor: pointer;
         transition: 0.5s ease-in-out;
-        font-family: "Open Sans", sans-serif;
+        font-family: "casus", sans-serif;
 
         &:hover {
           span:last-of-type {
-            transform: rotate(-90deg);
+            transform: rotate(-90deg) translate(-0.3rem, -0.3rem);
           }
         }
 
@@ -431,6 +438,7 @@ export class NavBarElement extends LitElement {
               font-weight: 100;
               font-size: 3.5rem;
               color: #f00;
+              margin-top: -0.5rem;
             }
           }
         }

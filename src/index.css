@@ -1,18 +1,19 @@
 :root {
 }
 
-*, html {
-  font-family: 'Open Sans', sans-serif;
+*,
+html {
+
 }
 
 /* Px to REM: Override root font-size: 62.5% */
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
-  overflow: hidden;
-  background-color: #F1DED4;
+  overflow-x: hidden;
+  background-color: #f1ded4;
 }
 
 body.overlay-active .overlay {
