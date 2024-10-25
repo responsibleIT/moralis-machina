@@ -1,14 +1,14 @@
 [
   {
-    "name": "Redenaar",
+    "name": "De Redenaar",
     "context": "Houd een vlammend betoog en zet de groep op het juiste spoor.",
     "color": "#75AFDF",
     "image": "de-redenaar"
   },
   {
-    "name": "Dissident",
+    "name": "De Dissident",
     "context": "Tijd om tegen de consensus in te gaan en gedachten voorgoed te veranderen.",
     "color": "#75AFDF",
-    "image": "de-redacteur"
+    "image": "de-dissident"
   }
 ]

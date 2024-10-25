@@ -1,4 +1,4 @@
-import { css, html} from 'lit'
+import { html} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 
 import {CardElement} from "./Card.ts";
@@ -26,7 +26,7 @@ export class RoleCardElement extends CardElement {
                 <!-- <div class="card role-card" style="background-color: ${color}"> -->
                 <div class="card role-card">
                     <div class="card-face card-front">
-                        <h3 class="card-name" style="border-color: ${color}">${this.cardName}</h3>
+                        <h3 class="card-name">${this.cardName}</h3>
                         <p class="card-context">${this.context}</p>
                         <img src="./card-images/${this.image}.png" alt="image">                   
                     </div>

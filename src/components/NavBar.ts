@@ -34,7 +34,7 @@ export class NavBarElement extends LitElement {
     return html`
       <nav>
         <a href="/"><h1>Moralis Machina</h1></a>
-        <button class="help-button" @click=${this.toggleGameRulesMenu}>
+        <button class="info-button" @click=${this.toggleGameRulesMenu}>
           Hoe werkt het spel?
         </button>
       </nav>
@@ -63,7 +63,7 @@ export class NavBarElement extends LitElement {
           </li>
           <li>
             <button class="close-btn" @click=${this.toggleGameRulesMenu}>
-              <p><span>Sluit</span><span>&times</span></p>
+              <p><span>&times</span></p>
             </button>
           </li>
         </ul>
@@ -75,8 +75,8 @@ export class NavBarElement extends LitElement {
               : ""}"
           >
             <section class="text-container">
-              <h3>Doel van het spel</h3>
-              <p class="intro-text">
+              <h3>Doel</h3>
+              <p>
                 Het doel van dit spel is bewustzijn creëren, kritisch denken
                 bevorderen en gezamenlijke standpunten en oplossingen
                 ontwikkelen voor de uitdagingen die generatieve AI met zich
@@ -84,29 +84,17 @@ export class NavBarElement extends LitElement {
               </p>
             </section>
             <section class="text-container setup-decks-container">
-              <h3>Setup</h3>
+              <h3>Opzet</h3>
               <p>
                 De groep ontvangt 15 scenariokaarten verdeeld in 4 stapels, elk
                 overeenkomend met een verschillende rol die generatieve AI in
                 het werk kan innemen:
               </p>
               <ul>
-                <li>
-                  <img src="../game-rules-images/deck-redacteur.png" />
-                  <p>Stapel 1: De Redacteur</p>
-                </li>
-                <li>
-                  <img src="../game-rules-images/deck-leeshulp.png" />
-                  <p>Stapel 2: De Leeshulp</p>
-                </li>
-                <li>
-                  <img src="../game-rules-images/deck-orakel.png" />
-                  <p>Stapel 3: Het Orakel</p>
-                </li>
-                <li>
-                  <img src="../game-rules-images/deck-schrijver.png" />
-                  <p>Stapel 4: De Schrijver</p>
-                </li>
+                <li>Stapel 1: De Redacteur</li>
+                <li>Stapel 2: De Leeshulp</li>
+                <li>Stapel 3: Het Orakel</li>
+                <li>Stapel 4: De Schrijver</li>
               </ul>
             </section>
             <section class="text-container setup-decks-container">
@@ -175,11 +163,23 @@ export class NavBarElement extends LitElement {
               >
             </section>
             <section class="text-container">
+              <ul>
+                <li>Concept: Martijn Veerman, Sophie Horsman en Jeroen Silvis.</li>
+                <li>UX & Web Development: Yuri Westplat, Bahaa Salaymeh</li>
+                <li>Software Engineering: Rick van Kersbergen, Tabish Nanhekhan</li>
+              </ul>
               <p>
-                Makers: Martijn Veerman, Sophie Horsman en Jeroen Silvis. Dit
-                spel is gemaakt met behulp van de AI-tools ChatGPT (tekst) en
+                Dit spel is gemaakt met behulp van de AI-tools ChatGPT (tekst) en
                 Adobe Firefly (beeld).
               </p>
+              <ul class="logos">
+                <li>
+                  <img src="../game-rules-images/logo-HvA.png" alt="Hogeschool van Amsterdam Logo"/>
+                </li>
+                <li>
+                  <img src="../game-rules-images/logo-PNH.png" alt="Provincie Noord Holland Logo"/>
+                </li>
+              </ul>
             </section>
           </div>
         </div>
@@ -194,9 +194,14 @@ export class NavBarElement extends LitElement {
       font-weight: 100;
       font-style: italic;
       margin: auto;
+      letter-spacing: -0.2rem;
+      color: #eda297;
     }
+
     nav {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2rem;
       max-width: 140rem;
       max-height: 20vh;
       margin: 2rem auto 0 auto;
@@ -205,19 +210,27 @@ export class NavBarElement extends LitElement {
     }
 
     nav > a {
+      grid-column: span 4;
+      grid-row: 1;
+      text-align: center;
       text-decoration: none;
-      color: black;
+      color: #000000;
     }
 
-    button.help-button {
+    button.info-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #ffffff;
       font-family: "casus", sans-serif;
       cursor: pointer;
-      background: none;
-      border: 1px solid #000000;
-      padding: 0.5rem 2rem;
+      border: none;
+      padding: 1.5rem 3rem;
       font-size: 1.7rem;
+      text-transform: uppercase;
+      border-bottom-left-radius: 1rem;
+      box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.2);
       transition: 0.25s ease-in-out;
-      filter: grayscale(1);
 
       &:hover {
         background-color: #000000;
@@ -228,7 +241,7 @@ export class NavBarElement extends LitElement {
     section.game-rules-menu {
       overflow-y: scroll;
       z-index: 9999;
-      width: 35vw;
+      width: 28vw;
       position: fixed;
       top: 0;
       right: 0;
@@ -236,7 +249,7 @@ export class NavBarElement extends LitElement {
       background-color: #ffffff;
       transition: 0.5s ease-in-out;
       transform: translateX(100%);
-      border-left: 2px solid #000000;
+      box-shadow: 0 0 .5rem rgb(0 0 0 / 30%);
 
       ul.tabs {
         display: flex;
@@ -251,31 +264,29 @@ export class NavBarElement extends LitElement {
             font-family: "casus", sans-serif;
             width: 100%;
             height: 100%;
+            padding: 0;
             background: none;
-            border: 1px solid #000000;
+            border: none;
             font-size: 2rem;
-            padding: 1rem;
+            text-align: left;
             text-transform: uppercase;
             cursor: pointer;
             transition: 0.25s ease-in-out;
 
             &:hover {
-              background-color: #000;
-              color: #fff;
+              color: #cc0100;
             }
           }
-
-          button[aria-pressed="true"] {
-            background-color: #292929;
-            color: #fff;
-          }
         }
+
         li:first-of-type {
           button {
             border-right: none;
           }
         }
+
         li:last-of-type {
+          margin-left: auto;
           button {
             padding-right: 0;
             padding-left: 2rem;
@@ -286,8 +297,16 @@ export class NavBarElement extends LitElement {
           }
           border: none;
         }
+
         li:not(:last-of-type) {
-          flex-grow: 1;
+          margin-right: 2rem;
+          button {
+            border-bottom: 3px solid transparent;
+          }
+          button[aria-pressed="true"] {
+              border-color: #cc0100;
+              color: #cc0100;
+          }
         }
       }
 
@@ -332,15 +351,14 @@ export class NavBarElement extends LitElement {
         padding: 0 3rem;
 
         h3, h4{
-         font-family: "casus", serif;
-        }
-        h3 {
-          font-size: 2rem;
+          font-family: "casus", serif;
           margin: 0;
         }
 
-        h4 {
-          margin: 0;
+        h3 {
+          color: #cc0100;
+          font-size: 2rem;
+          text-transform: uppercase;
         }
 
         a {
@@ -355,42 +373,61 @@ export class NavBarElement extends LitElement {
           font-size: 1.4rem;
           line-height: 1.2;
         }
-
-        p.intro-text {
-          font-size: 1.8rem;
-          line-height: 1.3;
-          margin-top: 1rem;
-          margin-bottom: 0;
+          
+        ul, ol {
+          padding-left: 1.5rem;
         }
 
         &:last-of-type {
           flex-grow: 1;
           margin-bottom: 10rem;
         }
+
+        ul.logos {
+          display: flex;
+          list-style-type: none;
+          padding: 0;
+          gap: 4rem;
+        }
       }
 
       .setup-decks-container {
         ul {
           display: flex;
-          flex-wrap: wrap;
-          padding: 0;
+          flex-direction: column;
+          gap: 2rem;
+          padding-left: 0;
           list-style-type: none;
-          row-gap: 2rem;
+
           li {
             display: flex;
-            flex-basis: 50%;
             align-items: center;
             gap: 1rem;
-            img {
-              width: 100%;
-              max-width: 6rem;
-              object-fit: contain;
+
+            &::before {
+              content: "";
+              background: lightgray;
+              padding: .6rem;
+              border-radius: 5rem;
+              width: .6rem;
+              height: .6rem;
+              display: block;
             }
-            p {
-              margin: 0;
-              font-size: 1.3rem;
-              font-style: italic;
-              font-weight: 100;
+
+            &:first-of-type::before{
+               background-color: #F1C74E;
+            }
+
+            &:nth-of-type(2)::before {
+              background-color: #62BDC6;
+            }
+
+            &:nth-of-type(3)::before {
+              background-color: #8EC268;
+            }
+
+            &:nth-of-type(4)::before {
+              background-color: #E8705F;
             }
           }
         }
@@ -437,7 +474,7 @@ export class NavBarElement extends LitElement {
             &:last-of-type {
               font-weight: 100;
               font-size: 3.5rem;
-              color: #f00;
+              color: #cc0100;
               margin-top: -0.5rem;
             }
           }

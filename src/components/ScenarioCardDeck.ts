@@ -1,4 +1,4 @@
-import {css, html } from 'lit';
+import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ScenarioType } from '../enums/ScenarioType.ts';
 import { DeckElement } from './Deck.ts';
@@ -20,26 +20,26 @@ export class ScenarioCardDeckElement extends DeckElement {
             top: 0;
             left: 0;
             transition: top 0.5s ease-in-out, left 0.5s ease-in-out, transform 0.5s ease-in-out;
-        }
 
-        scenario-card-element:nth-of-type(1){
-            padding-top: 0;
-        }
+            &:nth-of-type(1) {
+                padding-top: 0;
+            }
 
-        scenario-card-element:nth-of-type(2){
-            padding-top: 0.5rem;
-        }
+            &:nth-of-type(2) {
+                padding-top: 0.5rem;
+            }
 
-        scenario-card-element:nth-of-type(3){
-            padding-top: 1rem;
-        }
+            &:nth-of-type(3) {
+                padding-top: 1rem;
+            }
 
-        scenario-card-element:nth-of-type(4){
-            padding-top: 1.5rem;
-        }
-
-        scenario-card-element:nth-of-type(5){
-            padding-top: 2rem;
+            &:nth-of-type(4) {
+                padding-top: 1.5rem;
+            }
+                
+            &:nth-of-type(5) {
+                padding-top: 2rem;
+            }
         }
 
         .is-container-flipped {
@@ -51,22 +51,22 @@ export class ScenarioCardDeckElement extends DeckElement {
         }
 
         .deck-yellow .is-container-flipped {
-            transform: translate(152%, 0px) scale(1.2);
+            transform: translate(152%, 0) scale(1.2);
             transform-origin: left;
         }
 
         .deck-blue .is-container-flipped {
-            transform: translate(44%, 0px) scale(1.2);
+            transform: translate(44%, 0) scale(1.2);
             transform-origin: left;
         }
 
         .deck-green .is-container-flipped {
-            transform: translate(-44%, 0px) scale(1.2);
+            transform: translate(-44%, 0) scale(1.2);
             transform-origin: right;
         }
 
         .deck-red .is-container-flipped {
-            transform: translate(-152%, 0px) scale(1.2);
+            transform: translate(-152%, 0) scale(1.2);
             transform-origin: right;
         }
 

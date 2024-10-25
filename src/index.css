@@ -20,6 +20,7 @@ body.overlay-active .overlay {
   visibility: visible;
   opacity: 1;
   backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 
 .overlay {

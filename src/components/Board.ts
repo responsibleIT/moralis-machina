@@ -69,7 +69,6 @@ export class BoardElement extends LitElement {
         this.requestUpdate();
     }
     
-
     private discardCurrentCard(event: CustomEvent) {
         let card = event.detail.card as ScenarioCardElement;
         this._discardPile.push(card);
@@ -102,21 +101,18 @@ export class BoardElement extends LitElement {
                     ${this._roleCards.map(card => html`
                     <div class="card-container">${card}</div>`)}
                 </section>
-                <section class="side">
-                    <section class="special-cards-container">
-                        ${this._specialCards.map(card => html`
-                        <div class="card-container">${card}</div>`)}
-                    </section>
-                    <div class="discard-pile">
-                        <h3>Aflegstapel</h3>
-                        <div class="discard-pile-deck" @click="${this.returnCard}">
-                            ${this._discardPile.getCards.map((card, index) => html`
-                            <div class="card-container" style="grid-area: 1/1/1/1; position: absolute; padding-top: ${20 * index /4}px; padding-left: ${20 * index /4}px;"> ${card}</div>`)}
-                        </div>
-                    </div>
+                <section class="special-cards-container">
+                    ${this._specialCards.map(card => html`
+                    ${card}`)}
                 </section>
+                <div class="discard-pile">
+                    <h3>Aflegstapel</h3>
+                    <div class="discard-pile-deck" @click="${this.returnCard}">
+                        ${this._discardPile.getCards.map((card, index) => html`
+                    <div class="card-container" style="grid-area: 1/1/1/1; position: absolute; padding-top: ${20 * index /4}px; padding-left: ${20 * index /4}px;"> ${card}</div>`)}
+                    </div>
+                </div>
             </section>
-            </div>
         `
     }
 
@@ -125,22 +121,22 @@ export class BoardElement extends LitElement {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             grid-template-rows: auto auto;
-            gap: 2rem;
-            width: 100%;
             min-height: 80vh;
             max-width: 140rem;
+            gap: 2rem;
+            width: 100%;
             margin: 0 auto;
         }
 
         .decks-container {
-            min-height: 50vh;
+            position: relative;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(25em, 1fr));
-            gap: 2rem;
-            position: relative;
             grid-column: span 4;
             grid-row: 1;
+            gap: 2rem;
             align-items: baseline;
+            min-height: 50vh;
             margin-top: 2rem;
         }
 
@@ -156,7 +152,7 @@ export class BoardElement extends LitElement {
                 path {
                     fill: #f1ded4;
                     stroke: #000000;
-                    stroke-width: 3px;
+                    stroke-width: .3rem;
                     transition: 0.25s ease-in-out;
                 }
                 &:hover path{
@@ -166,34 +162,25 @@ export class BoardElement extends LitElement {
         }
 
         .role-cards-container{
-            min-height: 40vh;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(25em, 1fr));
             gap: 2rem;
             grid-column: span 4;
             grid-row: 2;
+            min-height: 40vh;
             margin-bottom: 5rem;
         }
 
-        .side {
-            grid-row: 1 / span 2;
-            justify-content: space-between;
-            display: flex;
-            flex-direction: column;
-        }
-
         .special-cards-container {
+            height: 40rem;
             position: relative;
             display: flex;
-            justify-content: flex-end;
-            column-gap: 0.5rem;
+            flex-direction: column;
+            gap: 1.2rem;
             margin-top: 2rem;
-            z-index: 999;
-
-            .card-container {
-                height: fit-content;
-                flex-shrink: 1
-            }
+            // z-index: 999;
+            grid-column: span 1;
+            grid-row: 1;
         }
 
         .discard-pile {
@@ -201,20 +188,22 @@ export class BoardElement extends LitElement {
             flex-direction: column;
             gap: 2rem;
             margin-bottom: 5rem;
+            grid-column: span 1;
+            grid-row: 2;
 
             h3 {
                 font-family: "casus", serif;
-                margin: auto;
                 font-size: 2rem;
                 font-weight: 100;
                 text-transform: uppercase;
                 text-align: center;
                 color: #9f9f9f;
+                margin: auto;
             }
 
             .discard-pile-deck {
                 display: grid;
-                border: 1px dashed rgb(248, 117, 97);
+                border: 1px dashed #F87561;
                 min-height: 40rem;
                 border-radius: 1rem;
                 margin-bottom: 5rem;

@@ -1,6 +1,6 @@
 export enum SpecialType {
-    Dissident = "Dissident",
-    Redenaar = "Redenaar",
+    Dissident = "De Dissident",
+    Redenaar = "De Redenaar",
     Normaal = "Normaal",
 }
 

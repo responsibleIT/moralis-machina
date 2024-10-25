@@ -1,4 +1,4 @@
-import { html} from 'lit'
+import {html} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 
 import {CardElement} from "./Card.ts";
@@ -81,14 +81,14 @@ export class ScenarioCardElement extends CardElement {
                     <div class="card-face card-back" style="border-color: ${color}" @click=${this.flip}>
                         <h3 class="rear-name" style="color: ${color}">${this.cardName}</h3>
                         <div class="rear-context">${this.context}</div>
-                        <div class="rear-hr"></div>
+                        <div class="rear-hr" style="background-color: ${color}"></div>
                         <div class="question-container">
                             <div class="rear-question1">${this._questions[0]}</div>
                             <div class="rear-question2">${this._questions[1]}</div>
                         </div>
 
                         <div class="filler"></div>
-                        <div class="tag-container">
+                        <div class="tag-container" style="color: ${color}">
                             <div class="rear-tag1">${this._tags[0]}</div>
                             <div class="rear-tag2">${this._tags[1]}</div>
                         </div>
