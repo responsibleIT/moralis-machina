@@ -2,6 +2,7 @@ import {css, html, LitElement} from 'lit'
 import {customElement} from 'lit/decorators.js'
 
 import './components/NavBar.ts'
+import './components/Intro.ts'
 import './components/Board.ts'
 import {PlayerElement} from "./components/Player.ts";
 import {SpecialType} from "./enums/SpecialType.ts";
@@ -192,6 +193,7 @@ export class RootElement extends LitElement {
 
     render() {
         return html`
+            <intro-element></intro-element>
             <navbar-element></navbar-element>
             <board-element ._players=${this.initPlayers()} ._roleCards=${this.initRoleCards()} ._specialCards=${this.initSpecialCards()} ._cardDecks=${this.initDecks()} ._discardPile=${this.initDiscardPile()}></board-element>
         `;

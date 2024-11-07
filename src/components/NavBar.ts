@@ -158,8 +158,8 @@ export class NavBarElement extends LitElement {
             <section class="text-container">
               <p>We horen graag je mening over dit spel</p>
               <img src="../game-rules-images/survey-qr-code.png" />
-              <a href="https://moralis.responsible-it.nl/" target="_blank"
-                >https://moralis.responsible-it.nl</a
+              <a href="https://edu.nl/jbkq4" target="_blank"
+                >https://edu.nl/jbkq4</a
               >
             </section>
             <section class="text-container">
