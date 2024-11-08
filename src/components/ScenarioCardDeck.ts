@@ -51,22 +51,22 @@ export class ScenarioCardDeckElement extends DeckElement {
         }
 
         .deck-yellow .is-container-flipped {
-            transform: translate(142%, 10%) scale(1.5);
+            transform: translate(135%, 20%) scale(1.7);
             transform-origin: left;
         }
 
         .deck-blue .is-container-flipped {
-            transform: translate(35%, 10%) scale(1.5);
+            transform: translate(20%, 20%) scale(1.7);
             transform-origin: left;
         }
 
         .deck-green .is-container-flipped {
-            transform: translate(-35%, 10%) scale(1.5);
+            transform: translate(-20%, 20%) scale(1.7);
             transform-origin: right;
         }
 
         .deck-red .is-container-flipped {
-            transform: translate(-142%, 10%) scale(1.5);
+            transform: translate(-135%, 20%) scale(1.7);
             transform-origin: right;
         }
 
