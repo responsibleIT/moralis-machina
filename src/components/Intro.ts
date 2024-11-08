@@ -68,10 +68,12 @@ export class IntroElement extends LitElement {
 
       .intro-top {
         justify-content: flex-end;
+        padding-top: clamp(1rem, calc(1rem + ((1vw - 0.32rem) * 8.3333)), 7rem);
       }
 
       .intro-bottom {
         justify-content: flex-start;
+        padding-bottom: clamp(1rem, calc(1rem + ((1vw - 0.32rem) * 8.3333)), 7rem);
       }
 
       &.hidden .intro-top {
@@ -96,7 +98,7 @@ export class IntroElement extends LitElement {
 
       h1 {
         font-family: "casus", sans-serif;
-        font-size: 8rem;
+        font-size: clamp(4rem, calc(4rem + ((1vw - 0.32rem) * 3.7037)), 8rem);
         font-weight: 100;
         font-style: italic;
         margin: 0;
@@ -107,7 +109,7 @@ export class IntroElement extends LitElement {
 
       img {
         order: -1;
-        max-width: 30rem;
+        max-width: clamp(20rem, calc(20rem + ((1vw - 0.32rem) * 9.2593)), 30rem);
       }
 
       .intro-line {
@@ -130,11 +132,12 @@ export class IntroElement extends LitElement {
 
       .intro-text {
         font-family: "casus", sans-serif;
-        font-size: 3rem;
+        font-size: clamp(2rem, calc(2rem + ((1vw - 0.32rem) * 0.9259)), 3rem);
         color: #eda297;
         max-width: 60rem;
         text-align: center;
         line-height: normal;
+        padding: 0 2rem;
       }
 
       .start-btn {

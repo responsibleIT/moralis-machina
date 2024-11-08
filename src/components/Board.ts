@@ -178,7 +178,7 @@ export class BoardElement extends LitElement {
             flex-direction: column;
             gap: 1.2rem;
             margin-top: 2rem;
-            // z-index: 999;
+            z-index: 998;
             grid-column: span 1;
             grid-row: 1;
         }

@@ -32,7 +32,7 @@ body.overlay-active .overlay {
   visibility: hidden;
   background: rgb(241 222 212 / 30%);
   backdrop-filter: blur(0px);
-  z-index: 999;
+  z-index: 997;
   opacity: 0;
   transition: 0.5s ease-in-out;
 }
